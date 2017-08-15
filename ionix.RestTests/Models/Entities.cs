@@ -16,10 +16,9 @@
 // ReSharper disable PartialMethodWithSinglePart
 // ReSharper disable RedundantNameQualifier
 
-using ionix.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using ionix.Data;
+using ionix.Annotation;
 
 namespace ionix.RestTests
 {
