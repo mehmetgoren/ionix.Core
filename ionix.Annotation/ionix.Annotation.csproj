@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
+    <Authors>Mehmet Gökalp Gören</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>X:\ionix.Core\builds\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

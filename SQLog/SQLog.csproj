@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Mehmet Gökalp Gören</Authors>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>X:\ionix.Core\builds\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Annotation\ionix.Annotation.csproj" />
+    <ProjectReference Include="..\ionix.Data.SQLite\ionix.Data.SQLite.csproj" />
+    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+  </ItemGroup>
+
+</Project>

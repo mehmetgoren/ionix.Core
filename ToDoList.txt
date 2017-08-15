@@ -1,0 +1,5 @@
+﻿- ToQuery2 de dynamic çıkarıldı test edilecek.
+- CommandAdapterBase' de QuerySingle de dynamic kaldırıldı test edilecek
+- CommandAdepterBase' de Query de dynamic kullanıldı test edilecek.
+
+- BulkCopy ve repository eklenecek.
