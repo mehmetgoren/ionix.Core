@@ -1,10 +1,10 @@
 namespace ionix.DataTests
 {
-    using ionix.Annotation;
     using ionix.Data;
     using ionix.DataTests.SqlServer;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
     using System.Linq;
 

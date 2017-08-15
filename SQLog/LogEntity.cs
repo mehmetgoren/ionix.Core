@@ -2,7 +2,7 @@
 {
     using System;
     using ionix.Data;
-    using ionix.Annotation;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("Log")]
     internal class LogEntity

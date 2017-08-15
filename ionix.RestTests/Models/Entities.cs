@@ -18,7 +18,7 @@
 
 using System;
 using ionix.Data;
-using ionix.Annotation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ionix.RestTests
 {

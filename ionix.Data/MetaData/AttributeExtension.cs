@@ -1,7 +1,7 @@
 ﻿namespace ionix.Data
 {
-    using ionix.Annotation;
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Reflection;
     using Utils.Reflection;
 

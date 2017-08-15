@@ -4,7 +4,8 @@
     using System;
     using System.Reflection;
     using System.Collections.Generic;
-    using ionix.Annotation;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     public abstract class EntityMetaDataProviderBase : IEntityMetaDataProvider
     {

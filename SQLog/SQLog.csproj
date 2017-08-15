@@ -13,10 +13,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Annotation\ionix.Annotation.csproj" />
     <ProjectReference Include="..\ionix.Data.SQLite\ionix.Data.SQLite.csproj" />
     <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
   </ItemGroup>

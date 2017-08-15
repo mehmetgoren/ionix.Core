@@ -11,12 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Annotation\ionix.Annotation.csproj" />
     <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="CommandAdapter\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Annotation\ionix.Annotation.csproj" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ionix.Data.SqlServer\ionix.Data.SqlServer.csproj" />
     <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
     <ProjectReference Include="..\ionix.Rest\ionix.Rest.csproj" />
