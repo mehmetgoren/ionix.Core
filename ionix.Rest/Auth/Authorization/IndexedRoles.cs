@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
 
+
     //Amaç RoleControllerActionEntity entityi parçalayıup indexlemek hızlı check işlemleri için.
     public sealed class IndexedRoles
     {
