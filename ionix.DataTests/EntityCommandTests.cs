@@ -139,7 +139,7 @@
         [TestMethod]
         public void UpdateTest()
         {
-            const int categoryId = 9;
+            const int categoryId = 8;
             Categories c = new Categories()
             {
                 CategoryID = categoryId,
@@ -157,7 +157,7 @@
         [TestMethod]
         public void UpdateNonGenericTest()
         {
-            const int categoryId = 9;
+            const int categoryId = 8;
             Categories c = new Categories()
             {
                 CategoryID = categoryId,

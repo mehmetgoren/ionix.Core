@@ -12,4 +12,18 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Auth\" />
+    <Folder Include="Dal\Repositories\" />
+    <Folder Include="Models\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Annotation\ionix.Annotation.csproj" />
+    <ProjectReference Include="..\ionix.Data.SqlServer\ionix.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+    <ProjectReference Include="..\ionix.Rest\ionix.Rest.csproj" />
+    <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
+  </ItemGroup>
+
 </Project>

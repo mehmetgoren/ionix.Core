@@ -101,7 +101,7 @@
             Console.WriteLine($"{typeof(PersonAddress).Name}, Elepsad: {bench.ElapsedTicks}");
         }
 
-        //[TestMethod]
+       // [TestMethod]
         public void Initialize()
         {
 
@@ -109,7 +109,7 @@
              MongoAdmin.ExecuteScript(db, "db.LdapUser.remove({});");
             // MongoAdmin.ExecuteScript(db, "db.LdapUser.drop();");
 
-            string json = File.ReadAllText("C:\\Users\\Administrator\\Documents\\sil.txt");
+            string json = File.ReadAllText("d:\\sil.txt");
 
 
             var list = Newtonsoft.Json.JsonConvert.DeserializeObject<List<LdapUser>>(json);

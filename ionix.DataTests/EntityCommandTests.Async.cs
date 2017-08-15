@@ -100,7 +100,7 @@
         [TestMethod]
         public async Task UpdateAsyncTest()
         {
-            const int categoryId = 9;
+            const int categoryId = 8;
             Categories c = new Categories()
             {
                 CategoryID = categoryId,
