@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Rest", "ionix.Rest\io
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Data.Mongo", "ionix.Data.MongoDB\ionix.Data.Mongo.csproj", "{EC9BB983-C0B8-48DA-B6E0-C4B499133825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.MongoTests", "ionix.MongoTests\ionix.MongoTests.csproj", "{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.MongoTests", "ionix.MongoTests\ionix.MongoTests.csproj", "{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.RestTests", "ionix.RestTests\ionix.RestTests.csproj", "{E29D78C2-9713-4423-B13F-F3456127B852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29D78C2-9713-4423-B13F-F3456127B852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29D78C2-9713-4423-B13F-F3456127B852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29D78C2-9713-4423-B13F-F3456127B852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29D78C2-9713-4423-B13F-F3456127B852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{277B0317-4DC4-4D1D-A679-46EA1470A33C} = {9D63A6DE-513E-459E-A43D-8367FCA81A2F}
 		{EC9BB983-C0B8-48DA-B6E0-C4B499133825} = {C2FF72AC-8CCE-4645-A14C-11BCECE9D759}
 		{F5C6F3E5-D09A-4D1B-8296-2AA13EE7116A} = {C2FF72AC-8CCE-4645-A14C-11BCECE9D759}
+		{E29D78C2-9713-4423-B13F-F3456127B852} = {9D63A6DE-513E-459E-A43D-8367FCA81A2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F697CD57-1B75-4708-8B35-46741F2390D6}
