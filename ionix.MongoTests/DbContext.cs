@@ -6,7 +6,7 @@
 
     public class DbContext
     {
-        internal const string MongoAddress = "mongodb://192.168.9.131:27017";
+        internal const string MongoAddress = "mongodb://192.168.253.138:27017";
 
         public const string DatabaseName = "TestDb";
 

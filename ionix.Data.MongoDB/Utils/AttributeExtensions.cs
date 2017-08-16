@@ -97,63 +97,59 @@
             return scripts;
         }
 
-        public static IEnumerable<string> Scripts(this IEnumerable<MongoTextIndexAttribute> attrList, Type owner)
+        public static string Script(this MongoTextIndexAttribute attr, Type owner)
         {
-            List<string> scripts = new List<string>();
-            if (null != attrList && attrList.Any() && null != owner)
+            string script = String.Empty;
+            if (null != attr && null != owner)
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (var attr in attrList)
+                if (null != attr.Fields && attr.Fields.Any())
                 {
-                    if (null != attr.Fields && attr.Fields.Any())
+                    string name = attr.Name;
+                    if (String.IsNullOrEmpty(name))
                     {
-                        string name = attr.Name;
-                        if (String.IsNullOrEmpty(name))
+                        name = "txtIndex_";
+                        foreach (var field in attr.Fields)
                         {
-                            name = "txtIndex_";
-                            foreach (var field in attr.Fields)
-                            {
-                                name += field + '_';
-                            }
-                            name = name.Remove(name.Length - 1, 1);
+                            name += field + '_';
                         }
-
-                        sb.Append("db.")
-                            .Append(GetCollectionName(owner))
-                            .Append(".createIndex( { ");
-                        foreach (var fieldOrginal in attr.Fields)
-                        {
-                            var field = fieldOrginal;
-                            if (field == "*")
-                            {
-                                field = "'$**'";
-                                name = "txtIndex_All";
-                            }
-
-                            sb.Append(field)
-                                .Append(": 'text', ");
-                        }
-                        sb.Remove(sb.Length - 2, 2)
-                            .Append(" }, { ")//options
-                            .Append("name: '")
-                            .Append(name)
-                            .Append("', ")
-                            .Append("unique: ")
-                            .Append(attr.Unique.ToString().ToLower())
-                            .Append(", ")
-                            .Append("default_language: '")
-                            .Append(attr.DefaultLanguage)
-                            .Append("'")
-                            .Append(" }")
-                            .Append(" )");
-
-                        scripts.Add(sb.ToString());
-                        sb.Length = 0;
+                        name = name.Remove(name.Length - 1, 1);
                     }
+
+                    sb.Append("db.")
+                        .Append(GetCollectionName(owner))
+                        .Append(".createIndex( { ");
+                    foreach (var fieldOrginal in attr.Fields)
+                    {
+                        var field = fieldOrginal;
+                        if (field == "*")
+                        {
+                            field = "'$**'";
+                            name = "txtIndex_All";
+                        }
+
+                        sb.Append(field)
+                            .Append(": 'text', ");
+                    }
+                    sb.Remove(sb.Length - 2, 2)
+                        .Append(" }, { ")//options
+                        .Append("name: '")
+                        .Append(name)
+                        .Append("', ")
+                        .Append("unique: ")
+                        .Append(attr.Unique.ToString().ToLower())
+                        .Append(", ")
+                        .Append("default_language: '")
+                        .Append(attr.DefaultLanguage)
+                        .Append("'")
+                        .Append(" }")
+                        .Append(" )");
+
+                    script = sb.ToString();
                 }
             }
 
-            return scripts;
+            return script;
         }
     }
 }

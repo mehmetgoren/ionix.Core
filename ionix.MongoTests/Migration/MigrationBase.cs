@@ -85,28 +85,27 @@
                         string script = collAttr.Script(type);
                         sb.Append(script).Append("; ");
                     }
+                }
 
-                    //default index
-                    var indexAttrList = typeInfo.GetCustomAttributes<MongoIndexAttribute>();
-                    if (null != indexAttrList)
+                //default index
+                var indexAttrList = typeInfo.GetCustomAttributes<MongoIndexAttribute>();
+                if (null != indexAttrList)
+                {
+                    foreach (var script in indexAttrList.Scripts(type))
                     {
-                        foreach (var script in indexAttrList.Scripts(type))
-                        {
 
-                            sb.Append(script).Append("; ");
-                        }
-                    }
-
-                    //text Index
-                    var textIndexAttrList = typeInfo.GetCustomAttributes<MongoTextIndexAttribute>();
-                    if (null != textIndexAttrList)
-                    {
-                        foreach (var script in textIndexAttrList.Scripts(type))
-                        {
-                            sb.Append(script).Append("; ");
-                        }
+                        sb.Append(script).Append("; ");
                     }
                 }
+
+                //text Index
+                var textIndexAttr = typeInfo.GetCustomAttribute<MongoTextIndexAttribute>();
+                if (null != textIndexAttr)
+                {
+                    string script = textIndexAttr.Script(type);
+                    sb.Append(script).Append("; ");
+                }
+
             }
 
             return sb;
