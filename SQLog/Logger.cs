@@ -1,6 +1,7 @@
 ﻿namespace SQLog
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading;
@@ -251,6 +252,23 @@
                 catch
                 {
                 }
+            }
+        }
+
+
+        public static class Logs
+        {
+            public static IList<dynamic> Query(SqlQuery query)
+            {
+                if (null != query)
+                {
+                    using (var c = ionixFactory.CreateDbClient())
+                    {
+                        return c.Cmd.Query<dynamic>(query);
+                    }
+                }
+
+                return  new List<dynamic>();
             }
         }
     }

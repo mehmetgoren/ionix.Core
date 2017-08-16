@@ -216,7 +216,7 @@
             Assert.IsNotNull(asset);
         }
 
-        private const int ManyTestLength = 100;
+        private const int ManyTestLength = 100000;
 
         [TestMethod]
         public void InsertManyTest()
