@@ -4,7 +4,7 @@
     using MongoDB.Bson.Serialization.Attributes;
     using ionix.Data.Mongo;
 
-    [MongoCollection(Database = DbContext.DatabaseName, Name = "LdapUser")]
+    [MongoCollection(Name = "LdapUser")]
     [MigrationVersion(Migration100.VersionNo)]
     [MongoIndex("UserName", Unique = true)]
     [MongoTextIndex("DisplayName", "physicalDeliveryOfficeName")]

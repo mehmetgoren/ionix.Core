@@ -21,9 +21,9 @@
             {
                 this._parent = parent;
 
-                var names = MongoExtensions.GetNames(typeof(TRight));
-                this._from = names.Name;
-                this._as = names.Name;
+                var info = MongoExtensions.GetCollectionInfo(typeof(TRight));
+                this._from = info.Name;
+                this._as = info.Name;
             }
 
             private string _localField;

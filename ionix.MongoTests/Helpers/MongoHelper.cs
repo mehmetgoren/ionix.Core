@@ -1,17 +1,17 @@
 ﻿namespace ionix.MongoTests
 {
     using ionix.Data.Mongo.Migration;
-    using System;
+    using MongoDB.Driver;
     using System.Reflection;
 
     //Todo: Index için Migration sınıfları ekle.
     public static class MongoHelper
     {
-        public static bool InitializeMongo(Assembly asm, string connectionString, string databaseName)
+        public static bool InitializeMigration(Assembly asm, IMongoDatabase db)
         {
-            if (null != asm && !String.IsNullOrEmpty(connectionString) && !String.IsNullOrEmpty(databaseName))
+            if (null != asm && null != db)
             {
-                var runner = new MigrationRunner(connectionString, databaseName);
+                var runner = new MigrationRunner(db);
 
                 runner.MigrationLocator.LookForMigrationsInAssembly(asm);
                 // runner.MigrationLocator.LookForMigrationsInAssemblyOfType<Migration1>();

@@ -19,9 +19,30 @@
     [TestClass]
     public class MongoTests
     {
-        static MongoTests()
+        internal const string MongoAddress = "mongodb://192.168.253.138:27017";
+
+        private static readonly object SyncRoot = new object();
+        internal static IMongoDatabase _db;
+        internal static IMongoDatabase Db
         {
-            DbContext.InitialGlobal();
+            get
+            {
+                if (null == _db)
+                {
+                    lock(SyncRoot)
+                    {
+                        if (null == _db)
+                        {
+                            MongoClientProxy.SetConnectionString(MongoAddress);
+
+                            _db = MongoAdmin.GetDatabase(MongoClientProxy.Instance, DbContext.DatabaseName);
+                            MongoHelper.InitializeMigration(new Migration100().GetMigrationsAssembly(), _db);
+                        }
+                    }
+                }
+
+                return _db;
+            }
         }
 
         private static IEnumerable<TEntity> CreateMockData<TEntity>(int limit)
@@ -65,10 +86,10 @@
         private static Task InsertMany<TEntity>()
             where TEntity : new()
         {
-            return new MongoRepository<TEntity>(MongoClientProxy.Instance).InsertManyAsync(CreateMockData<TEntity>(Limit));
+            return new MongoRepository<TEntity>(Db).InsertManyAsync(CreateMockData<TEntity>(Limit));
         }
 
-        private static readonly Mongo Cmd = new Mongo(MongoClientProxy.Instance);
+        private static readonly Mongo Cmd = new Mongo(Db);
 
         private static void InsertPersonAddress()
         {
@@ -104,9 +125,7 @@
        // [TestMethod]
         public void Initialize()
         {
-
-            var db = MongoAdmin.GetDatabase(MongoClientProxy.Instance, DbContext.DatabaseName);
-             MongoAdmin.ExecuteScript(db, "db.LdapUser.remove({});");
+             MongoAdmin.ExecuteScript(Db, "db.LdapUser.remove({});");
             // MongoAdmin.ExecuteScript(db, "db.LdapUser.drop();");
 
             string json = File.ReadAllText("d:\\sil.txt");
@@ -116,9 +135,9 @@
             Cmd.InsertMany(list);
 
 
-            MongoAdmin.ExecuteScript(db, "db.Person.remove({});");
-            MongoAdmin.ExecuteScript(db, "db.Address.remove({});");
-            MongoAdmin.ExecuteScript(db, "db.PersonAddress.remove({});");
+            MongoAdmin.ExecuteScript(Db, "db.Person.remove({});");
+            MongoAdmin.ExecuteScript(Db, "db.Address.remove({});");
+            MongoAdmin.ExecuteScript(Db, "db.PersonAddress.remove({});");
 
             InsertMany<Person>().Wait();
             InsertMany<Address>().Wait();
@@ -559,8 +578,7 @@
             var x = Cmd.AsQueryable<Person>().FirstOrDefault();
             var y = x.ToDictionary();
 
-            var dic = MongoAdmin.ExecuteScript(MongoAdmin.GetDatabase(MongoClientProxy.Instance
-                , DbContext.DatabaseName), script).ToDictionary();
+            var dic = MongoAdmin.ExecuteScript(Db, script).ToDictionary();
 
             object[] arr = ((IDictionary<string, object>) dic.First().Value).First().Value as object[];
 
@@ -583,7 +601,7 @@
         [TestMethod]
         public void LookupSimpleTest()
         {
-            var template = Lookup<Person>.Left(MongoClientProxy.Instance)
+            var template = Lookup<Person>.Left(Db)
                 .Project(p => p.Description)
                 .Match().Equals(p => p.Active, true).And().Contains(p => p.Name, "aaa").EndMatch()
                 .Limit(10)
@@ -599,7 +617,7 @@
         [TestMethod]
         public void LookupComplexTest()
         {
-            var template = Lookup<PersonAddress>.Left(MongoClientProxy.Instance)
+            var template = Lookup<PersonAddress>.Left(Db)
                     //.BatchSize(10)
                     .Project(p => p.Id, p => p.PersonId, p => p.AddressId, p => p.Active)
                     .Match().Equals(p => p.Active, true).And().NotEquals(p => p.Active, false).EndMatch()

@@ -15,13 +15,17 @@
     public class MongoRepository<TEntity>
     {
         private readonly Mongo mongo;
+
+        protected IMongoDatabase Database { get; }
         protected IMongoClient Client { get; }
 
 
-        public MongoRepository(IMongoClient client)
+        public MongoRepository(IMongoDatabase db)
         {
-            this.mongo = new Mongo(client);
-            this.Client = client;
+            this.mongo = new Mongo(db);
+
+            this.Database = db;
+            this.Client = db.Client;
         }
 
         public IMongoCollection<TEntity> Collection => this.mongo.Get<TEntity>();
@@ -285,7 +289,7 @@
 
         public Lookup<TEntity> Lookup()
         {
-            return Lookup<TEntity>.Left(this.Client);
+            return Lookup<TEntity>.Left(this.Database);
         }
 
         public TEntity New()

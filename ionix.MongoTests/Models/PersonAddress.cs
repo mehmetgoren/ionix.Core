@@ -4,10 +4,9 @@
     using MongoDB.Bson.Serialization.Attributes;
     using ionix.Data.Mongo;
 
-    [MongoCollection(Database = DbContext.DatabaseName, Name = "PersonAddress")]
+    [MongoCollection(Name = "PersonAddress")]
     [MigrationVersion(Migration100.VersionNo)]
     [MongoIndex("PersonId", "AddressId")]
-    [MongoIndex("AddressId")]
     [MongoIndex("AddressId")]
     public class PersonAddress
     {

@@ -34,7 +34,6 @@
             return this.GetType().GetTypeInfo().Assembly;
         }
 
-        public abstract string DatabaseName { get; }
 
         public sealed override void Update()
         {
@@ -80,11 +79,8 @@
                 var collAttr = typeInfo.GetCustomAttribute<MongoCollectionAttribute>();
                 if (null != collAttr)
                 {
-                    if (String.IsNullOrEmpty(collAttr.Database) || collAttr.Database == this.DatabaseName)
-                    {
-                        string script = collAttr.Script(type);
-                        sb.Append(script).Append("; ");
-                    }
+                    string script = collAttr.Script(type);
+                    sb.Append(script).Append("; ");
                 }
 
                 //default index

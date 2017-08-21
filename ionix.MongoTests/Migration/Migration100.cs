@@ -12,8 +12,6 @@
         {
         }
 
-        public override string DatabaseName => DbContext.DatabaseName;
-
         public override string GenerateMigrationScript()
         {
             var libAssembly = GetMigrationsAssembly();

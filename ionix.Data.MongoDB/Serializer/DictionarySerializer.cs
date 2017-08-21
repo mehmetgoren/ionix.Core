@@ -147,7 +147,7 @@
 
         public static T Unwind<T>(this IDictionary<string, object> dic)
         {
-            var name = MongoExtensions.GetNames(typeof(T)).Name;
+            var name = MongoExtensions.GetCollectionInfo(typeof(T)).Name;
             var dicInner = dic[name] as IDictionary<string, object>;
             return To<T>(dicInner);
         }

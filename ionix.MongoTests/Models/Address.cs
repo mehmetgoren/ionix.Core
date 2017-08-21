@@ -4,7 +4,7 @@
     using MongoDB.Bson.Serialization.Attributes;
     using MongoDB.Bson;
 
-    [MongoCollection(Database = DbContext.DatabaseName, Name = "Address")]
+    [MongoCollection(Name = "Address")]
     [MigrationVersion(Migration100.VersionNo)]
     [MongoIndex("Name")]
     public class Address

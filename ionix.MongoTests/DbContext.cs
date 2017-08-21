@@ -6,42 +6,21 @@
 
     public class DbContext
     {
-        internal const string MongoAddress = "mongodb://192.168.253.138:27017";
-
         public const string DatabaseName = "TestDb";
 
-
-        private static bool _initialedGlobally;
-
-        public static void InitialGlobal()
-        {
-            MongoClientProxy.SetConnectionString(MongoAddress);
-            MongoHelper.InitializeMongo(new Migration100().GetMigrationsAssembly(),
-                MongoAddress, DbContext.DatabaseName);
-
-
-            _initialedGlobally = MongoHelper.InitializeMongo(new Migration100().GetMigrationsAssembly(),
-                MongoAddress, DatabaseName);
-
-        }
-
-
+        public IMongoDatabase Database { get; }
         public IMongoClient MongoClient { get;}
 
         #region constructors
 
 
-        public DbContext(IMongoClient client)
+        public DbContext(IMongoDatabase db)
         {
-            if (null == client)
-                throw new ArgumentNullException(nameof(client));
+            if (null == db)
+                throw new ArgumentNullException(nameof(db));
 
-            this.MongoClient = client;
-
-            if (!_initialedGlobally)
-            {
-                throw new ArgumentException($"{nameof(DbContext)} must be initialized globally.");
-            }
+            this.Database = db;
+            this.MongoClient = db.Client;
 
             this._person = this.GetLazy<Person>();
             this._address = this.GetLazy<Address>();
@@ -50,19 +29,19 @@
         }
 
         public DbContext(string connectionString)
-            : this(new MongoClient(connectionString))
+            : this(MongoAdmin.GetDatabase(new MongoClient(connectionString), DatabaseName))
         {
         }
 
         public DbContext()
-            : this(MongoClientProxy.Instance)
+            : this(MongoTests.MongoAddress)
         {
         }
         #endregion
 
         private Lazy<MongoRepository<TEntity>> GetLazy<TEntity>()
         {
-            return new Lazy<MongoRepository<TEntity>>(() => new MongoRepository<TEntity>(this.MongoClient), true);
+            return new Lazy<MongoRepository<TEntity>>(() => new MongoRepository<TEntity>(this.Database), true);
         }
 
         private readonly Lazy<MongoRepository<Person>> _person;

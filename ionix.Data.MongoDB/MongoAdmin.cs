@@ -44,6 +44,12 @@
             if (null == client)
                 throw new ArgumentNullException(nameof(client));
         }
+        private static void EnsureDatabase(IMongoDatabase db)
+        {
+            if (null == db)
+                throw new ArgumentNullException(nameof(db));
+        }
+
         public static IEnumerable<Database> GetDatabaseList(IMongoClient client)
         {
             EnsureClient(client);
@@ -58,22 +64,18 @@
             return ret;
         }
 
-        public static void DropDatabase(IMongoClient client, string name)
+        public static void DropDatabase(IMongoDatabase db)
         {
-            EnsureClient(client);
-            if (String.IsNullOrEmpty(name))
-                throw new ArgumentNullException(nameof(name));
+            EnsureDatabase(db);
 
-            client.DropDatabase(name);
+            db.Client.DropDatabase(db.DatabaseNamespace.DatabaseName);
         }
 
-        public static async void DropDatabaseAsync(IMongoClient client, string name)
+        public static async void DropDatabaseAsync(IMongoDatabase db)
         {
-            EnsureClient(client);
-            if (String.IsNullOrEmpty(name))
-                throw new ArgumentNullException(nameof(name));
+            EnsureDatabase(db);
 
-            await client.DropDatabaseAsync(name);
+            await db.Client.DropDatabaseAsync(db.DatabaseNamespace.DatabaseName);
         }
 
         public static IMongoDatabase GetDatabase(IMongoClient client, string name)
@@ -85,21 +87,26 @@
             return client.GetDatabase(name);
         }
 
-        public static IMongoCollection<TEntity> GetCollection<TEntity>(IMongoClient client)
+        public static IMongoCollection<TEntity> GetCollection<TEntity>(IMongoDatabase db)
         {
-            var info = MongoExtensions.GetNames(typeof(TEntity));
-            var db = GetDatabase(client, info.Database);
+            EnsureDatabase(db);
+
+            var info = MongoExtensions.GetCollectionInfo(typeof(TEntity));
             var table = db.GetCollection<TEntity>(info.Name);
             return table;
         }
-        public static IMongoCollection<BsonDocument> GetCollection(IMongoClient client, Type modelType)
+        public static IMongoCollection<BsonDocument> GetCollection(IMongoDatabase db, Type modelType)
         {
-            var info = MongoExtensions.GetNames(modelType);
-            var db = MongoAdmin.GetDatabase(client, info.Database);
+            EnsureDatabase(db);
+
+            if (null == modelType)
+                throw new ArgumentNullException(nameof(modelType));
+
+            var info = MongoExtensions.GetCollectionInfo(modelType);
             return db.GetCollection<BsonDocument>(info.Name);
         }
 
-        private static string CreateIndexTemplate<TEntity>(IMongoClient client, CreateIndexOptions<TEntity> options, Expression<Func<TEntity, object>>[] exps
+        private static string CreateIndexTemplate<TEntity>(IMongoDatabase db, CreateIndexOptions<TEntity> options, Expression<Func<TEntity, object>>[] exps
             , Func<FieldDefinition<TEntity>, IndexKeysDefinition<TEntity>> func)
         {
             if (null == exps || 0 == exps.Length)
@@ -109,7 +116,7 @@
             for (int j = 0; j < exps.Length; ++j)
                 props[j] = ReflectionExtensions.GetPropertyInfo(exps[j]);
 
-            var table = GetCollection<TEntity>(client);
+            var table = GetCollection<TEntity>(db);
 
             if (props.Length == 1)
             {
@@ -134,24 +141,24 @@
         }
 
         //İleride Text Index i de ekle.
-        public static string CreateIndex<TEntity>(IMongoClient client, CreateIndexOptions<TEntity> options, params Expression<Func<TEntity, object>>[] exps)
+        public static string CreateIndex<TEntity>(IMongoDatabase db, CreateIndexOptions<TEntity> options, params Expression<Func<TEntity, object>>[] exps)
         {
-            return CreateIndexTemplate(client, options, exps, (field) => Builders<TEntity>.IndexKeys.Ascending(field));
+            return CreateIndexTemplate(db, options, exps, (field) => Builders<TEntity>.IndexKeys.Ascending(field));
         }
 
-        public static string CreateIndex<TEntity>(IMongoClient client, params Expression<Func<TEntity, object>>[] exps)
+        public static string CreateIndex<TEntity>(IMongoDatabase db, params Expression<Func<TEntity, object>>[] exps)
         {
-            return CreateIndex(client, null, exps);
+            return CreateIndex(db, null, exps);
         }
 
-        public static string CreateTextIndex<TEntity>(IMongoClient client, CreateIndexOptions<TEntity> options, params Expression<Func<TEntity, object>>[] exps)
+        public static string CreateTextIndex<TEntity>(IMongoDatabase db, CreateIndexOptions<TEntity> options, params Expression<Func<TEntity, object>>[] exps)
         {
-            return CreateIndexTemplate(client, options, exps, (field) => Builders<TEntity>.IndexKeys.Text(field));
+            return CreateIndexTemplate(db, options, exps, (field) => Builders<TEntity>.IndexKeys.Text(field));
         }
 
-        public static string CreateTextIndex<TEntity>(IMongoClient client, params Expression<Func<TEntity, object>>[] exps)
+        public static string CreateTextIndex<TEntity>(IMongoDatabase db, params Expression<Func<TEntity, object>>[] exps)
         {
-            return CreateTextIndex(client, null, exps);
+            return CreateTextIndex(db, null, exps);
         }
     }
 }

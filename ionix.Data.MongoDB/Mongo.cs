@@ -16,21 +16,23 @@
 
     public sealed class Mongo
     {
+        private readonly IMongoDatabase db;
         private readonly IMongoClient client;
 
         private static readonly UpdateOptions ReplaceOrInsertOneOptions = new UpdateOptions { IsUpsert = true };
-        public Mongo(IMongoClient client)
+        public Mongo(IMongoDatabase db)
         {
-            if (null == client)
-                throw new ArgumentNullException(nameof(client));
+            if (null == db)
+                throw new ArgumentNullException(nameof(db));
 
-            this.client = client;
+            this.db = db;
+            this.client = db.Client;
         }
 
 
         public IMongoCollection<TEntity> Get<TEntity>()
         {
-            return MongoAdmin.GetCollection<TEntity>(this.client);
+            return MongoAdmin.GetCollection<TEntity>(this.db);
         }
 
         #region |   Select   |
@@ -369,7 +371,7 @@
                 requests.Add(new ReplaceOneModel<BsonDocument>(filter, _mng) { IsUpsert = isUpsert });
             }
 
-            var coll = MongoAdmin.GetCollection(this.client, typeof(TEntity));
+            var coll = MongoAdmin.GetCollection(this.db, typeof(TEntity));
 
             return coll.BulkWriteAsync(requests, options);
         }

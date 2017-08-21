@@ -5,7 +5,6 @@ namespace ionix.Data.Mongo.Migration
 	using System.Linq;
 	using MongoDB.Bson.Serialization;
 	using MongoDB.Driver;
-    using System.Diagnostics;
 
     public class MigrationRunner
 	{
@@ -18,17 +17,6 @@ namespace ionix.Data.Mongo.Migration
 		{
 			BsonSerializer.RegisterSerializer(typeof (MigrationVersion), new MigrationVersionSerializer());
 		}
-
-        private readonly string connectionString;
-        public MigrationRunner(string connectionString, string databaseName)
-			: this(new MongoClient(connectionString).GetDatabase(databaseName))
-		{
-            this.connectionString = connectionString;
-		}
-        public MigrationRunner()
-        {
-
-        }
 
 		public MigrationRunner(IMongoDatabase database)
 		{
@@ -54,8 +42,9 @@ namespace ionix.Data.Mongo.Migration
 
 	    private string ServerAddresses()
 	    {
-            MongoUrl u = new MongoUrl(this.connectionString);
-            return u.Server.Host;
+            var server = this.Database.Client.Settings.Server;
+
+            return server.Host + ":" + server.Port;
 	    }
 
 	    protected virtual void ApplyMigrations(IEnumerable<Migration> migrations)

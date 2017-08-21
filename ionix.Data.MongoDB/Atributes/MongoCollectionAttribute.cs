@@ -14,7 +14,6 @@
             this.Name = name;
         }
 
-        public string Database { get; set; }
         public string Name { get; set; }
 
         public bool AutoIndexId { get; set; } = true;

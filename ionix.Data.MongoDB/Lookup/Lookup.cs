@@ -14,24 +14,24 @@
 
     public partial class Lookup<TLeft> : IMongoDbScriptProvider
     {
-        public static Lookup<TLeft> Left(IMongoClient client)
+        public static Lookup<TLeft> Left(IMongoDatabase db)
         {
-            return new Lookup<TLeft>(client);
+            return new Lookup<TLeft>(db);
         }
 
         private readonly Type _leftType;
-        private readonly MongoCollectionAttribute _names;
-        private readonly IMongoClient _client;
+        private readonly MongoCollectionAttribute _collectionInfo;
+        private readonly IMongoDatabase _db;
         private readonly Filter _match;
         private readonly HashSet<string> fields;
 
-        private Lookup(IMongoClient client)
+        private Lookup(IMongoDatabase db)
         {
             this._leftType = typeof(TLeft);
 
             this._batchSize = 1000000;
-            this._names = MongoExtensions.GetNames(this._leftType);
-            this._client = client;
+            this._collectionInfo = MongoExtensions.GetCollectionInfo(this._leftType);
+            this._db = db;
             this._match = new Filter(this);
             this.fields = new HashSet<string>();
 
@@ -112,8 +112,7 @@
             if (null == selector)
                 return null;
 
-            var db = MongoAdmin.GetDatabase(this._client, this._names.Database);
-            var dic = MongoAdmin.ExecuteScript(db, this.ToString()).ToDictionary();
+            var dic = MongoAdmin.ExecuteScript(this._db, this.ToString()).ToDictionary();
 
             var ret = new List<T>();
             var items = ((IDictionary<string, object>)dic.First().Value).First().Value as IEnumerable;
@@ -133,8 +132,7 @@
             if (null == selector)
                 return null;
 
-            var db = MongoAdmin.GetDatabase(this._client, this._names.Database);
-            var dic = (await MongoAdmin.ExecuteScriptAsync(db, this.ToString())).ToDictionary();
+            var dic = (await MongoAdmin.ExecuteScriptAsync(this._db, this.ToString())).ToDictionary();
 
             var ret = new List<T>();
             var items = ((IDictionary<string, object>)dic.First().Value).First().Value as IEnumerable;
@@ -152,7 +150,7 @@
         public StringBuilder ToScript()
         {
             StringBuilder sb = new StringBuilder("db.")
-                .Append(_names.Name)
+                .Append(this._collectionInfo.Name)
                 .Append(".aggregate([ ");
 
             if (null != this._match)
@@ -204,7 +202,7 @@
             foreach (var kvp in this._joins)
             {
                 var joinType = kvp.Key;
-                var projectName = MongoExtensions.GetNames(joinType).Name;
+                var projectName = MongoExtensions.GetCollectionInfo(joinType).Name;
                 sb.Append(projectName)
                     .Append(" : {");
                 foreach (var fieldName in DictionarySerializer.GetValidProperties(joinType)

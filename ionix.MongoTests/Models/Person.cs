@@ -5,7 +5,7 @@
     using ionix.Data.Mongo;
 
 
-    [MongoCollection(Database = DbContext.DatabaseName, Name = "Person")]
+    [MongoCollection(Name = "Person")]
     [MigrationVersion(Migration100.VersionNo)]
     [MongoIndex("Name", Unique = true)]
     [MongoTextIndex("*")]
