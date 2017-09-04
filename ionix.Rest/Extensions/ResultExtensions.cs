@@ -8,7 +8,7 @@
 
     public static class ResultExtensions
     {
-        public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<T> data)
+        public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<T> data, string message = null)
         {
             Response<T> response = new Response<T>();
             try
@@ -16,6 +16,7 @@
                 T item = data();
                 response.Data = new List<T>() { item };
                 response.Total = 0;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -24,7 +25,7 @@
 
             return new Result<T>(response);
         }
-        public static async Task<Result<T>> ResultSingleAsync<T>(this ControllerBase controller, Func<Task<T>> data)
+        public static async Task<Result<T>> ResultSingleAsync<T>(this ControllerBase controller, Func<Task<T>> data, string message = null)
         {
             Response<T> response = new Response<T>();
             try
@@ -32,6 +33,7 @@
                 T item = await data();
                 response.Data = new List<T>() { item };
                 response.Total = 0;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -41,7 +43,7 @@
             return new Result<T>(response);
         }
 
-        public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<Data<T>> data)
+        public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<Data<T>> data, string message = null)
         {
             Response<T> response = new Response<T>();
             try
@@ -49,6 +51,7 @@
                 Data<T> info = data();
                 response.Data = new List<T>() { info.Entity };
                 response.Total = info.Total;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -59,13 +62,14 @@
         }
 
 
-        public static Result<T> ResultList<T>(this ControllerBase controller, Func<IEnumerable<T>> data)
+        public static Result<T> ResultList<T>(this ControllerBase controller, Func<IEnumerable<T>> data, string message = null)
         {
             Response<T> response = new Response<T>();
             try
             {
                 response.Data = data();
                 response.Total = 0;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -74,13 +78,14 @@
 
             return new Result<T>(response);
         }
-        public static async Task<Result<T>> ResultListAsync<T>(this ControllerBase controller, Func<Task<IEnumerable<T>>> data)
+        public static async Task<Result<T>> ResultListAsync<T>(this ControllerBase controller, Func<Task<IEnumerable<T>>> data, string message = null)
         {
             Response<T> response = new Response<T>();
             try
             {
                 response.Data = await data();
                 response.Total = 0;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -90,7 +95,7 @@
             return new Result<T>(response);
         }
 
-        public static Result<T> ResultList<T>(this ControllerBase controller, Func<Datas<T>> datas)
+        public static Result<T> ResultList<T>(this ControllerBase controller, Func<Datas<T>> datas, string message = null)
         {
             Response<T> response = new Response<T>();
             try
@@ -98,6 +103,7 @@
                 Datas<T> infos = datas();
                 response.Data = infos.EntityList;
                 response.Total = infos.Total;
+                response.Message = message;
             }
             catch (Exception ex)
             {
@@ -105,15 +111,6 @@
             }
 
             return new Result<T>(response);
-        }
-
-
-        public static IActionResult ResultSingle(this ControllerBase controller, string message)
-        {
-            Response<object> response = new Response<object>();
-            response.Message = message;
-
-            return new Result<object>(response);
         }
     }
 

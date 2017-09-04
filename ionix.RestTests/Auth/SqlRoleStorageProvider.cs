@@ -7,6 +7,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     public sealed class SqlRoleStorageProvider : IRoleStorageProvider
     {
@@ -149,7 +150,7 @@
                 {
                     ActionRepository actionRepository = new ActionRepository(client.Cmd);
 
-                    ControllerActionsList reflecteds = ControllerActionsList.Create<ReflectController>(AppDomain.CurrentDomain.GetAssemblies());
+                    ControllerActionsList reflecteds = AuthorizationValidator.ControllerActionsList;
 
                     foreach (Controller controller in controllers)
                     {
@@ -159,8 +160,8 @@
                             List<ionix.RestTests.Action> actions = actionRepository.SelectByControllerId(controller.Id).ToList();
                             foreach (ionix.RestTests.Action action in actions)
                             {
-                                ActionMethodInfo ami = ca[action.Name];
-                                if (null == ami)//Mesela method silindi veya ismi değiştirildi.
+                                MethodInfo mi = ca[action.Name];
+                                if (null == mi)//Mesela method silindi veya ismi değiştirildi.
                                 {
                                     ret = DeleteRecordsByControllerAction(action);
                                 }

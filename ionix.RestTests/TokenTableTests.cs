@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ionix.RestTests
 {
+    using System.Diagnostics;
+
     public class TokenTableTests
     {
         const int length = 1000000;
@@ -27,7 +29,7 @@ namespace ionix.RestTests
 
             tasks[0] = Task.Run(() =>
             {
-                SignInTest();
+               // SignInTest();
             });
 
 
@@ -36,7 +38,7 @@ namespace ionix.RestTests
                 TryAuthenticateTokenTests();
             });
 
-            Task.WaitAll(tasks);
+           // Task.WaitAll(tasks);
 
             Console.WriteLine();
             Console.WriteLine("Press Any Key To Continue");
@@ -86,9 +88,11 @@ namespace ionix.RestTests
                 {
                     User user;
                     Guid random = GetRandomUserGuid();
+                    Stopwatch bench = Stopwatch.StartNew();
                     if (TokenTable.Instance.TryAuthenticateToken(random, out user))
                     {
-                        Console.WriteLine("TryAuthenticateTokenTests: " + user.Name);
+                        bench.Stop();
+                        Console.WriteLine("TryAuthenticateTokenTests: " + user.Name + " Elapsed: " + bench.ElapsedMilliseconds);
                     }
                     else
                     {
@@ -98,7 +102,7 @@ namespace ionix.RestTests
                 });
             }
 
-            Task.WaitAll(tasks);
+          //  Task.WaitAll(tasks);
         }
 
         private static Guid GetRandomUserGuid()
