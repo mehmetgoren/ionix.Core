@@ -56,7 +56,7 @@
 
                     if (!flag)
                     {
-                        context.Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                        context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
                         context.RequestAborted = new CancellationToken(true);
                         // throw new AuthenticationException("Access Denied");
                     }

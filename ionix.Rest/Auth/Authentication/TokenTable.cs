@@ -47,8 +47,7 @@
             {
                 lock (TokenTableSyncRoot.SyncRootContainsToken)
                 {
-                    User user = null;
-                    if (this.dic.TryGetByGuid(token, out user))
+                    if (this.dic.TryGetByGuid(token, out User user))
                     {
                         if (this.parent.IsTimeOut(user.LastLoginTime))//tiğmeout oldu ise logout yap.
                         {
