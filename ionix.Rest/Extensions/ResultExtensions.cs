@@ -112,6 +112,13 @@
 
             return new Result<T>(response);
         }
+
+        public static  Result<T> ResultValidationFail<T>(this ControllerBase controller, string message = "Validation has been failed.")
+        {
+            Response<T> @default = new Response<T>() { Message = message };
+
+            return new Result<T>(@default);
+        }
     }
 
 
