@@ -9,7 +9,7 @@
     using Microsoft.AspNetCore.Http;
     using Utils.Extensions;
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class TokenTableAuthAttribute : Attribute
     {
         

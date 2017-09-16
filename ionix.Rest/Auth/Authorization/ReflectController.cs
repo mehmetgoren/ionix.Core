@@ -67,7 +67,7 @@
                     {
                         if (!type.IsAbstract && ControllerType.IsAssignableFrom(type))
                         {
-                            TokenTableAuthAttribute aa = type.GetCustomAttribute<TokenTableAuthAttribute>(true);//Eğerki Authorize Attribute u Yok ise Boşuna DB ye eklemesin
+                            TokenTableAuthAttribute aa = type.GetCustomAttribute<TokenTableAuthAttribute>(false);//Eğerki Authorize Attribute u Yok ise Boşuna DB ye eklemesin
                             if (null != aa)
                             {
                                 var actionMethods = this.GetActionMethods(type);
@@ -109,7 +109,7 @@
             if (null == controllerType)
                 throw new ArgumentNullException(nameof(controllerType));
 
-            TokenTableAuthAttribute attr = controllerType.GetCustomAttribute<TokenTableAuthAttribute>(true);
+            TokenTableAuthAttribute attr = controllerType.GetCustomAttribute<TokenTableAuthAttribute>(false);
             if (null == attr)
                 throw  new ArgumentException($"'{controllerType}' is not marked with '{nameof(TokenTableAuthAttribute)}'");
 
