@@ -25,6 +25,9 @@
         public string Role { get; set; }
         public bool IsAdmin { get; set; }
 
+        //Burası tek değer. İleride web api gibi rol bazlı geliştirilebilir.
+        public bool CanUseWebSockets { get; set; }
+
         public dynamic Extended { get; }
 
         public bool Equals(User other)
