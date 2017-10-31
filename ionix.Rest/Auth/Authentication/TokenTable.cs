@@ -207,7 +207,7 @@
         }
 
         #region   |    ITokenTable    |
-        //IPrinciple nunu test ediyor.
+
         public bool TryAuthenticateToken(Guid token, out User user)
         {
             user = this.cache.ContainsToken(token);
