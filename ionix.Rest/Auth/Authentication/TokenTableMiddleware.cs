@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net;
+    using System.Security.Authentication;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -30,6 +31,7 @@
 
         public virtual async Task Invoke(HttpContext context)
         {
+            bool flag = true;
             var request = context.Request;
             if (request.Method != HttpMethods.Options) //? sec hole
             {
@@ -37,7 +39,7 @@
 
                 if (this._validator.IsNeedToBeAuthenticated(controller))
                 {
-                    bool flag = false;
+                    flag = false;
                     var headerValue = context.Request.Headers["Authorization"];
                     if (!headerValue.IsEmptyList())
                     {
@@ -57,13 +59,14 @@
                     if (!flag)
                     {
                         context.Response.StatusCode = (int) HttpStatusCode.Unauthorized;
-                        context.RequestAborted = new CancellationToken(true);
-                        // throw new AuthenticationException("Access Denied");
+                        await context.Response.WriteAsync("Access Denied 401");
+                        //throw new AuthenticationException("401 Access Denied");
                     }
                 }
             }
-
-            await _next.Invoke(context);
+          
+            if (flag)
+                await _next.Invoke(context);
         }
 
         protected virtual bool AuthenticateUser(string controller, string action, User user)
