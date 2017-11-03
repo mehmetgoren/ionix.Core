@@ -6,9 +6,7 @@
     using System.Threading.Tasks;
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
-    using System.Threading;
     using MongoDB.Bson;
-    using ionix.Utils.Reflection;
 
 
     //a kind of proxy
