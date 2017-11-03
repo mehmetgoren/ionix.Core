@@ -15,7 +15,7 @@ namespace SQLogTests
 
             for (int j = 0; j < 10; ++j)
             {
-                Logger.Create(new StackTrace()).Message("Save default " + j).Save(false);
+                Logger.Create(new StackTrace()).Message("Save default " + j).Save();
                 //Logger.Create(new StackTrace()).Message("Save on other thread " + j).Save();
                 await Logger.Create(new StackTrace()).Message("Save on other thread " + j).SaveAsync();
             }

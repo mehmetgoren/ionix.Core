@@ -163,16 +163,9 @@
             return this.Bench(action, "Bench Result");
         }
 
-        public void Save(bool saveByOtherThread = true)
+        public void Save()
         {
-            if (saveByOtherThread)
-            {
-                this.SaveToDb((c, e) => Task.Run(() => c.Insert(e)));
-            }
-            else
-            {
-                this.SaveToDb((c, e) => c.Insert(e));
-            }
+            this.SaveToDb((c, e) => c.Insert(e));
         }
 
         public Task SaveAsync()
