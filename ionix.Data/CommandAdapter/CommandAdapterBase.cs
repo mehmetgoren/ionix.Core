@@ -128,11 +128,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2>(this.EntityMetaDataProvider, query);
         }
+        public Task<(TEntity1, TEntity2)> QuerySingleAsync<TEntity1, TEntity2>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2>(this.EntityMetaDataProvider, query);
+        }
 
         public (TEntity1, TEntity2, TEntity3) QuerySingle<TEntity1, TEntity2, TEntity3>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2, TEntity3>(this.EntityMetaDataProvider, query);
+        }
+        public Task<(TEntity1, TEntity2, TEntity3)> QuerySingleAsync<TEntity1, TEntity2, TEntity3>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2, TEntity3>(this.EntityMetaDataProvider, query);
         }
 
         public (TEntity1, TEntity2, TEntity3, TEntity4) QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4>(SqlQuery query)
@@ -140,11 +150,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4>(this.EntityMetaDataProvider, query);
         }
+        public Task<(TEntity1, TEntity2, TEntity3, TEntity4)> QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4>(this.EntityMetaDataProvider, query);
+        }
 
         public (TEntity1, TEntity2, TEntity3, TEntity4, TEntity5) QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(this.EntityMetaDataProvider, query);
+        }
+        public Task<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5)> QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(this.EntityMetaDataProvider, query);
         }
 
         public (TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6) QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(SqlQuery query)
@@ -152,11 +172,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(this.EntityMetaDataProvider, query);
         }
+        public Task<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6)> QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(this.EntityMetaDataProvider, query);
+        }
 
         public (TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7) QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.QuerySingle<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(this.EntityMetaDataProvider, query);
+        }
+        public Task<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7)> QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QuerySingleAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(this.EntityMetaDataProvider, query);
         }
 
 
@@ -214,11 +244,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2>(this.EntityMetaDataProvider, query);
         }
+        public Task<IList<(TEntity1, TEntity2)>> QueryAsync<TEntity1, TEntity2>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2>(this.EntityMetaDataProvider, query);
+        }
 
         public IList<(TEntity1, TEntity2, TEntity3)> Query<TEntity1, TEntity2, TEntity3>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2, TEntity3>(this.EntityMetaDataProvider, query);
+        }
+        public Task<IList<(TEntity1, TEntity2, TEntity3)>> QueryAsync<TEntity1, TEntity2, TEntity3>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2, TEntity3>(this.EntityMetaDataProvider, query);
         }
 
         public IList<(TEntity1, TEntity2, TEntity3, TEntity4)> Query<TEntity1, TEntity2, TEntity3, TEntity4>(SqlQuery query)
@@ -226,11 +266,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2, TEntity3, TEntity4>(this.EntityMetaDataProvider, query);
         }
+        public Task<IList<(TEntity1, TEntity2, TEntity3, TEntity4)>> QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4>(this.EntityMetaDataProvider, query);
+        }
 
         public IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5)> Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(this.EntityMetaDataProvider, query);
+        }
+        public Task<IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5)>> QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5>(this.EntityMetaDataProvider, query);
         }
 
         public IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6)> Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(SqlQuery query)
@@ -238,11 +288,21 @@
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(this.EntityMetaDataProvider, query);
         }
+        public Task<IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6)>> QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6>(this.EntityMetaDataProvider, query);
+        }
 
         public IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7)> Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(SqlQuery query)
         {
             var cmd = this.CreateSelectCommand();
             return cmd.Query<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(this.EntityMetaDataProvider, query);
+        }
+        public Task<IList<(TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7)>> QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(SqlQuery query)
+        {
+            var cmd = this.CreateSelectCommand();
+            return cmd.QueryAsync<TEntity1, TEntity2, TEntity3, TEntity4, TEntity5, TEntity6, TEntity7>(this.EntityMetaDataProvider, query);
         }
 
         #endregion

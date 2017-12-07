@@ -19,7 +19,7 @@
     [TestClass]
     public class MongoTests
     {
-        internal const string MongoAddress = "mongodb://192.168.253.138:27017";
+        internal const string MongoAddress = "mongodb://192.168.230.130:27017";
 
         private static readonly object SyncRoot = new object();
         internal static IMongoDatabase _db;

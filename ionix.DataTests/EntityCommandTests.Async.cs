@@ -60,7 +60,7 @@
         }
 
         [TestMethod]
-        public async Task QueryTestAsync()
+        public async Task QueryAsyncTest()
         {
             IList<Customers> customers = null;
             using (var client = ionixFactory.CreateDbClient())
@@ -70,6 +70,56 @@
 
             Assert.IsNotNull(customers);
             Assert.AreNotEqual(customers.Count, 0);
+        }
+
+        [TestMethod]
+        public async Task MultipleQuerySingleAsyncTest()
+        {
+            using (var c = ionixFactory.CreateDbClient())
+            {
+                var cmd = c.Cmd;// new EntityCommandSelect(c.DataAccess, '@');
+
+                SqlQuery q = @"select top 1 o.*, c.* from Orders o
+                inner join Customers c on o.CustomerID = c.CustomerID".ToQuery();
+
+                var order = await cmd.QuerySingleAsync<Orders, Customers>(q);
+
+                q = @"select top 1 o.*, c.*, e.* from Orders o
+                inner join Customers c on o.CustomerID = c.CustomerID
+                inner join Employees e on o.EmployeeID = e.EmployeeID".ToQuery();
+                var order3 = await cmd.QuerySingleAsync<Orders, Customers, Employees>(q);
+
+                Assert.IsNotNull(order3);
+            }
+        }
+
+        [TestMethod]
+        public async Task MultipleQueryAsyncTest()
+        {
+            using (var c = ionixFactory.CreateDbClient())
+            {
+                var cmd = c.Cmd;// new EntityCommandSelect(c.DataAccess, '@');
+
+                var provider = new DbSchemaMetaDataProvider();
+
+                SqlQuery q = @"select o.*, c.* from Orders o
+                inner join Customers c on o.CustomerID = c.CustomerID".ToQuery();
+
+                var order = await cmd.QueryAsync<Orders, Customers>(q);
+
+                q = @"select o.*, c.*, e.* from Orders o
+                inner join Customers c on o.CustomerID = c.CustomerID
+                inner join Employees e on o.EmployeeID = e.EmployeeID".ToQuery();
+                var order3 = await cmd.QueryAsync<Orders, Customers, Employees>(q);
+
+
+                //for (int j = 0; j < 1; ++j)
+                //{
+                //    order3 = cmd.Query<Orders, Customers, Employees>(q);
+                //}
+
+                Assert.IsNotNull(order3);
+            }
         }
 
         [TestMethod]

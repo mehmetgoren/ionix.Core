@@ -321,7 +321,7 @@
         }
 
         [TestMethod]
-        public void MultipleQuerySingleTests()
+        public void MultipleQuerySingleTest()
         {
             using (var c = ionixFactory.CreateDbClient())
             {
@@ -350,7 +350,36 @@
         }
 
         [TestMethod]
-        public void MultipleQueryTests()
+        public void MultipleQueryLeftJoinTest()
+        {
+            using (var c = ionixFactory.CreateDbClient())
+            {
+                var cmd = c.Cmd;// new EntityCommandSelect(c.DataAccess, '@');
+
+                SqlQuery q = @"select t1.*, t2.* from Employees t1
+                left join Employees t2 on t1.EmployeeID=t2.ReportsTo".ToQuery();
+
+                var order = cmd.Query<Employees, Employees>(q);
+
+                //for (int j = 0; j < 1; ++j)
+                //{
+                //    order = cmd.QuerySingle<Orders, Customers>(q);
+                //}
+
+                //order = cmd.QuerySingle<Orders, Customers>(q);
+
+
+               // q = @"select top 1 o.*, c.*, e.* from Orders o
+               // inner join Customers c on o.CustomerID = c.CustomerID
+               // inner join Employees e on o.EmployeeID = e.EmployeeID".ToQuery();
+                //var order3 = cmd.QuerySingle<Orders, Customers, Employees>(q);
+
+                Assert.IsNotNull(order);
+            }
+        }
+
+        [TestMethod]
+        public void MultipleQueryTest()
         {
             using (var c = ionixFactory.CreateDbClient())
             {
