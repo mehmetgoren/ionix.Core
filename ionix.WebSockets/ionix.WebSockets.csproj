@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <Description>ionix.WebSockets</Description>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.WebSockets</PackageProjectUrl>
+    <Authors>Mehmet Gökalp Gören</Authors>
+    <Company>Mehmet Gökalp Gören</Company>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
