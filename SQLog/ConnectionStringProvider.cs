@@ -13,17 +13,13 @@
 
     public abstract class BaseConnectionStringProvider : IConnectionStringProvider
     {
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; set; } = Logger.AppSettings;
 
         public abstract string GetConnectionString();
 
         public virtual string GetPath()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-
-            this.Configuration = builder.Build();
-
-            return this.Configuration["SQLogDbFilePath"];
+            return this.Configuration?["SQLog:Path"];
         }
     }
 

@@ -11,6 +11,7 @@
     using System.IO;
     using ionix.Data;
     using ionix.Utils.Extensions;
+    using Microsoft.Extensions.Configuration;
 
     //Tamamen Exception Safety olmalı.
     public class Logger
@@ -24,6 +25,53 @@
                 ret.SetReflectedValues(stackTrace);
             }
             return ret;
+        }
+
+        private static readonly Lazy<IConfigurationRoot> _appSettings = new Lazy<IConfigurationRoot>(() =>
+        {
+            try
+            {
+                return new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            }
+            catch
+            {
+                return null;
+            }
+
+        }, true);
+        internal static IConfigurationRoot AppSettings => _appSettings.Value;
+
+
+        private static readonly object syncEnable = new object();
+        private static bool? _enable;
+        public static bool Enable {
+            get
+            {
+                if (!_enable.HasValue)
+                {
+                    lock(syncEnable)
+                    {
+                        if (!_enable.HasValue)
+                        {
+                            bool value = true;
+                            var appSettings = AppSettings;
+                            if (null != appSettings)
+                            {
+                                string enableStr = appSettings["SQLog:Enable"];
+                                if (!String.IsNullOrEmpty(enableStr))
+                                {
+                                   Boolean.TryParse(enableStr, out value);
+                                }
+                            }
+
+                            _enable = value;
+                        }
+                    }
+                }
+
+                return _enable.Value;
+            }
+            set { _enable = value;  }
         }
 
         public Logger Clear()
@@ -165,12 +213,13 @@
 
         public void Save()
         {
-            this.SaveToDb((c, e) => c.Insert(e));
+            if (Enable)
+              this.SaveToDb((c, e) => c.Insert(e));
         }
 
         public Task SaveAsync()
         {
-            return this.SaveToDb((c, e) => c.InsertAsync(e));
+            return Enable ? this.SaveToDb((c, e) => c.InsertAsync(e)) : Task.FromResult(0);
         }
 
         private T SaveToDb<T>(Func<ICommandAdapter, LogEntity, T> func)
@@ -185,7 +234,7 @@
                 c = ionixFactory.CreateDbClient();
 
                 ret = func(c.Cmd, l);
-               // c.Cmd.Insert(l);
+                // c.Cmd.Insert(l);
             }
             catch (Exception ex)
             {
@@ -193,7 +242,7 @@
                 {
                     //olmadı text olarak imdat mesajı yazılsın.
 
-                    string path = Assembly.GetExecutingAssembly().Location;
+                    string path = Assembly.GetExecutingAssembly().Location + "\\SQLog_Critical.txt";
 
                     File.WriteAllText(path, ex.FindRoot().Message);
 
