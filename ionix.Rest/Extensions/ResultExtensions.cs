@@ -12,9 +12,7 @@
 
         private static void OnExceptionDoSomething(Exception ex)
         {
-            var func = OnException;
-            if (null != OnException)
-                func(ex);
+            OnException?.Invoke(ex);
         }
 
         public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<T> data, string message = null)
