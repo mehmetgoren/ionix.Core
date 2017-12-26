@@ -8,6 +8,15 @@
 
     public static class ResultExtensions
     {
+        public static Action<Exception> OnException { get; set; }
+
+        private static void OnExceptionDoSomething(Exception ex)
+        {
+            var func = OnException;
+            if (null != OnException)
+                func(ex);
+        }
+
         public static Result<T> ResultSingle<T>(this ControllerBase controller, Func<T> data, string message = null)
         {
             Response<T> response = new Response<T>();
@@ -21,6 +30,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
@@ -38,6 +48,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
@@ -56,6 +67,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
@@ -74,6 +86,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
@@ -90,6 +103,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
@@ -108,6 +122,7 @@
             catch (Exception ex)
             {
                 response.Error = ex.FindRoot();
+                OnExceptionDoSomething(response.Error);
             }
 
             return new Result<T>(response);
