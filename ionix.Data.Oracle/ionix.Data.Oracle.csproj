@@ -5,7 +5,7 @@
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <Description>ionix.Data.Oracle</Description>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.Oracle</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>

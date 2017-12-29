@@ -70,6 +70,36 @@
             return Concrete.WithWriteConcern(writeConcern);
         }
 
+        public void DropDatabase(IClientSessionHandle session, string name, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            Concrete.DropDatabase(session, name, cancellationToken);
+        }
+
+        public Task DropDatabaseAsync(IClientSessionHandle session, string name, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Concrete.DropDatabaseAsync(session, name, cancellationToken);
+        }
+
+        public IAsyncCursor<BsonDocument> ListDatabases(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Concrete.ListDatabases(session, cancellationToken);
+        }
+
+        public Task<IAsyncCursor<BsonDocument>> ListDatabasesAsync(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Concrete.ListDatabasesAsync(session, cancellationToken);
+        }
+
+        public IClientSessionHandle StartSession(ClientSessionOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Concrete.StartSession(options, cancellationToken);
+        }
+
+        public Task<IClientSessionHandle> StartSessionAsync(ClientSessionOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Concrete.StartSessionAsync(options, cancellationToken);
+        }
+
         public ICluster Cluster { get; } = Concrete.Cluster;
         public MongoClientSettings Settings { get; } = Concrete.Settings;
     }

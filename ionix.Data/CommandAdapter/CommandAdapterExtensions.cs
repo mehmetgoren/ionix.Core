@@ -61,7 +61,19 @@
                 {
                     Expression<Func<TEntity, object>> exp = updatedFields[j];
                     PropertyInfo pi = ReflectionExtensions.GetPropertyInfo(exp.Body);
-                    arr[j] = pi.Name;
+                    string columnName = pi.Name;
+
+                    var attr = pi.GetCustomAttribute<DbSchemaAttribute>();
+                    if (null != attr && !String.IsNullOrEmpty(attr.ColumnName))
+                        columnName = attr.ColumnName;
+                    else
+                    {
+                        var attr2 = pi.GetCustomAttribute<System.ComponentModel.DataAnnotations.Schema.ColumnAttribute>();
+                        if (null != attr2 && !String.IsNullOrEmpty(attr2.Name))
+                            columnName = attr2.Name;
+                    }
+
+                    arr[j] = columnName;
                 }
             }
             return arr;

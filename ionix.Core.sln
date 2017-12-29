@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Utils", "ionix.Utils\ionix.Utils.csproj", "{8BEB387D-D0A4-43F9-85B4-9F9D226E0784}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.MongoTests", "ionix.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.RestTests", "ionix.RestTests\ionix.RestTests.csproj", "{E29D78C2-9713-4423-B13F-F3456127B852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.WebSockets", "ionix.WebSockets\ionix.WebSockets.csproj", "{6E5FE33F-F0D7-4197-8C16-5F872A00268F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.WebSockets", "ionix.WebSockets\ionix.WebSockets.csproj", "{6E5FE33F-F0D7-4197-8C16-5F872A00268F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

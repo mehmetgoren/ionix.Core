@@ -4,11 +4,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
-    <Version>2.0.0</Version>
+    <Version>2.01</Version>
     <Description>ionix.Data</Description>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Data</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl></RepositoryUrl>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <FileVersion>2.0.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
   </ItemGroup>
 
 </Project>

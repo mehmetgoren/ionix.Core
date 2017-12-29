@@ -157,11 +157,11 @@
             return this.ExecuteAsync(query, (cmd) => cmd.ExecuteScalarAsync());
         }
 
-        public IDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior)
+        public virtual IDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior)
         {
             return this.Execute(query, (cmd) => cmd.ExecuteReader(behavior));
         }
-        public Task<DbDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior)
+        public virtual Task<DbDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior)
         {
             return this.ExecuteAsync(query, (cmd) => cmd.ExecuteReaderAsync(behavior));
         }
