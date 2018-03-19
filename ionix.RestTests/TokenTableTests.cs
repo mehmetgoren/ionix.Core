@@ -1,14 +1,13 @@
-using ionix.Rest;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace ionix.RestTests
 {
+    using ionix.Rest;
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using System.Diagnostics;
 
-    public class TokenTableTests
+    public static class TokenTableTests
     {
         const int length = 1000000;
 
@@ -16,14 +15,14 @@ namespace ionix.RestTests
 
         static void Main(string[] args)
         {
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "aaaaaa", Password = "aaaaaa" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "bbbbbb", Password = "bbbbbb" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "MvcApp", Password = "MvcApp" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "cccccc", Password = "cccccc" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "dddddd", Password = "dddddd" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "eeeeee", Password = "eeeeee" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "ffffff", Password = "ffffff" }).Value);
-            users.Add(TokenTable.Instance.SignIn(new Credentials() { Username = "hhhhhh", Password = "hhhhhh" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "aaaaaa", Password = "aaaaaa" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "bbbbbb", Password = "bbbbbb" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "MvcApp", Password = "MvcApp" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "cccccc", Password = "cccccc" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "dddddd", Password = "dddddd" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "eeeeee", Password = "eeeeee" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "ffffff", Password = "ffffff" }).Value);
+            users.Add(TokenTable.Instance.Login(new Credentials() { Username = "hhhhhh", Password = "hhhhhh" }).Value);
 
             Task[] tasks = new Task[2];
 
@@ -55,7 +54,7 @@ namespace ionix.RestTests
             {
                 tasks[j] = Task.Run(() =>
                 {
-                    var guid = TokenTable.Instance.SignIn(new Credentials() { Username = "MvcApp", Password = "MvcApp" });
+                    var guid = TokenTable.Instance.Login(new Credentials() { Username = "MvcApp", Password = "MvcApp" });
 
                     guids.Add(guid.Value);
                     Console.WriteLine("SignInTest: " + guid);
@@ -64,7 +63,7 @@ namespace ionix.RestTests
 
             Task.WaitAll(tasks);
 
-            Guid first = TokenTable.Instance.SignIn(new Credentials() { Username = "MvcApp", Password = "MvcApp" }).Value;
+            Guid first = TokenTable.Instance.Login(new Credentials() { Username = "MvcApp", Password = "MvcApp" }).Value;
 
             if (guids.Count != length)
                 throw new Exception("guids.Count != length");

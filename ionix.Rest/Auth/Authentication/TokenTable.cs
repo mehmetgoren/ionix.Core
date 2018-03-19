@@ -9,7 +9,8 @@
     //Bu Kısım Cache lenecek bir dictionary için bir sözleşme. RESTful da kullanılmıyOR. Ancak Kullanacak Kısımlar için eklendi.
     public interface ITokenTable
     {
-        Guid? SignIn(Credentials credential);
+        Guid? Login(Credentials credentials);
+        bool Logout(Credentials credentials);
 
         bool TryAuthenticateToken(Guid token, out User user);//RDBMS, Redis or .Net Dictionary
     }
@@ -217,14 +218,19 @@
         //Artık DB de nasıl tutulursa tutulsun bu iki alan olacağından Bana 'Credentials' Nesnesi Döndürülecek.
         protected abstract User GetUserByCredentials(Credentials credentials);
 
-        public Guid? SignIn(Credentials credential)
+        private static bool CheckCredentials(Credentials credentials)
         {
-            if (null != credential && !String.IsNullOrWhiteSpace(credential.Username) && !String.IsNullOrWhiteSpace(credential.Password))
+            return null != credentials && !String.IsNullOrWhiteSpace(credentials.Username) && !String.IsNullOrWhiteSpace(credentials.Password);
+        }
+
+        public Guid? Login(Credentials credentials)
+        {
+            if (CheckCredentials(credentials))
             {
-                var user = this.GetUserByCredentials(credential);
+                var user = this.GetUserByCredentials(credentials);
                 if (null != user)
                 {
-                    if (user.Password == credential.Password)
+                    if (user.Password == credentials.Password)
                     {
                         user.LastLoginTime = DateTime.Now;
                         //return this.cache.AddToken(user);
@@ -235,6 +241,21 @@
                 }
             }
             return null;
+        }
+
+        public bool Logout(Credentials credentials)
+        {
+            if (CheckCredentials(credentials))
+            {
+                var user = this.GetUserByCredentials(credentials);
+                if (null != user)
+                {
+                    this.cache.Remove(user);//if reentered password is incorrect then singout.
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         #endregion
