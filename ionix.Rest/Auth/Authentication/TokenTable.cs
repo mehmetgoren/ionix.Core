@@ -10,7 +10,7 @@
     public interface ITokenTable
     {
         Guid? Login(Credentials credentials);
-        bool Logout(Credentials credentials);
+        bool Logout(Guid token);
 
         bool TryAuthenticateToken(Guid token, out User user);//RDBMS, Redis or .Net Dictionary
     }
@@ -50,7 +50,7 @@
                 {
                     if (this.dic.TryGetByGuid(token, out User user))
                     {
-                        if (this.parent.IsTimeOut(user.LastLoginTime))//tiğmeout oldu ise logout yap.
+                        if (this.parent.IsTimeOut(user.LastLoginTime))//timeout oldu ise logout yap.
                         {
                             this.Remove(user);
                             return null;
@@ -243,11 +243,11 @@
             return null;
         }
 
-        public bool Logout(Credentials credentials)
+        public bool Logout(Guid token)
         {
-            if (CheckCredentials(credentials))
+            if (token != default(Guid))
             {
-                var user = this.GetUserByCredentials(credentials);
+                User user = this.cache.ContainsToken(token);
                 if (null != user)
                 {
                     this.cache.Remove(user);//if reentered password is incorrect then singout.
