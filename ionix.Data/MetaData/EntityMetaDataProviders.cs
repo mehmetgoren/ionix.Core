@@ -137,8 +137,15 @@
                 schema.DefaultValue = att.DefaultValue;
                 schema.IsKey = att.IsKey;
                 schema.MaxLength = att.MaxLength;
-                schema.IsNullable = att.IsNullable;
-                schema.ReadOnly = att.ReadOnly;
+
+                if (schema.IsKey)
+                    schema.IsNullable = false;
+                else if (att.isNullable.IsDirty)//Ensure it is changes by user. Because the metadataprovider set the value properly.
+                    schema.IsNullable = att.IsNullable;
+
+                if (att.readOnly.IsDirty)//Ensure it is changes by user.
+                    schema.ReadOnly = att.ReadOnly;
+
                 schema.SqlValueType = att.SqlValueType;
             }
         }

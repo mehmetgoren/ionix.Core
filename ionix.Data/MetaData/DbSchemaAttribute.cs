@@ -1,5 +1,6 @@
 ﻿namespace ionix.Data
 {
+    using ionix.Utils;
     using System;
     using System.ComponentModel.DataAnnotations;
 
@@ -11,11 +12,22 @@
         public bool IsKey { get; set; }
         public StoreGeneratedPattern DatabaseGeneratedOption { get; set; }
 
-        public bool IsNullable { get; set; } = true;
+        internal Track<bool> isNullable = new Track<bool>(true);
+        public bool IsNullable
+        {
+            get => this.isNullable.Value;
+            set => this.isNullable.Value = value;
+        }
+
         public int MaxLength { get; set; }//UI Binding için.
         public string DefaultValue { get; set; }
 
-        public bool ReadOnly { get; set; }
+        internal Track<bool> readOnly;
+        public bool ReadOnly
+        {
+            get => this.readOnly.Value;
+            set => this.readOnly.Value = value;
+        }
 
         public SqlValueType SqlValueType { get; set; }
 
