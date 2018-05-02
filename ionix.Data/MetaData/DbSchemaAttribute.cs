@@ -11,7 +11,7 @@
         public bool IsKey { get; set; }
         public StoreGeneratedPattern DatabaseGeneratedOption { get; set; }
 
-        public bool IsNullable { get; set; }
+        public bool IsNullable { get; set; } = true;
         public int MaxLength { get; set; }//UI Binding için.
         public string DefaultValue { get; set; }
 
