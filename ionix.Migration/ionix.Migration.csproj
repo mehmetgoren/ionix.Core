@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mehmet Gökalp Gören</Authors>
+    <Company>Mehmet Gökalp Gören</Company>
+    <Description>ionix.Migration</Description>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>X:\ionix.Core\builds\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+  </ItemGroup>
+
+</Project>

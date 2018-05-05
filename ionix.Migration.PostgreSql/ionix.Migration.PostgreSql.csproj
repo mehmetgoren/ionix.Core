@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Mehmet Gökalp Gören</Authors>
+    <Product>ionix.Migration.PostgreSql</Product>
+    <Description>ionix.Migration.PostgreSql</Description>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration.PostgreSql</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>X:\ionix.Core\builds\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+    <ProjectReference Include="..\ionix.Migration\ionix.Migration.csproj" />
+  </ItemGroup>
+
+</Project>
