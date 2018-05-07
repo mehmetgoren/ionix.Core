@@ -43,7 +43,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migration", "Migration", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Migration", "ionix.Migration\ionix.Migration.csproj", "{18C89F2B-D530-4019-ABD3-95E8EAAB6196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.Migration.PostgreSql", "ionix.Migration.PostgreSql\ionix.Migration.PostgreSql.csproj", "{A002BBC2-5321-49F1-8700-6AC9F8B75266}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Migration.PostgreSql", "ionix.Migration.PostgreSql\ionix.Migration.PostgreSql.csproj", "{A002BBC2-5321-49F1-8700-6AC9F8B75266}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.Data.PostgreSql.BulkCopy", "ionix.Data.PostgreSql.BulkCopy\ionix.Data.PostgreSql.BulkCopy.csproj", "{DA39A991-2EBF-4E92-B559-F375DAEBD291}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,10 @@ Global
 		{A002BBC2-5321-49F1-8700-6AC9F8B75266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A002BBC2-5321-49F1-8700-6AC9F8B75266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A002BBC2-5321-49F1-8700-6AC9F8B75266}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +142,7 @@ Global
 		{6E5FE33F-F0D7-4197-8C16-5F872A00268F} = {9D63A6DE-513E-459E-A43D-8367FCA81A2F}
 		{18C89F2B-D530-4019-ABD3-95E8EAAB6196} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
 		{A002BBC2-5321-49F1-8700-6AC9F8B75266} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
+		{DA39A991-2EBF-4E92-B559-F375DAEBD291} = {C2FF72AC-8CCE-4645-A14C-11BCECE9D759}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F697CD57-1B75-4708-8B35-46741F2390D6}

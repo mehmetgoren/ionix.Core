@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mehmet Gökalp Gören</Authors>
+    <Company>Mehmet Gökalp Gören</Company>
+    <Description>ionix.Data.PostgreSql.BulkCopy</Description>
+    <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql.BulkCopy</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>X:\ionix.Core\builds\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="3.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ionix.Data.PostgreSql\ionix.Data.PostgreSql.csproj" />
+    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+    <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
