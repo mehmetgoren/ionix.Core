@@ -9,6 +9,7 @@
     <Description>ionix.Data.PostgreSql.BulkCopy</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql.BulkCopy</PackageProjectUrl>
+    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' and 'Npgsql' packages have been updated.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -16,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="3.2.7" />
+    <PackageReference Include="Npgsql" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>

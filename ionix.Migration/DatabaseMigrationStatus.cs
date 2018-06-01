@@ -45,7 +45,7 @@
 
             var databaseVersion = this.GetVersion();
             var migrationVersion = this.runner.MigrationReflection.LatestVersion();
-            throw new Exception("Database is not the expected version, database is at version: " + databaseVersion + ", migrations are at version: " + migrationVersion);
+            throw new Exception($"Migration versions are not match. The database' s version is '{databaseVersion}', and  migration's version is '{migrationVersion }'");
         }
 
         public void ValidateMigrationsVersions()
@@ -56,25 +56,27 @@
             var incompletedVersions = dbAllMigrations.Where(p => p.Version != Migration000.VersionNo && p.CompletedOn == null).Select(m => m.Version).ToList();
             if (incompletedVersions.Any())
             {
-                throw new MigrationException($"Migrations : {string.Join(",", incompletedVersions)} are incomplete. Please contact administrator. (means you' ve been fucked)");
+                throw new MigrationException($"Some Migrations : {string.Join(",", incompletedVersions)} are incomplete.");
             }
 
             var appAllMigrations = this.runner.MigrationReflection.GetAllMigrations().OrderBy(m => m.Version).ToList();
 
             if (dbAllMigrations.Count > appAllMigrations.Count)
             {
-                throw new MigrationException($"The number of migrations in db ({dbAllMigrations.Count}) is higher than the migration in applications ({appAllMigrations.Count}). Migrations names : {string.Join(",", dbAllMigrations.Skip(appAllMigrations.Count).Select(m => m.Version))}");
+                throw new MigrationException($"the Migrations count in db ({dbAllMigrations.Count}) is higher than application migration count ({appAllMigrations.Count}). Migrations names : {string.Join(",", dbAllMigrations.Skip(appAllMigrations.Count).Select(m => m.Version))}");
             }
 
             for (int i = 0; i < dbAllMigrations.Count; i++)
             {
                 if (dbAllMigrations[i].Version != appAllMigrations[i].Version)
                 {
-                    throw new MigrationException($"Conflict script has been detected! at {i}. Versions is different. The Db' script is : \"{dbAllMigrations[i].Version}\" and the application's is \"{appAllMigrations[i].Version}\".");
+                    throw new MigrationException($"A migration conflict has been detected at index: {i}. The db's version is \"{dbAllMigrations[i].Version}\" and application's version is \"{appAllMigrations[i].Version}\".");
                 }
-                if (dbAllMigrations[i].Script != appAllMigrations[i].GenerateQuery().ToString())
+
+                string generatedQuery = appAllMigrations[i].GenerateQuery().ToString();
+                if (dbAllMigrations[i].Script != generatedQuery)
                 {
-                    throw new MigrationException($"Conflict script has been detected! at {i}.  Version: '{dbAllMigrations[i].Version}'. The Db' script is : \n{dbAllMigrations[i].Script}\n\nin and the application's is:\n{appAllMigrations[i].GenerateQuery()}");
+                    throw new MigrationException($"A migration conflict script has been detected at index: {i}. The db's version: '{dbAllMigrations[i].Version}'. and application's version is \n{dbAllMigrations[i].Script}\n\nin application is:\n{generatedQuery}");
                 }
             }
         }

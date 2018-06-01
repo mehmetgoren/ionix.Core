@@ -37,7 +37,7 @@ namespace ionix.Data.Mongo.Migration
 
 		private string WhatWeAreUpdating()
 		{
-			return string.Format("Updating server(s) \"{0}\" for database \"{1}\"", ServerAddresses(), Database.DatabaseNamespace.DatabaseName);
+			return $"Updating server(s) \"{ServerAddresses()}\" \"{Database.DatabaseNamespace.DatabaseName}\"";
 		}
 
 	    private string ServerAddresses()

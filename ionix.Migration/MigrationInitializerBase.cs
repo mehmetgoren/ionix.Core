@@ -17,7 +17,7 @@
         private static bool _isRegistered;
         protected abstract void RegisterMigrationServices();
 
-        public virtual bool Execute(Assembly asm, ICommandAdapter cmd)
+        public virtual bool Execute(Assembly asm, ICommandAdapter cmd, bool throwIfNotLatestVersion)
         {
             if (!_isRegistered)
             {
@@ -29,7 +29,7 @@
             {
                 ITransactionalDbAccess dbAccess = cmd.Factory.DataAccess as ITransactionalDbAccess;
                 if (null == dbAccess)
-                    throw new InvalidOperationException("please use transactional dbaccess.");
+                    throw new InvalidOperationException("please use transactional IDbaccess object.");
 
                 if (null != this.backUp)
                     this.backUp();
@@ -40,7 +40,8 @@
 
                 runner.DatabaseStatus.ValidateMigrationsVersions();
 
-                runner.DatabaseStatus.ThrowIfNotLatestVersion();//?
+                if (throwIfNotLatestVersion)
+                    runner.DatabaseStatus.ThrowIfNotLatestVersion();//?
 
                 runner.UpdateToLatest();
                 return true;

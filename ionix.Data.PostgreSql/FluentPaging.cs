@@ -15,7 +15,7 @@
                     query.Sql(column)
                     .Sql(", ");
                 }
-                query.Text.Remove(query.Text.Length - 1, 1);
+                query.Text.Remove(query.Text.Length - 2, 2);
                 query.Sql(" FROM ").Sql(this.from);
 
                 if (!String.IsNullOrEmpty(this.orderBy))

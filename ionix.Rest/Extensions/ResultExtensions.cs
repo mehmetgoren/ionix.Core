@@ -3,6 +3,7 @@
     using Utils.Extensions;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
 
@@ -126,11 +127,16 @@
             return new Result<T>(response);
         }
 
-        public static  Result<T> ResultValidationFail<T>(this ControllerBase controller, string message = "Validation has been failed.")
+        public static Result<T> ResultAsMessage<T>(this ControllerBase controller, string message)
         {
             Response<T> @default = new Response<T>() { Message = message };
 
             return new Result<T>(@default);
+        }
+
+        public static Result<object> ResultAsMessage(this ControllerBase controller, string message)
+        {
+            return ResultAsMessage<object>(controller, message);
         }
     }
 

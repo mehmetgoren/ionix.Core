@@ -8,6 +8,8 @@
     <Description>ionix.Migration</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</PackageProjectUrl>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' package has been updated.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -26,7 +26,7 @@
                 {
                     var conn = dbAccess.Connection;// .Client.Settings.Server;
 
-                    return "Data Source: " + conn.DataSource + ", Databse: " + conn.Database;
+                    return $"{conn.Database}@{conn.DataSource}"; 
                 }
                 return "DbAccess casting failed, could not identify server info";
             }
@@ -40,7 +40,7 @@
 
         private string WhatWeAreUpdating()
         {
-            return $"Updating server(s) \"{this.Database}\" for database ";
+            return $"Updating server(s) {this.Database}";
         }
 
 
