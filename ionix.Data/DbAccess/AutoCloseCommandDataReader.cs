@@ -72,12 +72,12 @@
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
-            //base.Dispose(disposing);base.Dispose calls Close and close does nothing. 
-
-            this.concrete.Dispose();
-
+            //base.Dispose(disposing);base.Dispose calls Close and we don't need such an action. 
+    
             if (disposing)
             {
+                this.concrete?.Dispose();
+
                 this.command?.Dispose();
             }
         }
