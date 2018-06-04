@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using ionix.Data;
 
 namespace SQLogTests
 {
@@ -30,6 +31,15 @@ namespace SQLogTests
 
 
             Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void ReadTest()
+        {
+            var q = "select * from Log t".ToQuery();
+            var list = SQLog.Logger.Logs.Query(q);
+
+            Assert.AreNotEqual(list.Count, 0);
         }
     }
 }

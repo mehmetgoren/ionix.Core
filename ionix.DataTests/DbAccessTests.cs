@@ -40,6 +40,30 @@
         [TestMethod]
         public void ExecuteScalarTest()
         {
+            int result = 0;
+            using (var dbAccess = ionixFactory.CreatDataAccess())
+            {
+                result = dbAccess.ExecuteScalar<int>("select top 1 RegionID from Region".ToQuery());
+            }
+
+            Assert.AreNotEqual(result, 0);
+        }
+
+        [TestMethod]
+        public async Task ExecuteScalarAsyncTest()
+        {
+            int result = 0;
+            using (var dbAccess = ionixFactory.CreatDataAccess())
+            {
+                result = await dbAccess.ExecuteScalarAsync<int>("select RegionID from Region".ToQuery());
+            }
+
+            Assert.AreNotEqual(result, 0);
+        }
+
+        [TestMethod]
+        public void ExecuteScalarListTest()
+        {
             IList<int> result = null;
             using (var dbAccess = ionixFactory.CreatDataAccess())
             {
@@ -50,7 +74,7 @@
         }
 
         [TestMethod]
-        public async Task ExecuteScalarAsyncTest()
+        public async Task ExecuteScalarListAsyncTest()
         {
             IList<int> result = null;
             using (var dbAccess = ionixFactory.CreatDataAccess())
@@ -68,6 +92,30 @@
             using (var dbAccess = ionixFactory.CreatDataAccess())
             {
                 result = dbAccess.QueryDataTable("select * from Customers t".ToQuery());
+            }
+
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void QueryExpandoListTest()
+        {
+            IList<dynamic> result = null;
+            using (var dbAccess = ionixFactory.CreatDataAccess())
+            {
+                result = dbAccess.Query("select * from Customers t".ToQuery());
+            }
+
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task QueryExpandoListAsyncTest()
+        {
+            IList<dynamic> result = null;
+            using (var dbAccess = ionixFactory.CreatDataAccess())
+            {
+                result = await dbAccess.QueryAsync("select * from Customers t".ToQuery());
             }
 
             Assert.IsNotNull(result);
@@ -213,5 +261,22 @@
 
             Assert.IsTrue(orginalValue == rollBackValue && modifiedVAlue == commitVAlue);
         }
+
+        //[TestMethod]
+        //public void AutoCloseCommandDataReaderGetDbDataReaderTest()
+        //{
+        //    IDataReader innerReader = null;
+        //    using (var dbAccess = ionixFactory.CreateTransactionalDataAccess())
+        //    {
+        //        using (var reader = dbAccess.CreateDataReader("select * from Customers".ToQuery()))
+        //        {
+        //          // innerReader = ((AutoCloseCommandDataReader)reader).Concrete.GetData(0);
+        //           innerReader = reader.GetData(0);
+        //           innerReader.Dispose();
+        //        }
+        //    }
+
+        //    Assert.IsNotNull(innerReader);
+        //}
     }
 }

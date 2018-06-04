@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
@@ -28,7 +27,8 @@ namespace ionix.DataTests.SqlServer
                             {
                                 try
                                 {
-                                    using (Stream fs = new FileStream("X:\\logs\\sql.txt", FileMode.Append, FileAccess.Write))
+                                    using (Stream fs = new FileStream((e.ExecutionException == null ? "X:\\logs\\sql.txt" : "X:\\logs\\sqlHata.txt")
+                                        , FileMode.Append, FileAccess.Write))
                                     {
                                         using (StreamWriter sw = new StreamWriter(fs))
                                         {
@@ -62,7 +62,7 @@ namespace ionix.DataTests.SqlServer
         {
             DbConnection conn = CreateEmptyConnection();
 
-            conn.ConnectionString = @"Data Source=192.168.190.128;Initial Catalog=NORTHWND;User Id=sa;Password=1;";
+            conn.ConnectionString = @"Data Source=192.168.70.129;Initial Catalog=NORTHWND;User Id=sa;Password=1;";
             conn.Open();
 
             return conn;

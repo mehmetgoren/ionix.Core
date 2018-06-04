@@ -57,7 +57,7 @@
 
             return dataAccess.CreateDataReader(query, CommandBehavior.Default);
         }
-        public static Task<DbDataReader> CreateDataReaderAsync(this IDbAccess dataAccess, SqlQuery query)
+        public static Task<AutoCloseCommandDataReader> CreateDataReaderAsync(this IDbAccess dataAccess, SqlQuery query)
         {
             EnsureDbAccess(dataAccess);
 
@@ -161,12 +161,12 @@
             {
                 dr = dataAccess.CreateDataReader(query, CommandBehavior.SingleRow);
 
-                int fieldCount = dr.FieldCount;
+                Lazy<int> fieldCount = new Lazy<int>(() => dr.FieldCount);
                 if (dr.Read())
                 {
                     ExpandoObject expando = new ExpandoObject();
                     IDictionary<string, object> dic = expando;
-                    for (int j = 0; j < fieldCount; ++j)
+                    for (int j = 0; j < fieldCount.Value; ++j)
                     {
                         object dbValue = dr.IsDBNull(j) ? null : dr[j];
 
@@ -225,12 +225,12 @@
             {
                 dr = dataAccess.CreateDataReader(query, CommandBehavior.Default);
 
-                int fieldCount = dr.FieldCount;
+                Lazy<int> fieldCount = new Lazy<int>(() => dr.FieldCount);
                 while (dr.Read())
                 {
                     ExpandoObject expando = new ExpandoObject();
                     IDictionary<string, object> dic = expando;
-                    for (int j = 0; j < fieldCount; ++j)
+                    for (int j = 0; j < fieldCount.Value; ++j)
                     {
                         object dbValue = dr.IsDBNull(j) ? null : dr[j];
 
@@ -257,12 +257,12 @@
             {
                 dr = await dataAccess.CreateDataReaderAsync(query, CommandBehavior.Default);
 
-                int fieldCount = dr.FieldCount;
+                Lazy<int> fieldCount = new Lazy<int>(() => dr.FieldCount);
                 while (dr.Read())
                 {
                     ExpandoObject expando = new ExpandoObject();
                     IDictionary<string, object> dic = expando;
-                    for (int j = 0; j < fieldCount; ++j)
+                    for (int j = 0; j < fieldCount.Value; ++j)
                     {
                         object dbValue = dr.IsDBNull(j) ? null : dr[j];
 

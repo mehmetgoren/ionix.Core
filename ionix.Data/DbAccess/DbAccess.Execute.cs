@@ -70,7 +70,7 @@
 
         }
 
-        private T Execute<T>(SqlQuery query, Func<DbCommand, T> func)
+        private T Execute<T>(SqlQuery query, Func<DbCommand, T> func, bool disposeCommand)
         {
             DbCommand cmd = null;
             OutParameters outParameters;
@@ -90,7 +90,7 @@
             }
             finally
             {
-                if (null != cmd) cmd.Dispose();
+                if (disposeCommand && null != cmd) cmd.Dispose();
             }
 
             if (null != outParameters)
@@ -105,7 +105,7 @@
 
         //Neden ayırdık çünkü identity gibi yeni değerlerin eklenmesi durumunda func task olarak döndüğünden execute edilmiyor ve output parametreler set edilmiyordu...
         //Aynı şekilde transaction de commit den sonra çalışarak da sıkıntı çıkarabilirdi.
-        private async Task<T> ExecuteAsync<T>(SqlQuery query, Func<DbCommand, Task<T>> funcAsync)
+        private async Task<T> ExecuteAsync<T>(SqlQuery query, Func<DbCommand, Task<T>> funcAsync, bool disposeCommand)
         {
             DbCommand cmd = null;
             OutParameters outParameters;
@@ -125,7 +125,7 @@
             }
             finally
             {
-                if (null != cmd) cmd.Dispose();
+                if (disposeCommand && null != cmd) cmd.Dispose();
             }
 
             if (null != outParameters)
@@ -140,30 +140,30 @@
 
         public int ExecuteNonQuery(SqlQuery query)
         {
-            return this.Execute(query, (cmd) => cmd.ExecuteNonQuery());
+            return this.Execute(query, (cmd) => cmd.ExecuteNonQuery(), true);
         }
         public Task<int> ExecuteNonQueryAsync(SqlQuery query)
         {
-            return this.ExecuteAsync(query, (cmd) => cmd.ExecuteNonQueryAsync());
+            return this.ExecuteAsync(query, (cmd) => cmd.ExecuteNonQueryAsync(), true);
         }
 
 
         public object ExecuteScalar(SqlQuery query)
         {
-            return this.Execute(query, (cmd) => cmd.ExecuteScalar());
+            return this.Execute(query, (cmd) => cmd.ExecuteScalar(), true);
         }
         public Task<object> ExecuteScalarAsync(SqlQuery query)
         {
-            return this.ExecuteAsync(query, (cmd) => cmd.ExecuteScalarAsync());
+            return this.ExecuteAsync(query, (cmd) => cmd.ExecuteScalarAsync(), true);
         }
 
-        public virtual IDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior)
+        public virtual AutoCloseCommandDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior)
         {
-            return this.Execute(query, (cmd) => cmd.ExecuteReader(behavior));
+            return this.Execute(query, (cmd) => AutoCloseCommandDataReader.Create(cmd, cmd.ExecuteReader(behavior)), false);
         }
-        public virtual Task<DbDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior)
+        public virtual Task<AutoCloseCommandDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior)
         {
-            return this.ExecuteAsync(query, (cmd) => cmd.ExecuteReaderAsync(behavior));
+            return this.ExecuteAsync(query, async (cmd) => AutoCloseCommandDataReader.Create(cmd, await cmd.ExecuteReaderAsync(behavior)), false);
         }
     }
 }

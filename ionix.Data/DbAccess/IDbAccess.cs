@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data;
-    using System.Data.Common;
     using System.Threading.Tasks;
 
     public interface IDbAccess : IDisposable
@@ -13,8 +12,8 @@
         object ExecuteScalar(SqlQuery query);
         Task<object> ExecuteScalarAsync(SqlQuery query);
 
-        IDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior);
-        Task<DbDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior);
+        AutoCloseCommandDataReader CreateDataReader(SqlQuery query, CommandBehavior behavior);
+        Task<AutoCloseCommandDataReader> CreateDataReaderAsync(SqlQuery query, CommandBehavior behavior);
     }
 
     public interface ITransactionalDbAccess : IDbAccess, IDbTransaction
