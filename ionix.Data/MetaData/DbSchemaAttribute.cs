@@ -1,6 +1,7 @@
 ﻿namespace ionix.Data
 {
     using ionix.Utils;
+    using ionix.Utils.Extensions;
     using System;
     using System.ComponentModel.DataAnnotations;
 
@@ -33,21 +34,22 @@
 
         public override bool IsValid(object value)
         {
-            if (!this.IsNullable)//required
+            bool isValueNull = value.IsNull();
+            if (!this.IsNullable && isValueNull)//required
             {
-                if (null == value)
-                {
-                    this.ErrorMessage = "this field is required";
-                    return false;
-                }
+                this.ErrorMessage = "this field is required";
+                return false;
             }
-            int maxLength = this.MaxLength;
-            if (maxLength > 0)
+            if (!isValueNull)
             {
-                if (value?.ToString().Length > maxLength)
+                int maxLength = this.MaxLength;
+                if (maxLength > 0)
                 {
-                    this.ErrorMessage = "input value is not in range";
-                    return false;
+                    if (value.ToString().Length > maxLength)
+                    {
+                        this.ErrorMessage = "input value is not in range";
+                        return false;
+                    }
                 }
             }
 
