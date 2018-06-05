@@ -16,11 +16,11 @@ using (var db = ionixFactory.CreateDbClient())
     var employee = db.Cmd.SelectById<Employees>(1);
     employee = await db.Cmd.SelectByIdAsync<Employees>(1);	
 	
-    var customer = dbCmd.QuerySingle<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR")); 
-    customer = await dbCmd.QuerySingleAsync<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR"));
+    var employee = dbCmd.QuerySingle<Employees>("select * from Employees where EmployeeID=@0".ToQuery(1)); 
+    employee = await dbCmd.QuerySingleAsync<Employee>("select * from Employees where EmployeeID=@0".ToQuery(1));
 	
-    IList<Customers> customerList = dbCmd.Query<Customers>("select * from Customers".ToQuery());
-    customerList = await dbCmd.QueryAsync<Customers>("select * from Customers".ToQuery());
+    IList<Employees> employeeList = dbCmd.Query<Employees>("select * from Employees".ToQuery());
+    employeeList = await dbCmd.QueryAsync<Employees>("select * from Employees".ToQuery());
 
     var q = @"select o.*, c.*, e.* from Orders o
               inner join Customers c on o.CustomerID = c.CustomerID
