@@ -45,6 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Migration.PostgreSql"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Data.PostgreSql.BulkCopy", "ionix.Data.PostgreSql.BulkCopy\ionix.Data.PostgreSql.BulkCopy.csproj", "{DA39A991-2EBF-4E92-B559-F375DAEBD291}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{31D22F98-53FE-451E-8CC1-912235EC1B1D}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
