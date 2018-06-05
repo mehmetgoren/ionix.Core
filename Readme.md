@@ -1,4 +1,4 @@
-ionix is a micro-orm libraray that based on .net standart 2.0 (which supports Linux, Windows and macOS).
+ionix is a micro-orm library that based on .net standart 2.0 (which supports Linux, Windows and macOS).
 
 From NuGet
 ----------
