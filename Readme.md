@@ -44,8 +44,98 @@ using (var db = ionixFactory.CreateDbClient())
 
     dynamic customers = db.Cmd.QuerySingle<dynamic>("select * from Customers t".ToQuery());
     IList<dynamic> customers = db.Cmd.Query<dynamic>("select * from Customers t".ToQuery());
+
+    IList<Categories> categories = (IList<Categories>)client.Cmd.QueryNonGeneric(typeof(Categories), "select top 3 * from Categories".ToQuery());
 }
 ```
 
+Update Operations
+-----------------
+```csharp
+using (var db = ionixFactory.CreateTransactionalDbClient())
+{
+    Categories c = new Categories()
+    {
+        CategoryID = 8,
+        CategoryName = "CategoryName",
+    };
+
+    int affected = db.Cmd.Update(c);
+    affected = db.Cmd.Update(c, p => p.CategoryName);
+    affected = await db.Cmd.UpdateAsync(c);
+
+    IList<Categories> catagories = client.Cmd.Select<Categories>();
+    db.Cmd.BatchUpdate(catagories);
+    db.Cmd.BatchUpdate(catagories, p => p.CategoryName);
+    await db.Cmd.BatchUpdateAsync(catagories);
+     
+    db.Commit();
+}
+```
+
+Insert Operations
+-----------------
+```csharp
+using (var db = ionixFactory.CreateTransactionalDbClient())
+{
+    Categories c = new Categories()
+    {
+        CategoryID = 0,
+        CategoryName = "CategoryName",
+    };
+
+    int affected = db.Cmd.Insert(c);
+    affected = db.Cmd.Insert(c, p => p.CategoryName);
+    affected = await db.Cmd.InsertAsync(c);
+
+    IList<Categories> catagories = client.Cmd.Select<Categories>();
+    categories.ForEach((item) => item.CategoryID = 0);
+    db.Cmd.BatchInsert(catagories);
+    db.Cmd.BatchInsert(catagories, p => p.CategoryName);
+    await db.Cmd.BatchInsertAsync(catagories);
+     
+    db.Commit();
+}
+```
+
+Upsert Operations
+-----------------
+```csharp
+using (var db = ionixFactory.CreateTransactionalDbClient())
+{
+    Categories c = new Categories()
+    {
+        CategoryID = 0,
+        CategoryName = "CategoryName",
+    };
+
+    int affected = db.Cmd.Upsert(c);
+    affected = db.Cmd.Upsert(c, p => p.CategoryName);
+    affected = await db.Cmd.UpsertAsync(c);
+
+    IList<Categories> catagories = client.Cmd.Select<Categories>();
+    categories.ForEach((item) => item.CategoryID = 0);
+    db.Cmd.BatchUpsert(catagories);
+    db.Cmd.BatchUpsert(catagories, p => p.CategoryName);
+    await db.Cmd.BatchUpsertAsync(catagories);
+     
+    db.Commit();
+}
+```
+
+Delete Operations
+-----------------
+```csharp
+using (var db = ionixFactory.CreateDbClient())
+{
+    Categories c = new Categories()
+    {
+        CategoryID = 3
+    };
+
+    int affected = db.Cmd.Delete(c);
+    affected = await db.Cmd.DeleteAsync(c);
+}
+```
 
 it supprots Sql Server, Oracle, PostgreSQL(with migration / code-first approach) and SQLite.
