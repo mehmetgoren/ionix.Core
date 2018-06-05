@@ -138,4 +138,19 @@ using (var db = ionixFactory.CreateDbClient())
 }
 ```
 
+BulkCopy Operations
+-----------------
+```csharp
+const int length = 1000000;
+List<Region> list = new List<Region>(length);
+for (int j = 0; j < length; ++j)
+     list.Add(new Region() { RegionID = 1000 + j, RegionDescription = "dl" + j });
+
+using (var db = ionixFactory.CreateDbClient())
+{
+    db.Cmd.BulkCopy(list);
+    async db.Cmd.BulkCopyAsync(list); 
+}
+```
+
 it supprots Sql Server, Oracle, PostgreSQL(with migration / code-first approach) and SQLite.
