@@ -13,7 +13,7 @@
         private static DbConnection CreateDbConnection()
         {
             DbConnection conn = new SqlConnection();
-            conn.ConnectionString = "Data Source=192.168.19.128;initial Catalog=Auth_BioID;User Id=sa;password=1;";
+            conn.ConnectionString = "Data Source=192.168.70.129;initial Catalog=Auth_BioID;User Id=sa;password=1;";
             conn.Open();
 
             return conn;

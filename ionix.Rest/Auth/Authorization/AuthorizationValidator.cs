@@ -15,7 +15,7 @@
     public abstract class AuthorizationValidatorBase<TAuthenticationManager> : IAuthorizationValidator
         where TAuthenticationManager : AuthorizationValidatorBase<TAuthenticationManager>, new()
     {
-        protected  abstract ControllerActionsList CreateControllerActionsList();
+        protected abstract ControllerActionsList CreateControllerActionsList();
         private HashSet<string> _controllerList;
         private HashSet<string> ControllerList => this._controllerList ?? (this._controllerList = this.CreateControllerActionsList().Select(i => i.ControllerType.Name.Replace("Controller", "").ToLower()).ToHashSet());
 
