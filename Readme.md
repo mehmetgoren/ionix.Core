@@ -26,7 +26,6 @@ using (var db = ionixFactory.CreateDbClient())
     var q = @"select o.*, c.*, e.* from Orders o
               inner join Customers c on o.CustomerID = c.CustomerID
               inner join Employees e on o.EmployeeID = e.EmployeeID".ToQuery();
-
     var models = db.Cmd.Query<Orders, Customers, Employees>(q);
     models = await db.Cmd.QueryAsync<Orders, Customers, Employees>(q); 	
 }
