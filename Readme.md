@@ -38,9 +38,9 @@ using (var db = ionixFactory.CreateDbClient())
 {
     int regionId = db.Cmd.QuerySingle<int>("select top 1 RegionID from Region".ToQuery());
     
-    IList<int> regionIds = db.Cmd.Query<int>("select top 1 RegionID from Region".ToQuery());
+    IList<int> regionIds = db.Cmd.Query<int>("select RegionID from Region".ToQuery());
 
-    dynamic customers = db.Cmd.QuerySingle<dynamic>("select * from Customers t".ToQuery());
+    dynamic customers = db.Cmd.QuerySingle<dynamic>("select top 1 * from Customers t".ToQuery());
     IList<dynamic> customers = db.Cmd.Query<dynamic>("select * from Customers t".ToQuery());
 
     IList<Categories> categories = (IList<Categories>)client.Cmd.QueryNonGeneric(typeof(Categories), "select top 3 * from Categories".ToQuery());
@@ -83,13 +83,11 @@ using (var db = ionixFactory.CreateTransactionalDbClient())
     };
 
     int affected = db.Cmd.Insert(c);
-    affected = db.Cmd.Insert(c, p => p.CategoryName);
     affected = await db.Cmd.InsertAsync(c);
 
     IList<Categories> catagories = client.Cmd.Select<Categories>();
     categories.ForEach((item) => item.CategoryID = 0);
     db.Cmd.BatchInsert(catagories);
-    db.Cmd.BatchInsert(catagories, p => p.CategoryName);
     await db.Cmd.BatchInsertAsync(catagories);
      
     db.Commit();
