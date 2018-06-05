@@ -20,14 +20,31 @@ using (var db = ionixFactory.CreateDbClient())
     var customer = dbCmd.QuerySingle<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR")); 
     customer = await dbCmd.QuerySingleAsync<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR"));
 	
-    var customerList = dbCmd.Query<Customers>("select * from Customers".ToQuery());
-    customerList = await  dbCmd.QueryAsync<Customers>("select * from Customers".ToQuery()); 	
+    IList<Customers> customerList = dbCmd.Query<Customers>("select * from Customers".ToQuery());
+    customerList = await dbCmd.QueryAsync<Customers>("select * from Customers".ToQuery());
+
+    var q = @"select o.*, c.*, e.* from Orders o
+              inner join Customers c on o.CustomerID = c.CustomerID
+              inner join Employees e on o.EmployeeID = e.EmployeeID".ToQuery();
+
+    var models = db.Cmd.Query<Orders, Customers, Employees>(q);
+    models = await db.Cmd.QueryAsync<Orders, Customers, Employees>(q); 	
 }
 ```
 
 Select Operations #2
 -----------------
+
 ```csharp
+using (var db = ionixFactory.CreateDbClient())
+{
+    int regionId = db.Cmd.QuerySingle<int>("select top 1 RegionID from Region".ToQuery());
+    
+    IList<int> regionIds = db.Cmd.Query<int>("select top 1 RegionID from Region".ToQuery());
+
+    dynamic customers = db.Cmd.QuerySingle<dynamic>("select * from Customers t".ToQuery());
+    IList<dynamic> customers = db.Cmd.Query<dynamic>("select * from Customers t".ToQuery());
+}
 ```
 
 
