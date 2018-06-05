@@ -5,7 +5,7 @@ From NuGet
 Install-Package ionix.Data
 
 
-It' s very easy to use, here is some Northwind database examples;
+It' s very easy to use, here is some Northwind database examples:
 
 Select Operations
 -----------------
@@ -138,7 +138,7 @@ using (var db = ionixFactory.CreateDbClient())
 ```
 
 BulkCopy Operations
------------------
+-------------------
 ```csharp
 const int length = 1000000;
 List<Region> list = new List<Region>(length);
@@ -152,5 +152,8 @@ using (var db = ionixFactory.CreateDbClient())
 }
 ```
 
+Which databases are supported?
+------------------------------
+Sql Server, Oracle, PostgreSQL(with migration / code-first approach) and SQLite.
 
-it supprots Sql Server, Oracle, PostgreSQL(with migration / code-first approach) and SQLite.
+You can check the [ionix.DataTests](https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.DataTests) project out for more details.
