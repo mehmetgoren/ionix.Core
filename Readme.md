@@ -14,8 +14,7 @@ Select Operations
 using (var db = ionixFactory.CreateDbClient())
 {
     var employee = db.Cmd.SelectById<Employees>(1);
-    employee = await db.Cmd.SelectByIdAsync<Employees>(1);
-	
+    employee = await db.Cmd.SelectByIdAsync<Employees>(1);	
 	
     var customer = dbCmd.QuerySingle<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR")); 
     customer = await dbCmd.QuerySingleAsync<Customers>("select * from Customers where CustomerID=@0".ToQuery("ANATR"));
