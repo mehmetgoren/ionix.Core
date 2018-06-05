@@ -5,14 +5,15 @@
     <Authors>Mehmet Gökalp Gören</Authors>
     <Company>Mehmet Gökalp Gören</Company>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
-    <Version>2.0.4</Version>
+    <Version>2.0.5</Version>
     <Description>ionix.Data.Mongo</Description>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.MongoDB</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <RepositoryUrl></RepositoryUrl>
-    <AssemblyVersion>2.0.4.0</AssemblyVersion>
-    <FileVersion>2.0.4.0</FileVersion>
-    <PackageReleaseNotes>the MongoDB driver has been updated.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.MongoDB</RepositoryUrl>
+    <AssemblyVersion>2.0.5.0</AssemblyVersion>
+    <FileVersion>2.0.5.0</FileVersion>
+    <PackageReleaseNotes>The MongoDB driver has been updated.</PackageReleaseNotes>
+    <PackageTags>orm, MongoDB,  .net core</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

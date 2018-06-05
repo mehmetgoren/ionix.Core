@@ -5,11 +5,13 @@
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.4</Version>
+    <Version>2.0.5</Version>
     <Description>ionix.Data.PostgreSql</Description>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql</PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' package has been updated.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql</RepositoryUrl>
+    <PackageReleaseNotes>Updated to the ionix.Data 2.0.5.</PackageReleaseNotes>
+    <AssemblyVersion>2.0.5.0</AssemblyVersion>
+    <PackageTags>orm, postgres, postgresql, .net core</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

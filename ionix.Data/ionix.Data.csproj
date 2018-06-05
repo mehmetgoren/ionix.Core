@@ -4,14 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
-    <Version>2.0.4</Version>
+    <Version>2.0.5</Version>
     <Description>ionix.Data</Description>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Data</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <RepositoryUrl></RepositoryUrl>
-    <AssemblyVersion>2.0.4.0</AssemblyVersion>
-    <FileVersion>2.0.4.0</FileVersion>
-    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' package has been updated.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data</RepositoryUrl>
+    <AssemblyVersion>2.0.5.0</AssemblyVersion>
+    <FileVersion>2.0.5.0</FileVersion>
+    <PackageReleaseNotes>Added 'AutoCloseCommandDataReader' type.</PackageReleaseNotes>
+    <PackageTags>orm, micro orm, .net core</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

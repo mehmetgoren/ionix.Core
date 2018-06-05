@@ -7,9 +7,12 @@
     <Company>Mehmet Gökalp Gören</Company>
     <Description>ionix.Migration</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</PackageProjectUrl>
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' package has been updated.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Updated to the ionix.Data 2.0.5.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</RepositoryUrl>
+    <PackageTags>orm, migration, code-first, .net core</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

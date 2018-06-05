@@ -6,9 +6,12 @@
     <Product>ionix.Migration.PostgreSql</Product>
     <Description>ionix.Migration.PostgreSql</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration.PostgreSql</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration.PostgreSql</RepositoryUrl>
+    <PackageTags>orm, migration, code-first, postgresql, .net core</PackageTags>
+    <PackageReleaseNotes>Updated to the ionix.Data 2.0.5.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

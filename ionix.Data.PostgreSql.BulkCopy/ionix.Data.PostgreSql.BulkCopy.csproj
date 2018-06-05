@@ -2,14 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Company>Mehmet Gökalp Gören</Company>
     <Description>ionix.Data.PostgreSql.BulkCopy</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
-    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql.BulkCopy</PackageProjectUrl>
-    <PackageReleaseNotes>the 'System.ComponentModel.Annotations' and 'Npgsql' packages have been updated.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
+    <PackageReleaseNotes>Updated to the ionix.Data 2.0.5.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.PostgreSql.BulkCopy</RepositoryUrl>
+    <PackageTags>orm, postgres, postgresql, migration, code-first, .net core</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
