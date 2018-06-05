@@ -154,6 +154,6 @@ using (var db = ionixFactory.CreateDbClient())
 
 Which databases are supported?
 ------------------------------
-Sql Server, Oracle, PostgreSQL(with migration / code-first approach) and SQLite.
+Sql Server, Oracle, PostgreSQL (with migration / code-first approach) and SQLite.
 
 You can check the [ionix.DataTests](https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.DataTests) project out for more details.
