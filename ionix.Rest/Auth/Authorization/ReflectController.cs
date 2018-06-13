@@ -18,7 +18,7 @@
 
     public class ReflectController : IReflectController
     {
-        private static readonly Type ControllerType = typeof(Controller);
+        private static readonly Type ControllerType = typeof(ControllerBase);
 
         private static readonly Type ActionResultType = typeof(IActionResult);
 
@@ -39,7 +39,7 @@
 
             return String.Format("{0}:{1}({2}):{3}", mi.DeclaringType.AssemblyQualifiedName, mi.Name, signatureString, returnTypeName);
         }
-        private static readonly HashSet<string> BaseActionsMethods = typeof(Controller).GetTypeInfo().GetMethods()
+        private static readonly HashSet<string> BaseActionsMethods = ControllerType.GetTypeInfo().GetMethods()
             .Where(p => ActionResultType.IsAssignableFrom(p.ReturnType)).Select(CreateUniqueName)
             .ToHashSet();
 
