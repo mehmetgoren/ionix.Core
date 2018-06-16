@@ -162,4 +162,4 @@ Maybe It's not perfectly accurate, but the picture gives you some insight about 
 
 ![ionix vs Entity Framework](https://github.com/mehmetgoren/ionix.Core/blob/master/ionix_vs_ef.png)
 
-(EF_Test: Entity Framework' s Tests, ionix_Tests: ionix.Data' s Tests. All the tests run on Sql Server 2012)
+("EF_Test" is Entity Framework' s Tests, "ionix_Tests" is ionix.Data' s Tests. All the tests run on Sql Server 2012)
