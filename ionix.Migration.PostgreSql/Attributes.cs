@@ -4,26 +4,6 @@
     using System.ComponentModel;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public sealed class PrecisionAttribute : Attribute
-    {
-        public int Length { get; set; }
-
-        public int Precision { get; set; }
-
-        public PrecisionAttribute()
-        {
-
-        }
-
-        public PrecisionAttribute(int length, int precision)
-        {
-            this.Length = length;
-            this.Precision = precision;
-        }
-    }
-
-
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class ColumnAttribute : Attribute
     {
         public PostgresDbType? DbType { get; set; }

@@ -47,8 +47,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ionix.Data.PostgreSql.BulkC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{31D22F98-53FE-451E-8CC1-912235EC1B1D}"
 	ProjectSection(SolutionItems) = preProject
+		ionix_vs_ef.png = ionix_vs_ef.png
 		Readme.md = Readme.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.Migration.SQLite", "ionix.Migration.SQLite\ionix.Migration.SQLite.csproj", "{E84906B6-6E36-4665-89CD-14FB20EACF65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ionix.Migration.SQLiteTests", "ionix.Migration.SQLiteTests\ionix.Migration.SQLiteTests.csproj", "{9DAE6084-4EA3-439D-A5C3-C42F579BC22B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +125,14 @@ Global
 		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA39A991-2EBF-4E92-B559-F375DAEBD291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E84906B6-6E36-4665-89CD-14FB20EACF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E84906B6-6E36-4665-89CD-14FB20EACF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E84906B6-6E36-4665-89CD-14FB20EACF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E84906B6-6E36-4665-89CD-14FB20EACF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAE6084-4EA3-439D-A5C3-C42F579BC22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAE6084-4EA3-439D-A5C3-C42F579BC22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAE6084-4EA3-439D-A5C3-C42F579BC22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAE6084-4EA3-439D-A5C3-C42F579BC22B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +154,8 @@ Global
 		{18C89F2B-D530-4019-ABD3-95E8EAAB6196} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
 		{A002BBC2-5321-49F1-8700-6AC9F8B75266} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
 		{DA39A991-2EBF-4E92-B559-F375DAEBD291} = {C2FF72AC-8CCE-4645-A14C-11BCECE9D759}
+		{E84906B6-6E36-4665-89CD-14FB20EACF65} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
+		{9DAE6084-4EA3-439D-A5C3-C42F579BC22B} = {6B42C5E9-C58D-4013-8414-DB2B7D7D02F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F697CD57-1B75-4708-8B35-46741F2390D6}

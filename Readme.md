@@ -154,3 +154,12 @@ Which databases are supported?
 Sql Server, Oracle, PostgreSQL (with migration / code-first approach) and SQLite.
 
 You can check the [ionix.DataTests](https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.DataTests) project out for more details.
+
+
+What about performance?
+------------------------------
+Maybe It's not perfectly accurate, but the picture gives you some insight about ionix's Performance;
+
+![ionix vs Entity Framework](https://github.com/mehmetgoren/ionix.Core/blob/master/ionix_vs_ef.png)
+
+(EF_Test: Entity Framework' s Tests, ionix_Tests: ionix.Data' s Tests. All the tests run on Sql Server 2012)

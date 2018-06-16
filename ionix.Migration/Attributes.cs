@@ -60,4 +60,26 @@
 
         public string ReferenceColumns { get; set; }
     }
+
+    /// <summary>
+    /// For column with numeric data types
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public sealed class PrecisionAttribute : Attribute
+    {
+        public int Length { get; set; }
+
+        public int Precision { get; set; }
+
+        public PrecisionAttribute()
+        {
+
+        }
+
+        public PrecisionAttribute(int length, int precision)
+        {
+            this.Length = length;
+            this.Precision = precision;
+        }
+    }
 }

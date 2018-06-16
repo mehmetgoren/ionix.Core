@@ -18,12 +18,12 @@
         public abstract string DataType { get; }
 
 
-        private string GetNullStatement()
+        protected string GetNullStatement()
         {
             return this.NotNull ? " NOT NULL" : "";//var sayılan NULL olduğu için belirtmeye gerek yok.
         }
 
-        private string GetDefaultStatement()
+        protected string GetDefaultStatement()
         {
             if (!String.IsNullOrEmpty(this.Default))
                 return " DEFAULT " + this.Default;

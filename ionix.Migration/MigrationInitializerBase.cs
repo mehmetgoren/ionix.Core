@@ -6,10 +6,13 @@
 
     public abstract class MigrationInitializerBase
     {
+        public bool CheckTransactionalDbAccess { get; set; }
+
         private readonly Action backUp;
         protected MigrationInitializerBase(Action backUp)
         {
             this.backUp = backUp;
+            this.CheckTransactionalDbAccess = true;
         }
         protected MigrationInitializerBase()
             : this(null) { }
@@ -27,9 +30,12 @@
 
             if (null != asm && null != cmd)
             {
-                ITransactionalDbAccess dbAccess = cmd.Factory.DataAccess as ITransactionalDbAccess;
-                if (null == dbAccess)
-                    throw new InvalidOperationException("please use transactional IDbaccess object.");
+                if (this.CheckTransactionalDbAccess)
+                {
+                    ITransactionalDbAccess dbAccess = cmd.Factory.DataAccess as ITransactionalDbAccess;
+                    if (null == dbAccess)
+                        throw new InvalidOperationException("please use transactional IDbaccess object.");
+                }
 
                 if (null != this.backUp)
                     this.backUp();
