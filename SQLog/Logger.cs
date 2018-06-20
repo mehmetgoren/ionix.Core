@@ -211,6 +211,30 @@
             return this.Bench(action, "Bench Result");
         }
 
+
+        private Action<string> _action;
+        private void ExecuteActionSafely(string msg)
+        {
+            try
+            {
+                this._action?.Invoke(msg);
+            }
+            catch { }
+
+        }
+
+        /// <summary>
+        /// if you need to do something with the message text after save operation complete. i.e: to write message to Console
+        /// </summary>
+        /// <param name="action">it gives you the message text</param>
+        /// <returns></returns>
+        public Logger OnSaveCompleted(Action<string> action)
+        {
+            this._action = action;
+
+            return this;
+        }
+
         public void Save()
         {
             if (Enable)
@@ -235,6 +259,7 @@
 
                 ret = func(c.Cmd, l);
                 // c.Cmd.Insert(l);
+                this.ExecuteActionSafely(l.Message);
             }
             catch (Exception ex)
             {
@@ -244,7 +269,9 @@
 
                     string path = Assembly.GetExecutingAssembly().Location + "\\SQLog_Critical.txt";
 
-                    File.WriteAllText(path, ex.FindRoot().Message);
+                    string msg = ex.FindRoot().Message;
+                    this.ExecuteActionSafely(l.Message);
+                    File.WriteAllText(path, msg);            
 
                     //string sSource = "SQLog";
                     //string sLog = "Application";
