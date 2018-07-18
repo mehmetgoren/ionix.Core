@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <AssemblyVersion>2.0.8.0</AssemblyVersion>
     <FileVersion>2.0.8.0</FileVersion>
-    <PackageReleaseNotes>Microsoft.Extensions.Configuration.Json updated to 2.1.0.</PackageReleaseNotes>
+    <PackageReleaseNotes>Microsoft.Extensions.Configuration.Json updated to 2.1.0 and added log type support.</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/SQLog</RepositoryUrl>
     <PackageTags>Logger, Sqlite, .net core</PackageTags>
   </PropertyGroup>
