@@ -17,12 +17,11 @@
         public int ThreadId { get; set; }
 
         public int? Code { get; set; }
+        public string LogType { get; set; }
         public string Message { get; set; }
         public string ObjJson { get; set; }
 
         public long? Elapsed { get; set; }
-
-        public bool? HasError { get; set; }
 
         public LogEntity Copy()
         {
@@ -35,14 +34,22 @@
             copy.ThreadId = this.ThreadId;
 
             copy.Code = this.Code;
+            copy.LogType = this.LogType;
             copy.Message = this.Message;
             copy.ObjJson = this.ObjJson;
 
             copy.Elapsed = this.Elapsed;
 
-            copy.HasError = this.HasError;
-
             return copy;
+        }
+
+        public void Clear()
+        {
+            this.Code = null;
+            this.LogType = null;
+            this.Message = null;
+            this.ObjJson = null;
+            this.Elapsed = null;
         }
 
         public static string CreateSql()
@@ -55,10 +62,10 @@
                 Method   VARCHAR (250)  NOT NULL,
                 ThreadId INT            NOT NULL,
                 Code     INT,
+                LogType  VARCHAR (7),
                 Message  VARCHAR (1000),
                 ObjJson  TEXT,
-                Elapsed  BIGINT,
-                HasError BOOLEAN
+                Elapsed  BIGINT
             );
 
             CREATE INDEX ix_Log_OpDate ON Log (

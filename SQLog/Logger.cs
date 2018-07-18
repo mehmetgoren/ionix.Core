@@ -77,11 +77,7 @@
         public Logger Clear()
         {
             this.entity.ThreadId = Thread.CurrentThread.ManagedThreadId;
-            this.entity.Code = null;
-            this.entity.Message = null;
-            this.entity.ObjJson = null;
-            this.entity.HasError = null;
-            this.entity.Elapsed = null;
+            this.entity.Clear();
 
             return this;
         }
@@ -116,9 +112,34 @@
             return this;
         }
 
-        public Logger Message(string value)
+        public Logger Info(string value)
         {
+            this.entity.LogType = nameof(Info);
             this.entity.Message = value;
+            return this;
+        }
+
+        public Logger Warning(string value)
+        {
+            this.entity.LogType = nameof(Warning);
+            this.entity.Message = value;
+            return this;
+        }
+
+        public Logger Error(string value)
+        {
+            this.entity.LogType = nameof(Error);
+            this.entity.Message = value;
+            return this;
+        }
+
+        public Logger Error(Exception ex)
+        {
+            if (null != ex)
+            {
+                this.Error(ex.FindRoot().Message)
+                    .Object(ex);
+            }
             return this;
         }
 
@@ -136,11 +157,6 @@
             return this;
         }
 
-        public Logger HasError(bool value)
-        {
-            this.entity.HasError = value;
-            return this;
-        }
 
         public Logger Elapsed(long value)
         {
@@ -148,17 +164,7 @@
             return this;
         }
 
-        //Kısa yol.
-        public Logger OnException(Exception ex)
-        {
-            if (null != ex)
-            {
-                this.Message(ex.FindRoot().Message)
-                    .Object(ex)
-                    .HasError(true);
-            }
-            return this;
-        }
+
 
         //Exception Çıkabilacek Durumlarda loglama için.
         public Logger Check(Action action, out Exception ex)
@@ -173,7 +179,7 @@
                 catch (Exception ex2)
                 {
                     ex = ex2;
-                    this.OnException(ex2);
+                    this.Error(ex2);
                 }
             }
             return this;
@@ -195,12 +201,12 @@
                     action();
                     bench.Stop();
 
-                    this.Message(message)
+                    this.Info(message)
                         .Elapsed(bench.ElapsedMilliseconds);
                 }
                 catch (Exception ex)
                 {
-                    this.OnException(ex);
+                    this.Error(ex);
                 }
             }
             return this;
