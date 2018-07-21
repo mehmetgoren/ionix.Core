@@ -9,7 +9,7 @@
     using System.Threading.Tasks;
     using ionix.Utils.Reflection;
 
-    public static class MongoAdmin
+    public static partial class MongoAdmin
     {
         private static string ConvertToEvalScript(string script)
         {

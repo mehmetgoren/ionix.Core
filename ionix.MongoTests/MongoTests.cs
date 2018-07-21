@@ -638,5 +638,16 @@
             int count = result.Count;
             Assert.AreNotEqual(count, 0);
         }
+
+        [TestMethod]
+        public void HostInfoTest()
+        {
+            var x = MongoAdmin.ExecuteScript(Db, "db.getCollection('Scan').find({})");
+            var document = MongoAdmin.ExecuteScript(Db, "db.hostInfo();");
+
+            HostInfo info = MongoAdmin.GetHostInfo(Db);
+
+            Assert.IsNotNull(info);
+        }
     }
 }
