@@ -35,7 +35,7 @@
         /// <returns></returns>
         public static Logger Create(string type, string method)
         { 
-            return new Logger().ThreadId(Thread.CurrentThread).Type(type??"").Method(type??"");
+            return new Logger().ThreadId(Thread.CurrentThread).Type(type??"").Method(method??"");
         }
 
         private static readonly Lazy<IConfigurationRoot> _appSettings = new Lazy<IConfigurationRoot>(() =>
