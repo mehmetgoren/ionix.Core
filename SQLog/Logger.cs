@@ -27,6 +27,17 @@
             return ret;
         }
 
+        /// <summary>
+        /// if you use anonymous methods, chose this methos instead.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public static Logger Create(string type, string method)
+        { 
+            return new Logger().ThreadId(Thread.CurrentThread).Type(type??"").Method(type??"");
+        }
+
         private static readonly Lazy<IConfigurationRoot> _appSettings = new Lazy<IConfigurationRoot>(() =>
         {
             try
@@ -88,19 +99,19 @@
             this.entity = new LogEntity();
         }
 
-        internal Logger Type(string value)
+        private Logger Type(string value)
         {
             this.entity.Type = value;
             return this;
         }
 
-        internal Logger Method(string value)
+        private Logger Method(string value)
         {
             this.entity.Method = value;
             return this;
         }
 
-        internal Logger ThreadId(Thread thread)
+        private Logger ThreadId(Thread thread)
         {
             this.entity.ThreadId = thread.ManagedThreadId;
             return this;
