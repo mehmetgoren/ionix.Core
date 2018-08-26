@@ -3,17 +3,15 @@
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
 
-    internal static class ResultConst
+    //added to disable camelCase. 
+    public class DefaultJsonResult : JsonResult
     {
         internal static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings();
-    }
 
-    public class Result<T> : JsonResult
-    {
-        public Result(Response<T> data)
-            : base(data, ResultConst.DefaultJsonSerializerSettings)
+        public DefaultJsonResult(object value)
+            : base(value, DefaultJsonSerializerSettings)
         {
-            
+
         }
     }
 }
