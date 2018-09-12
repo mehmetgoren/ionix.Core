@@ -3,6 +3,7 @@
     using MongoDB.Bson.Serialization.Attributes;
     using MongoDB.Driver;
     using System;
+    using System.Threading.Tasks;
 
     public sealed class HostInfo
     {
@@ -73,5 +74,6 @@
         }
 
         public static HostInfo GetHostInfo(IMongoDatabase db) => ExecuteScript<RetVal<HostInfo>>(db, "db.hostInfo();")?.Retval;
+        public static async Task<HostInfo> GetHostInfoAsync(IMongoDatabase db) => (await ExecuteScriptAsync<RetVal<HostInfo>>(db, "db.hostInfo();"))?.Retval;
     }
 }
