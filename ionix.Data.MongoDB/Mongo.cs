@@ -40,13 +40,13 @@
         public long Count<TEntity>()
         {
             var table = this.Get<TEntity>();
-            return table.Count(new BsonDocument());
+            return table.CountDocuments(new BsonDocument());
         }
 
         public Task<long> CountAsync<TEntity>()
         {
             var table = this.Get<TEntity>();
-            return table.CountAsync(new BsonDocument());
+            return table.CountDocumentsAsync(new BsonDocument());
         }
 
         public IMongoQueryable<TEntity> AsQueryable<TEntity>()

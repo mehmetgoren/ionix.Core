@@ -45,8 +45,32 @@
 
         public sealed class ExtraInfo
         {
+            [BsonElement("versionString")]
+            public string VersionString { get; set; }
+
+            [BsonElement("libcVersion")]
+            public string LibcVersion { get; set; }
+
+            [BsonElement("versionSignature")]
+            public string VersionSignature { get; set; }
+
+            [BsonElement("kernelVersion")]
+            public string kernelVersion { get; set; }
+
+            [BsonElement("cpuFrequencyMHz")]
+            public string cpuFrequencyMHz { get; set; }
+
+            [BsonElement("cpuFeatures")]
+            public string cpuFeatures { get; set; }
+
             [BsonElement("pageSize")]
             public long PageSize { get; set; }
+
+            [BsonElement("numPages")]
+            public int NumPages { get; set; }
+
+            [BsonElement("maxOpenFiles")]
+            public int MaxOpenFiles { get; set; }
         }
 
         [BsonElement("system")]

@@ -118,13 +118,14 @@
 
             var table = GetCollection<TEntity>(db);
 
+            CreateIndexModel<TEntity> cim;
             if (props.Length == 1)
             {
                 var prop = props[0];
                 FieldDefinition<TEntity> field = prop.Name;
-                var keys = func(field);// Builders<TEntity>.IndexKeys.Ascending(prop.Name);
+                IndexKeysDefinition<TEntity> keys = func(field);// Builders<TEntity>.IndexKeys.Ascending(prop.Name);
 
-                return table.Indexes.CreateOne(keys, options);
+                cim = new CreateIndexModel<TEntity>(keys, options);
             }
             else
             {
@@ -136,8 +137,10 @@
                     indexes.Add(index);
                 }
 
-                return table.Indexes.CreateOne(Builders<TEntity>.IndexKeys.Combine(indexes.ToArray()), options);
+                 cim = new CreateIndexModel<TEntity>(Builders<TEntity>.IndexKeys.Combine(indexes.ToArray()), options);
             }
+
+            return table.Indexes.CreateOne(cim);
         }
 
         //İleride Text Index i de ekle.

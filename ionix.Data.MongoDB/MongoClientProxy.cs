@@ -102,6 +102,37 @@
 
         public ICluster Cluster { get; } = Concrete.Cluster;
         public MongoClientSettings Settings { get; } = Concrete.Settings;
+
+
+
+        //MongoDB Client 2.7 Entended.
+        public IAsyncCursor<string> ListDatabaseNames(CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNames(cancellationToken);
+
+        public IAsyncCursor<string> ListDatabaseNames(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNames(session, cancellationToken);
+
+        public Task<IAsyncCursor<string>> ListDatabaseNamesAsync(CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNamesAsync(cancellationToken);
+
+        public Task<IAsyncCursor<string>> ListDatabaseNamesAsync(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNamesAsync(session,cancellationToken);
+
+        public IAsyncCursor<BsonDocument> ListDatabases(ListDatabasesOptions options, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabases(options,cancellationToken);
+
+        public IAsyncCursor<BsonDocument> ListDatabases(IClientSessionHandle session, ListDatabasesOptions options, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabases(session, options, cancellationToken);
+
+        public Task<IAsyncCursor<BsonDocument>> ListDatabasesAsync(ListDatabasesOptions options, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabasesAsync(options, cancellationToken);
+
+        public Task<IAsyncCursor<BsonDocument>> ListDatabasesAsync(IClientSessionHandle session, ListDatabasesOptions options, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabasesAsync(session,options,cancellationToken);
+
+        public IAsyncCursor<TResult> Watch<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        => Concrete.Watch(pipeline, options,cancellationToken);
+
+        public IAsyncCursor<TResult> Watch<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        => Concrete.Watch(session, pipeline,options,cancellationToken);
+
+        public Task<IAsyncCursor<TResult>> WatchAsync<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        => Concrete.WatchAsync(pipeline,options,cancellationToken);
+
+        public Task<IAsyncCursor<TResult>> WatchAsync<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        => Concrete.WatchAsync(session, pipeline, options, cancellationToken);
     }
 }
 
