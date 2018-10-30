@@ -4,14 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Product>ionix.Migration.PostgreSql</Product>
-    <Description>ionix.Migration.PostgreSql</Description>
+    <Description>A high performer migration library for PostgreSQL.</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration.PostgreSql</RepositoryUrl>
-    <PackageTags>orm, migration, code-first, postgresql, .net core</PackageTags>
-    <PackageReleaseNotes>Some types have moved to 'ionix.Migration'.</PackageReleaseNotes>
+    <PackageTags>orm, micro-orm, sql, migration, code-first, postgres, postgresql</PackageTags>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

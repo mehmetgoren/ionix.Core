@@ -5,14 +5,14 @@
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.0.7</Version>
-    <Description>ionix.Data.SqlServer</Description>
+    <Version>2.0.8</Version>
+    <Description>Incredibly easy and talented micro orm library for Sql Server</Description>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
-    <AssemblyVersion>2.0.7.0</AssemblyVersion>
-    <FileVersion>2.0.7.0</FileVersion>
-    <PackageReleaseNotes>the SqlClient package has been updated from '4.5.0' to '4.5.1'</PackageReleaseNotes>
+    <AssemblyVersion>2.0.8.0</AssemblyVersion>
+    <FileVersion>2.0.8.0</FileVersion>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.SqlServer</RepositoryUrl>
-    <PackageTags>orm, Sql Server, .net core</PackageTags>
+    <PackageTags>micro-orm, orm, sql, sqlserver, sql-server, sql server</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

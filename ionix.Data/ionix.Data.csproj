@@ -4,15 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
-    <Version>2.0.5</Version>
-    <Description>ionix.Data</Description>
+    <Version>2.0.6</Version>
+    <Description>Incredibly easy and talented micro orm library.</Description>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data</RepositoryUrl>
-    <AssemblyVersion>2.0.5.0</AssemblyVersion>
-    <FileVersion>2.0.5.0</FileVersion>
-    <PackageReleaseNotes>Added 'AutoCloseCommandDataReader' type.</PackageReleaseNotes>
-    <PackageTags>orm, micro orm, .net core</PackageTags>
+    <AssemblyVersion>2.0.6.0</AssemblyVersion>
+    <FileVersion>2.0.6.0</FileVersion>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
+    <PackageTags>micro-orm, orm, sql</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

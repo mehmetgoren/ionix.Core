@@ -3,13 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mehmet Gökalp Gören</Authors>
-    <Description>ionix.Migration.SQLite</Description>
+    <Description>A high performer migration library for SQLite</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration.SQLite</RepositoryUrl>
-    <PackageTags>orm, migration, code-first, sqlite, .net core</PackageTags>
-    <PackageReleaseNotes>Added to Github</PackageReleaseNotes>
+    <PackageTags>orm, micro-orm, sql, migration, code-first, sqlite</PackageTags>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

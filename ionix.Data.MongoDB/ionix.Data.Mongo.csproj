@@ -5,15 +5,15 @@
     <Authors>Mehmet Gökalp Gören</Authors>
     <Company>Mehmet Gökalp Gören</Company>
     <Copyright>Copyright © Mehmet Gökalp Gören 2017</Copyright>
-    <Version>2.0.6</Version>
-    <Description>ionix.Data.Mongo</Description>
+    <Version>2.0.7</Version>
+    <Description>Migration and orm extension for MongoDB</Description>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Data.MongoDB</RepositoryUrl>
-    <AssemblyVersion>2.0.6.0</AssemblyVersion>
-    <FileVersion>2.0.6.0</FileVersion>
-    <PackageReleaseNotes>Now you can get MongoDB host info by using MongoAdmin.GetHostInfo method.</PackageReleaseNotes>
-    <PackageTags>orm, MongoDB,  .net core</PackageTags>
+    <AssemblyVersion>2.0.7.0</AssemblyVersion>
+    <FileVersion>2.0.7.0</FileVersion>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
+    <PackageTags>orm, micrp-orm, migration, no-sql, mongodb</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

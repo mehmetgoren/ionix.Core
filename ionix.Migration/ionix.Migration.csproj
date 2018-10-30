@@ -5,14 +5,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mehmet Gökalp Gören</Authors>
     <Company>Mehmet Gökalp Gören</Company>
-    <Description>ionix.Migration</Description>
+    <Description>A high performer migration library.</Description>
     <Copyright>Copyright © Mehmet Gökalp Gören 2018</Copyright>
     <PackageProjectUrl>https://github.com/mehmetgoren/ionix.Core</PackageProjectUrl>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>Got some types from 'ionix.Migration.PostgreSql'.</PackageReleaseNotes>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.4</Version>
+    <PackageReleaseNotes>Some nuget packages updated.</PackageReleaseNotes>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</RepositoryUrl>
-    <PackageTags>orm, migration, code-first, .net core</PackageTags>
+    <PackageTags>orm, micro-orm, sql, migration, code-first</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
