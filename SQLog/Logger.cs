@@ -154,6 +154,13 @@
             return this;
         }
 
+        public Logger Trace(string name, object obj)
+        {
+            this.entity.LogType = nameof(Trace);
+            this.entity.Message = name;
+            return this.Object(obj);
+        }
+
         public Logger Object(object obj)
         {
             if (null != obj)
