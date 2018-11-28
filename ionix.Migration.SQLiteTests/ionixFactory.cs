@@ -107,11 +107,14 @@
             return DefaultMetaDataProvider;
         }
 
-        public static void InitMigration()
+        public static void InitMigration(bool deleteFiles)
         {
-            File.Delete(_directoryPath + "\\migration_tests.db");
-            File.Delete(_directoryPath + "\\sql.txt");
-            File.Delete(_directoryPath + "\\sqlError.txt");
+            if (deleteFiles)
+            {
+                File.Delete(_directoryPath + "\\migration_tests.db");
+                File.Delete(_directoryPath + "\\sql.txt");
+                File.Delete(_directoryPath + "\\sqlError.txt");
+            }
 
             using (var client = CreateDbClient())
             {

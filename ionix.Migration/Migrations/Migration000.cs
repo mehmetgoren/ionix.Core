@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Data;
 
-    public sealed class Migration000 : MigrationBase
+    public sealed class Migration000 : MigrationCreateTable
     {
         public const string VersionNo = "0.0.0";
 

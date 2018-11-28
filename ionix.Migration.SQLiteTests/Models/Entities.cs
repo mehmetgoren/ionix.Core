@@ -229,5 +229,35 @@
         public decimal LineerScore { get; set; }
 
         public double LineerBiasScore { get; set; }
+
+        [MigrationVersion(Migration103.VersionNo)]
+        public string this_added_newly { get; set; }
+
+
+        [MigrationVersion(Migration104.VersionNo)]
+        [DbSchema(ColumnName = "This_Added_Nonnullable", DefaultValue = "0")]
+        public int this_added_nonnullable { get; set; }
     }
+
+
+    [MigrationVersion(Migration102.VersionNo)]
+    [Table("AddedLater")]
+    [TableIndex("Name", Unique = true)]
+    public class AddedLater
+    {
+        [DbSchema(IsKey = true, DatabaseGeneratedOption = StoreGeneratedPattern.Identity)]
+        public int ControllerId { get; set; }
+
+        public int? OpUserId { get; set; }
+
+        [DbSchema(DefaultValue = "CURRENT_TIMESTAMP")]
+        public DateTime? OpDate { get; set; }
+
+        [DbSchema(MaxLength = 15)]
+        public string OpIp { get; set; }
+
+        [DbSchema(MaxLength = 50)]
+        public string Name { get; set; }
+    }
+
 }

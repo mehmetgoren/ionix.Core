@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using Data;
 
+    [MigrationVersion(Migration000.VersionNo)]
     [Table("DatabaseVersion")]
     public class DatabaseVersion : DatabaseVersionBase
     {

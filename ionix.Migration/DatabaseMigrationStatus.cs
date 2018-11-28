@@ -45,7 +45,7 @@
 
             var databaseVersion = this.GetVersion();
             var migrationVersion = this.runner.MigrationReflection.LatestVersion();
-            throw new Exception($"Migration versions are not match. The database' s version is '{databaseVersion}', and  migration's version is '{migrationVersion }'");
+            throw new Exception($"The migrations versions are not match. The database' s version is '{databaseVersion}', and  migration's version is '{migrationVersion }'");
         }
 
         public void ValidateMigrationsVersions()
@@ -56,14 +56,14 @@
             var incompletedVersions = dbAllMigrations.Where(p => p.Version != Migration000.VersionNo && p.CompletedOn == null).Select(m => m.Version).ToList();
             if (incompletedVersions.Any())
             {
-                throw new MigrationException($"Some Migrations : {string.Join(",", incompletedVersions)} are incomplete.");
+                throw new MigrationException($"A migrations : {string.Join(",", incompletedVersions)} are incomplete.");
             }
 
             var appAllMigrations = this.runner.MigrationReflection.GetAllMigrations().OrderBy(m => m.Version).ToList();
 
             if (dbAllMigrations.Count > appAllMigrations.Count)
             {
-                throw new MigrationException($"the Migrations count in db ({dbAllMigrations.Count}) is higher than application migration count ({appAllMigrations.Count}). Migrations names : {string.Join(",", dbAllMigrations.Skip(appAllMigrations.Count).Select(m => m.Version))}");
+                throw new MigrationException($"A migrations count in db ({dbAllMigrations.Count}) is higher than application migration count ({appAllMigrations.Count}). Migrations names : {string.Join(",", dbAllMigrations.Skip(appAllMigrations.Count).Select(m => m.Version))}");
             }
 
             for (int i = 0; i < dbAllMigrations.Count; i++)

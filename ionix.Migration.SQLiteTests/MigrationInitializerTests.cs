@@ -8,7 +8,9 @@ namespace ionix.Migration.SQLiteTests
         [TestMethod]
         public void ExecuteTest()
         {
-            ionixFactory.InitMigration();
+            ionixFactory.InitMigration(false);
+
+           // ionixFactory.InitMigration();
         }
     }
 }

@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public sealed class Migration100 : MigrationAutoGen
+    public sealed class Migration100 : MigrationCreateTable
     {
         public const string VersionNo = "1.0.0";
 
@@ -14,10 +14,7 @@
         {
         }
 
-        protected override IEnumerable<Type> GetMigrationTypes()
-        {
-            return Assembly.GetExecutingAssembly().GetTypes();
-        }
+        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
     }
 
 
@@ -70,5 +67,37 @@
             cmd.BatchInsert(menus);
 
         }
+    }
+
+    public sealed class Migration102 : MigrationCreateTable
+    {
+        public const string VersionNo = "1.0.2";
+
+        public Migration102() :
+            base(VersionNo)
+        {
+        }
+
+        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
+    }
+
+    public sealed class Migration103 : MigrationAddColumn
+    {
+        public const string VersionNo = "1.0.3";
+
+        public Migration103()
+            : base(VersionNo) { }
+
+        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
+    }
+
+    public sealed class Migration104 : MigrationAddColumn
+    {
+        public const string VersionNo = "1.0.4";
+
+        public Migration104()
+            : base(VersionNo) { }
+
+        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
     }
 }

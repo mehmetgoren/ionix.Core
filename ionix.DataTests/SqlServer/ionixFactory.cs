@@ -62,7 +62,7 @@ namespace ionix.DataTests.SqlServer
         {
             DbConnection conn = CreateEmptyConnection();
 
-            conn.ConnectionString = @"Data Source=192.168.70.129;Initial Catalog=NORTHWND;User Id=sa;Password=1;";
+            conn.ConnectionString = @"Data Source=192.168.0.33;Initial Catalog=NORTHWND;User Id=sa;Password=1;";
             conn.Open();
 
             return conn;

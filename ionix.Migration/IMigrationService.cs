@@ -5,7 +5,7 @@
 
     public interface IMigrationService
     {
-        IMigrationBuilder MigrationBuilder { get; }
+        IMigrationSqlQueryBuilder MigrationSqlQueryBuilder { get; }
 
         IColumnDbTypeResolver ColumnDbTypeResolver { get; }
 

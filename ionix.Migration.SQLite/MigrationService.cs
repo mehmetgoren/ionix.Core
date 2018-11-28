@@ -11,7 +11,7 @@
 
         }
 
-        public IMigrationBuilder MigrationBuilder => SQLite.MigrationBuilder.Instance;
+        public IMigrationSqlQueryBuilder MigrationSqlQueryBuilder => SQLite.MigrationSqlQueryBuilder.Instance;
 
         public IColumnDbTypeResolver ColumnDbTypeResolver => SQLite.ColumnDbTypeResolver.Instance;
 

@@ -11,7 +11,7 @@
 
         }
 
-        public IMigrationBuilder MigrationBuilder => PostgreSql.MigrationBuilder.Instance;
+        public IMigrationSqlQueryBuilder MigrationSqlQueryBuilder => PostgreSql.MigrationSqlQueryBuilder.Instance;
 
         public IColumnDbTypeResolver ColumnDbTypeResolver => PostgreSql.ColumnDbTypeResolver.Instance;
 

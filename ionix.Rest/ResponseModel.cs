@@ -92,16 +92,18 @@
 
 
         private int _total;
-        public ResponseModel<T> Total(int total)
+        public ResponseModel<T> Total(Func<int> func)
         {
-            this._total = total;
+            if (null != func)
+                this._total = func();
             return this;
         }
 
         private string _message;
-        public ResponseModel<T> Message(string message)
+        public ResponseModel<T> Message(Func<string> func)
         {
-            this._message = message;
+            if (null != func)
+                this._message = func();
             return this;
         }
 
