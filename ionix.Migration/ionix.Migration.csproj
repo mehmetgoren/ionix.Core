@@ -13,6 +13,7 @@
     <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/mehmetgoren/ionix.Core/tree/master/ionix.Migration</RepositoryUrl>
     <PackageTags>orm, micro-orm, sql, migration, code-first</PackageTags>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

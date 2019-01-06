@@ -43,7 +43,6 @@
                         }
                     }
 
-
                     query.Text.AppendLine();
                 }
             }

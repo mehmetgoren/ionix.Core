@@ -49,7 +49,7 @@
 
         public override string ToString()
         {
-            return $"{this.Version} started on {this.StartedOn} completed on {this.CompletedOn}";
+            return $"{this.Version} started at {this.StartedOn} completed at {this.CompletedOn}";
         }
     }
 }

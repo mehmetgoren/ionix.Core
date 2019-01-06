@@ -26,7 +26,7 @@
             cmd.InsertNonGeneric(model);
         }
 
-        protected override IEnumerable<Type> GetMigrationTypes()
+        protected override IEnumerable<Type> GetEntityTypes()
         {
             return new[] { Injector.GetInstance<IMigrationService>().CreateDatabaseVersion().GetType() };
         }

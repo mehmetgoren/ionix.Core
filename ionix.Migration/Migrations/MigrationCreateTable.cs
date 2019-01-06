@@ -16,21 +16,21 @@
             : base(version) { }
 
 
-        protected abstract IEnumerable<Type> GetMigrationTypes();//örneğin assembly versin.
+        protected abstract IEnumerable<Type> GetEntityTypes();//örneğin assembly versin.
 
         private readonly Lazy<IMigrationService> migrationService = new Lazy<IMigrationService>(Injector.GetInstance<IMigrationService>);
         protected IMigrationService MigrationService => migrationService.Value;
 
 
 
-        private IEnumerable<Type> GetMigrationTypesWithCheckTableAttributes() => this.GetMigrationTypes()?.Where(p => p.GetCustomAttribute<TableAttribute>() != null);
+        private IEnumerable<Type> GetEntityTypesWithCheckTableAttributes() => this.GetEntityTypes()?.Where(p => p.GetCustomAttribute<TableAttribute>() != null);
 
         public override SqlQuery GenerateQuery()
         {
-            var migrationTypes = this.GetMigrationTypesWithCheckTableAttributes();
+            IEnumerable<Type> migrationTypes = this.GetEntityTypesWithCheckTableAttributes();
             if (!migrationTypes.IsEmptyList())
             {
-                List<Type> filteredList = new List<Type>();
+                List<Type> filteredEntityTypes = new List<Type>();
                 foreach (Type migrationType in migrationTypes)
                 {
                     bool flag = false;
@@ -41,19 +41,87 @@
                         flag = !String.IsNullOrEmpty(migrationVersion) && new MigrationVersion(migrationVersion) == this.Version;
                     }
                     if (flag)
-                        filteredList.Add(migrationType);
+                        filteredEntityTypes.Add(migrationType);
                 }
 
-                if (!filteredList.IsEmptyList())
+                if (!filteredEntityTypes.IsEmptyList())
                 {
-                    return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(filteredList, MigrationCreateTableDbSchemaMetaDataProvider.Create(this.Version), this.MigrationService.ColumnDbTypeResolver);
+                    filteredEntityTypes = SortTypesHierarchical(filteredEntityTypes);
+                    return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(filteredEntityTypes, MigrationCreateTableDbSchemaMetaDataProvider.Create(this.Version), this.MigrationService.ColumnDbTypeResolver);
                 }
-
-
-                //return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(migrationTypes, MigrationCreateTableDbSchemaMetaDataProvider.Create(this.Version), this.MigrationService.ColumnDbTypeResolver);
             }
 
             return new SqlQuery();
+        }
+
+        private static List<Type> SortTypesHierarchical(List<Type> entiyTypes)
+        {
+            bool Sort(ref List<Type> list)
+            {
+                bool sorted = false;
+
+                LinkedList<Type> linkedList = new LinkedList<Type>(list);
+                for (int j = 0; j < list.Count; ++j)
+                {
+                    Type entiyType = list[j];
+
+                    IEnumerable<TableForeignKeyAttribute> tfkas = entiyType.GetCustomAttributes<TableForeignKeyAttribute>();
+                    if (null != tfkas)
+                    {
+                        foreach (TableForeignKeyAttribute tfka in tfkas)
+                        {
+                            Type parentTableType = list.FirstOrDefault(type => AttributeExtension.GetTableName(type) == tfka.ReferenceTable);
+                            if (null == parentTableType)
+                                throw new InvalidOperationException("parent table was not found.");
+
+                            if (parentTableType != entiyType)//if the table is not self referenced
+                            {
+                                int parentIndex = list.IndexOf(parentTableType);
+                                if (-1 == parentIndex)
+                                    throw new InvalidOperationException("parent table was not found.");
+
+                                if (parentIndex >= j)//yani daha sonda ise.
+                                {
+                                    linkedList.Remove(parentTableType);
+                                    linkedList.AddBefore(linkedList.Find(entiyType), parentTableType);
+                                    sorted = true;
+                                    goto SetList;
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+
+                SetList:
+                list = linkedList.ToList();
+
+                return sorted;
+            }
+
+            while (Sort(ref entiyTypes)) ;
+            return entiyTypes;
+
+            //var tablesAndOrders = new Dictionary<Type, int>();
+            //entiyTypes.ForEach(t => tablesAndOrders.Add(t, 0));
+
+            //foreach (Type entiyType in entiyTypes)
+            //{
+            //    IEnumerable<TableForeignKeyAttribute> tfkas = entiyType.GetCustomAttributes<TableForeignKeyAttribute>();
+            //    if (null != tfkas)
+            //    {
+            //        foreach (TableForeignKeyAttribute tfka in tfkas)
+            //        {
+            //            Type parentTableType = entiyTypes.FirstOrDefault(type => AttributeExtension.GetTableName(type) == tfka.ReferenceTable);
+            //            if (null == parentTableType)
+            //                throw new InvalidOperationException("parent table was not found.");
+
+            //            ++tablesAndOrders[parentTableType];
+            //        }
+            //    }
+            //}
+
+            //return tablesAndOrders.Select(p => (p.Key, p.Value)).OrderByDescending(p => p.Value).Select(p => p.Key);// .Values.OrderBy(p => p);
         }
 
         public override void Sync(ICommandAdapter cmd)
@@ -66,6 +134,5 @@
 
             cmd.Factory.DataAccess.ExecuteNonQuery(this.GenerateQuery());
         }
-
     }
 }
