@@ -6,6 +6,7 @@
     using System.Reflection;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     /*
      TokenTableAuthAttribute on method is not available. Clients need to group controllers to separate auhorized and unauthhorized methods. Why, bacause this approach is more clean,
@@ -23,14 +24,14 @@
         private static readonly Type ActionResultType = typeof(IActionResult);
 
 
-        private static String CreateUniqueName(MethodInfo mi)
+        private static string CreateUniqueName(MethodInfo mi)
         {
-            String signatureString = String.Join(",", mi.GetParameters().Select(p => p.ParameterType.Name).ToArray());
-            String returnTypeName = mi.ReturnType.Name;
+            string signatureString = String.Join(",", mi.GetParameters().Select(p => p.ParameterType.Name).ToArray());
+            string returnTypeName = mi.ReturnType.Name;
 
             if (mi.IsGenericMethod)
             {
-                String typeParamsString = String.Join(",", mi.GetGenericArguments().Select(g => g.AssemblyQualifiedName).ToArray());
+                string typeParamsString = String.Join(",", mi.GetGenericArguments().Select(g => g.AssemblyQualifiedName).ToArray());
 
 
                 // returns a string like this: "Assembly.YourSolution.YourProject.YourClass:YourMethod(Param1TypeName,...,ParamNTypeName):ReturnTypeName
@@ -43,16 +44,33 @@
             .Where(p => ActionResultType.IsAssignableFrom(p.ReturnType)).Select(CreateUniqueName)
             .ToHashSet();
 
-        protected virtual HashSet<MethodInfo> GetActionMethods(Type controllerType)
+        private static readonly Type ArgumentlessTaskType = typeof(Task<>);
+        protected virtual bool IsAssignableFrom(Type returnType)
+        {
+            if (ActionResultType.IsAssignableFrom(returnType))
+                return true;
+
+            if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == ArgumentlessTaskType)
+            {
+                var kernelReturnType = returnType.GetGenericArguments().FirstOrDefault();
+                if (null != kernelReturnType)
+                    return this.IsAssignableFrom(kernelReturnType);
+            }
+
+            return false;
+        }
+
+        protected HashSet<MethodInfo> GetActionMethods(Type controllerType)
         {
             HashSet<MethodInfo> ret = new HashSet<MethodInfo>();
-            foreach (MethodInfo mi in controllerType.GetMethods().Where(p => ActionResultType.IsAssignableFrom(p.ReturnType)))
+            foreach (MethodInfo mi in controllerType.GetMethods().Where(p => this.IsAssignableFrom(p.ReturnType)))
             {
                 if (!BaseActionsMethods.Contains(CreateUniqueName(mi)))
                 {
                     ret.Add(mi);
                 }
             }
+
             return ret;
         }
 
