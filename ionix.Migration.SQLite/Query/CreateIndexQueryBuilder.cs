@@ -1,6 +1,6 @@
-﻿namespace ionix.Migration.SQLite
+﻿namespace Ionix.Migration.SQLite
 {
-    using ionix.Utils.Extensions;
+    using Ionix.Utils.Extensions;
     using System;
     using System.Text;
     using Data;

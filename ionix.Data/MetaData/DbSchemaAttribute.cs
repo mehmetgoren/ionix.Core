@@ -1,7 +1,7 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
-    using ionix.Utils;
-    using ionix.Utils.Extensions;
+    using Ionix.Utils;
+    using Ionix.Utils.Extensions;
     using System;
     using System.ComponentModel.DataAnnotations;
 

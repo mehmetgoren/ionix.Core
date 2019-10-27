@@ -1,4 +1,4 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
     using Utils.Extensions;
     using System.Collections.Generic;

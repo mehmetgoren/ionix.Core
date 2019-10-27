@@ -1,11 +1,10 @@
-﻿namespace ionix.Rest
+﻿namespace Ionix.Rest
 {
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Collections;
     using System.Threading;
-
 
     internal struct UserGuid
     {

@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
+    <ProjectReference Include="..\Ionix.Data\Ionix.Data.csproj" />
   </ItemGroup>
 
 </Project>

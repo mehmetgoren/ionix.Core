@@ -1,4 +1,4 @@
-﻿namespace ionix.Utils
+﻿namespace Ionix.Utils
 {
     using System;
 
@@ -14,6 +14,14 @@
         {
 
         }
+
+        public ObjectIsLockedException(string message) : base(message)
+        {
+        }
+
+        public ObjectIsLockedException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 
     public class ItemAlreadyAddedException : Exception
@@ -28,13 +36,34 @@
         {
 
         }
+
+        public ItemAlreadyAddedException(string message) : base(message)
+        {
+        }
+
+        public ItemAlreadyAddedException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
+
     public class NotFoundException : Exception
     {
         public NotFoundException(string message, params object[] args)
             : base(String.Format(message, args))
         {
 
+        }
+
+        public NotFoundException() : base()
+        {
+        }
+
+        public NotFoundException(string message) : base(message)
+        {
+        }
+
+        public NotFoundException(string message, Exception innerException) : base(message, innerException)
+        {
         }
     }
 
@@ -49,6 +78,14 @@
             : base(String.Format(message, args))
         {
 
+        }
+
+        public ReadOnlyException(string message) : base(message)
+        {
+        }
+
+        public ReadOnlyException(string message, Exception innerException) : base(message, innerException)
+        {
         }
     }
 }

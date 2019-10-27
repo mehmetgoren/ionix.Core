@@ -1,4 +1,4 @@
-﻿namespace ionix.Utils.Reflection
+﻿namespace Ionix.Utils.Reflection
 {
     using System;
     using System.Collections;
@@ -10,7 +10,7 @@
 
     public static class ReflectionExtensions
     {
-        private static readonly MethodInfo ToNullable_MethodInfo = typeof(ionixExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
+        private static readonly MethodInfo ToNullable_MethodInfo = typeof(IonixExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
 
         private static MethodInfo convertTo_MethodInfo;
         private static readonly object forLock = new object();
@@ -24,7 +24,7 @@
                     {
                         if (null == convertTo_MethodInfo)
                         {
-                            convertTo_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(ionixExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), "ConvertTo", 1, 1);
+                            convertTo_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(IonixExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), "ConvertTo", 1, 1);
 
                             if (null == convertTo_MethodInfo)
                                 throw new NotFoundException("ionixExtensions.ConvertTo method not found");

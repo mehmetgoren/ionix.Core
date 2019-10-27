@@ -1,4 +1,4 @@
-﻿namespace ionix.Data.PostgreSql
+﻿namespace Ionix.Data.PostgreSql
 {
     using System;
 

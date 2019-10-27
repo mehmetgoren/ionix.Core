@@ -1,4 +1,4 @@
-﻿namespace ionix.Data.Oracle
+﻿namespace Ionix.Data.Oracle
 {
     using System;
 

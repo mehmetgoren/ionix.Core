@@ -1,4 +1,4 @@
-﻿namespace ionix.Migration
+﻿namespace Ionix.Migration
 {
     using System;
 

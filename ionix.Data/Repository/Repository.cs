@@ -1,6 +1,6 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
-    using ionix.Utils.Collections;
+    using Ionix.Utils.Collections;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

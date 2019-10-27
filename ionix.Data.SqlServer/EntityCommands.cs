@@ -1,4 +1,4 @@
-﻿namespace ionix.Data.SqlServer
+﻿namespace Ionix.Data.SqlServer
 {
     using System;
     using System.Collections.Generic;

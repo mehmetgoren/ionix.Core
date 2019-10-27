@@ -1,10 +1,9 @@
-﻿namespace ionix.Migration.PostgreSql
+﻿namespace Ionix.Migration.PostgreSql
 {
     using System;
     using System.Reflection;
     using System.Text;
     using Data;
-
 
     internal static class Columns
     {

@@ -1,4 +1,4 @@
-﻿namespace ionix.Data.PostgreSql.BulkCopy
+﻿namespace Ionix.Data.PostgreSql.BulkCopy
 {
     using Npgsql;
 

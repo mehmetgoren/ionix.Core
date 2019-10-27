@@ -1,10 +1,10 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
     using Utils;
     using Utils.Extensions;
     using System;
     using System.Collections.Generic;
-    using ionix.Utils.Reflection;
+    using Ionix.Utils.Reflection;
     using System.Threading.Tasks;
 
     public abstract class CommandAdapterBase : ICommandAdapter

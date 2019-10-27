@@ -19,8 +19,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
-    <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
+    <ProjectReference Include="..\Ionix.Data\Ionix.Data.csproj" />
+    <ProjectReference Include="..\Ionix.Utils\Ionix.Utils.csproj" />
   </ItemGroup>
 
 </Project>

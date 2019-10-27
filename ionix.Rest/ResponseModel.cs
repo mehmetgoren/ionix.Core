@@ -1,6 +1,6 @@
-﻿namespace ionix.Rest
+﻿namespace Ionix.Rest
 {
-    using ionix.Utils.Extensions;
+    using Ionix.Utils.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

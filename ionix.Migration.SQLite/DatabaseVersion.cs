@@ -1,4 +1,4 @@
-﻿namespace ionix.Migration.SQLite
+﻿namespace Ionix.Migration.SQLite
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;

@@ -1,4 +1,4 @@
-﻿namespace ionix.Rest
+﻿namespace Ionix.Rest
 {
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;

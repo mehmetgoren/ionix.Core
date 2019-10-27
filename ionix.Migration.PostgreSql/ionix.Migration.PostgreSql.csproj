@@ -20,8 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Data\ionix.Data.csproj" />
-    <ProjectReference Include="..\ionix.Migration\ionix.Migration.csproj" />
+    <ProjectReference Include="..\Ionix.Data\Ionix.Data.csproj" />
+    <ProjectReference Include="..\Ionix.Migration\Ionix.Migration.csproj" />
   </ItemGroup>
 
 </Project>

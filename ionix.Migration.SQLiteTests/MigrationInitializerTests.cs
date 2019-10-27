@@ -1,14 +1,15 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
+using Xunit;
 
-namespace ionix.Migration.SQLiteTests
+namespace Ionix.Migration.SQLiteTests
 {
-    [TestClass]
     public class MigrationInitializerTests
     {
-        [TestMethod]
+        [Fact]
         public void ExecuteTest()
         {
-            ionixFactory.InitMigration(false);
+            IonixFactory.InitMigration(false);
+            true.Should().BeTrue();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace ionix.Migration.SQLiteTests.Models
+﻿namespace Ionix.Migration.SQLiteTests.Models
 {
-    using ionix.Data;
+    using Ionix.Data;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
 

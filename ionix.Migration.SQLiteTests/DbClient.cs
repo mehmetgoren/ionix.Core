@@ -1,8 +1,8 @@
-﻿namespace ionix.Migration.SQLiteTests
+﻿namespace Ionix.Migration.SQLiteTests
 {
     using System;
     using System.Data;
-    using ionix.Data;
+    using Ionix.Data;
 
     internal abstract class DbClient<TDbAccess> : IDisposable
         where TDbAccess : IDbAccess
@@ -16,7 +16,7 @@
 
         //  public ICommandFactory Factory => ionixFactory.CreateFactory(this.DataAccess);
 
-        public ICommandAdapter Cmd => ionixFactory.CreateCommand(this.DataAccess);
+        public ICommandAdapter Cmd => IonixFactory.CreateCommand(this.DataAccess);
 
         public virtual void Dispose()
         {

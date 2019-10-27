@@ -1,10 +1,10 @@
-﻿namespace ionix.Data.SQLite
+﻿namespace Ionix.Data.SQLite
 {
     using Utils;
     using System;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
-    using ionix.Utils.Extensions;
+    using Ionix.Utils.Extensions;
 
     public static class SQLiteExtensions
     {

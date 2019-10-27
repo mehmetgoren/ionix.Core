@@ -1,4 +1,4 @@
-﻿namespace ionix.Utils
+﻿namespace Ionix.Utils
 {
     using System;
     using Collections;

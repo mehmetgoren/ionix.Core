@@ -1,4 +1,4 @@
-﻿namespace ionix.Utils.Extensions
+﻿namespace Ionix.Utils.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@
     using Reflection;
 
 
-    public static class ionixExtensions
+    public static class IonixExtensions
     {
         public static T Cast<T>(this object obj)
         {

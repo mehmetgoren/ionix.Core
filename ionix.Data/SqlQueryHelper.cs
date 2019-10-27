@@ -1,4 +1,4 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
     using Utils.Extensions;
     using System;
@@ -12,6 +12,14 @@
             : base("Key Schema Not Found")
         {
 
+        }
+
+        public KeySchemaNotFoundException(string message) : base(message)
+        {
+        }
+
+        public KeySchemaNotFoundException(string message, Exception innerException) : base(message, innerException)
+        {
         }
     }
 

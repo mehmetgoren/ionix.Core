@@ -1,6 +1,6 @@
-﻿namespace ionix.Migration.SQLiteTests.Models
+﻿namespace Ionix.Migration.SQLiteTests.Models
 {
-    using ionix.Data;
+    using Ionix.Data;
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +11,7 @@
     [TableForeignKey("MenuId", "Menu", "MenuId")]
     public class RoleMenu
     {
-        [DbSchema(IsKey = true, DatabaseGeneratedOption = ionix.Data.StoreGeneratedPattern.Identity)]
+        [DbSchema(IsKey = true, DatabaseGeneratedOption = Ionix.Data.StoreGeneratedPattern.Identity)]
         public int RoleMenuId { get; set; }
 
         public int? OpUserId { get; set; }

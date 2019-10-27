@@ -1,15 +1,15 @@
-﻿namespace ionix.Migration.SQLiteTests
+﻿namespace Ionix.Migration.SQLiteTests
 {
     using System;
     using System.Data.Common;
     using System.IO;
     using System.Reflection;
-    using ionix.Data;
-    using ionix.Data.SQLite;
-    using ionix.Migration.SQLite;
+    using Ionix.Data;
+    using Ionix.Data.SQLite;
+    using Ionix.Migration.SQLite;
     using Microsoft.Data.Sqlite;
 
-    internal static class ionixFactory
+    internal static class IonixFactory
     {
         private static readonly string _directoryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 

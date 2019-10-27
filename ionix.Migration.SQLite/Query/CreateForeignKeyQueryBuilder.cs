@@ -1,6 +1,6 @@
-﻿namespace ionix.Migration.SQLite
+﻿namespace Ionix.Migration.SQLite
 {
-    using ionix.Data;
+    using Ionix.Data;
     using System;
 
     // Tablonun içinde çalışacak.

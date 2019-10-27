@@ -1,10 +1,10 @@
-﻿namespace ionix.Migration.SQLite
+﻿namespace Ionix.Migration.SQLite
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Data;
-    using ionix.Utils.Extensions;
+    using Ionix.Utils.Extensions;
 
     internal sealed class CreateTableQueryBuilder : ISqlQueryProvider
     {

@@ -1,4 +1,4 @@
-﻿namespace ionix.Rest
+﻿namespace Ionix.Rest
 {
     using Utils.Extensions;
     using System;

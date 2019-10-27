@@ -1,4 +1,4 @@
-﻿namespace ionix.Data
+﻿namespace Ionix.Data
 {
     using System;
     using System.Collections;

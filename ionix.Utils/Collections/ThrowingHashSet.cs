@@ -1,4 +1,4 @@
-﻿namespace ionix.Utils.Collections
+﻿namespace Ionix.Utils.Collections
 {
     using System;
     using System.Collections.Generic;

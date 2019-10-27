@@ -1,4 +1,4 @@
-﻿namespace ionix.Data.SQLite
+﻿namespace Ionix.Data.SQLite
 {
     using Utils.Extensions;
     using System.Collections.Generic;

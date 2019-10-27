@@ -29,11 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ionix.Utils\ionix.Utils.csproj" />
+    <Folder Include="Auth\Authorization\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Auth\Authorization\" />
+    <ProjectReference Include="..\Ionix.Utils\Ionix.Utils.csproj" />
   </ItemGroup>
 
 </Project>

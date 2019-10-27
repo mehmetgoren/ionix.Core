@@ -1,4 +1,4 @@
-﻿namespace ionix.Migration.PostgreSql
+﻿namespace Ionix.Migration.PostgreSql
 {
     using System.Collections.Generic;
     using Data;
