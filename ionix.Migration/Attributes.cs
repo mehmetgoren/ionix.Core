@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class MigrationVersionAttribute : Attribute
     {
         public string MigrationVersion { get; }

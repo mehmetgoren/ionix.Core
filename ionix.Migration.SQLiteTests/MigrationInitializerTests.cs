@@ -9,8 +9,6 @@ namespace ionix.Migration.SQLiteTests
         public void ExecuteTest()
         {
             ionixFactory.InitMigration(false);
-
-           // ionixFactory.InitMigration();
         }
     }
 }

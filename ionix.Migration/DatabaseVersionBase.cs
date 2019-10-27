@@ -23,6 +23,8 @@
 
         public virtual string Exception { get; set; }
 
+        public virtual bool? BuiltIn { get; set; }
+
 
         public virtual void SetValuesFrom(Migration migration)
         {
@@ -30,6 +32,7 @@
             StartedOn = DateTime.Now;
             Description = migration.Description;
             Script = migration.GenerateQuery()?.ToString();
+            BuiltIn = migration.IsBuiltIn;
         }
 
         public override string ToString()

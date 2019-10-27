@@ -55,38 +55,11 @@
             return schema;
         }
 
-
-        protected bool DoNotCache { get; set; }
-        private EntityMetaData CreateEntityMetaData_Internal(Type entityType)
-        {
-            EntityMetaData ret = new EntityMetaData(entityType);
-            int order = 0;
-            foreach (PropertyInfo pi in entityType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                ++order;
-                SchemaInfo schema = this.FromPropertyInfo(pi);
-                if (null == schema) //NotMapped.
-                    continue;
-
-                schema.Order = order; //Order parametere isimlarine ardışıklık için çok önemli. Oyüzden base de atamasını yaptık.
-                schema.Lock();
-                ret.Add(schema, pi);
-            }
-
-            this.SetExtendedMetaData(ret);
-
-            return ret;
-        }
-
         private static readonly object syncRoot = new object();
         public IEntityMetaData CreateEntityMetaData(Type entityType)
         {
             lock (syncRoot)
             {
-                if (this.DoNotCache)
-                    return CreateEntityMetaData_Internal(entityType);
-                   // throw new Exception("do not execute this code");
-
                 Type derivedType = this.GetType();
                 Dictionary<Type, IEntityMetaData> tempCache;
                 if (!_cache.TryGetValue(derivedType, out tempCache))
@@ -98,7 +71,21 @@
                 IEntityMetaData metaData;
                 if (!tempCache.TryGetValue(entityType, out metaData))
                 {
-                    EntityMetaData temp = CreateEntityMetaData_Internal(entityType);
+                    int order = 0;
+                    EntityMetaData temp = new EntityMetaData(entityType);
+                    foreach (PropertyInfo pi in entityType.GetTypeInfo().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                    {
+                        ++order;
+                        SchemaInfo schema = this.FromPropertyInfo(pi);
+                        if (null == schema) //NotMapped.
+                            continue;
+
+                        schema.Order = order; //Order parametere isimlarine ardışıklık için çok önemli. Oyüzden base de atamasını yaptık.
+                        schema.Lock();
+                        temp.Add(schema, pi);
+                    }
+
+                    this.SetExtendedMetaData(temp);
 
                     tempCache.Add(entityType, temp);
                     metaData = temp;

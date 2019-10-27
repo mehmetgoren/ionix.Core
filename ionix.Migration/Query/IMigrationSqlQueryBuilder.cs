@@ -6,8 +6,6 @@
 
     public interface IMigrationSqlQueryBuilder
     {
-        SqlQuery CreateTable(IEnumerable<Type> types, MigrationCreateTableDbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver);
-
-        SqlQuery AddColumn(IEnumerable<Type> types, MigrationAddColumnDbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver);
+        SqlQuery CreateTable(IEnumerable<Type> types, DbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver);
     }
 }

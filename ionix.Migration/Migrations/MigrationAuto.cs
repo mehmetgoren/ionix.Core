@@ -10,9 +10,9 @@
 
     //Migration000 ve MigrationCreateTable' ın ikisinin de buna ihtiyacı var.
     //MigrationVersionAttribute attributu' u nu Migration000' ıun da
-    public abstract class MigrationCreateTable : Migration
+    public abstract class MigrationAuto : Migration
     {
-        protected MigrationCreateTable(MigrationVersion version)
+        protected MigrationAuto(MigrationVersion version)
             : base(version) { }
 
 
@@ -21,7 +21,7 @@
         private readonly Lazy<IMigrationService> migrationService = new Lazy<IMigrationService>(Injector.GetInstance<IMigrationService>);
         protected IMigrationService MigrationService => migrationService.Value;
 
-
+        public sealed override bool IsBuiltIn => true;
 
         private IEnumerable<Type> GetEntityTypesWithCheckTableAttributes() => this.GetEntityTypes()?.Where(p => p.GetCustomAttribute<TableAttribute>() != null);
 
@@ -47,7 +47,7 @@
                 if (!filteredEntityTypes.IsEmptyList())
                 {
                     filteredEntityTypes = SortTypesHierarchical(filteredEntityTypes);
-                    return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(filteredEntityTypes, MigrationCreateTableDbSchemaMetaDataProvider.Create(this.Version), this.MigrationService.ColumnDbTypeResolver);
+                    return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(filteredEntityTypes,  DbSchemaMetaDataProvider.Instance, this.MigrationService.ColumnDbTypeResolver);
                 }
             }
 
@@ -100,39 +100,8 @@
             }
 
             while (Sort(ref entiyTypes)) ;
+
             return entiyTypes;
-
-            //var tablesAndOrders = new Dictionary<Type, int>();
-            //entiyTypes.ForEach(t => tablesAndOrders.Add(t, 0));
-
-            //foreach (Type entiyType in entiyTypes)
-            //{
-            //    IEnumerable<TableForeignKeyAttribute> tfkas = entiyType.GetCustomAttributes<TableForeignKeyAttribute>();
-            //    if (null != tfkas)
-            //    {
-            //        foreach (TableForeignKeyAttribute tfka in tfkas)
-            //        {
-            //            Type parentTableType = entiyTypes.FirstOrDefault(type => AttributeExtension.GetTableName(type) == tfka.ReferenceTable);
-            //            if (null == parentTableType)
-            //                throw new InvalidOperationException("parent table was not found.");
-
-            //            ++tablesAndOrders[parentTableType];
-            //        }
-            //    }
-            //}
-
-            //return tablesAndOrders.Select(p => (p.Key, p.Value)).OrderByDescending(p => p.Value).Select(p => p.Key);// .Values.OrderBy(p => p);
-        }
-
-        public override void Sync(ICommandAdapter cmd)
-        {
-            SqlQuery query = this.GenerateQuery();
-            if (null == query || query.IsEmpty())
-            {
-                throw new MigrationException($"{this.GetType()}.{nameof(GenerateQuery)} shouldn't returns null or empty query.");
-            }
-
-            cmd.Factory.DataAccess.ExecuteNonQuery(this.GenerateQuery());
         }
     }
 }

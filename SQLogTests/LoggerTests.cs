@@ -1,9 +1,7 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SQLog;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using ionix.Data;
 

@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Newtonsoft.Json;
+    using System.Text.Json;
     using System.Reflection;
     using System.IO;
     using ionix.Data;
@@ -167,7 +167,7 @@
             {
                 try
                 {
-                    string json = JsonConvert.SerializeObject(obj);
+                    string json = JsonSerializer.Serialize(obj);
                     this.entity.ObjJson = json;
                 }
                 catch { }

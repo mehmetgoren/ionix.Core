@@ -25,10 +25,11 @@
 
         public DatabaseVersion(Migration migration)
         {
-            Version = migration.Version;
-            StartedOn = DateTime.Now;
-            Description = migration.Description;
-            Script = migration.GenerateQuery()?.ToString();
+            this.Version = migration.Version;
+            this.StartedOn = DateTime.Now;
+            this.Description = migration.Description;
+            this.Script = migration.GenerateQuery()?.ToString();
+            this.BuiltIn = migration.IsBuiltIn;
         }
 
         public override string ToString()

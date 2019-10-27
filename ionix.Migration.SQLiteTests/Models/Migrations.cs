@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Reflection;
 
-    public sealed class Migration100 : MigrationCreateTable
+    public sealed class Migration100 : MigrationAuto
     {
         public const string VersionNo = "1.0.0";
 
@@ -26,6 +26,8 @@
             base(VersionNo)
         {
         }
+
+        public override bool IsBuiltIn => false;
 
         public override SqlQuery GenerateQuery()
         {
@@ -69,7 +71,7 @@
         }
     }
 
-    public sealed class Migration102 : MigrationCreateTable
+    public sealed class Migration102 : MigrationAuto
     {
         public const string VersionNo = "1.0.2";
 
@@ -81,23 +83,25 @@
         protected override IEnumerable<Type> GetEntityTypes() => Assembly.GetExecutingAssembly().GetTypes();
     }
 
-    public sealed class Migration103 : MigrationAddColumn
+    public sealed class Migration103 : MigrationManuel
     {
         public const string VersionNo = "1.0.3";
 
         public Migration103()
             : base(VersionNo) { }
 
-        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
+        public override SqlQuery GenerateQuery() =>
+            "ALTER TABLE AppUser ADD COLUMN this_added_newly TEXT".ToQuery();
     }
 
-    public sealed class Migration104 : MigrationAddColumn
+    public sealed class Migration104 : MigrationManuel
     {
         public const string VersionNo = "1.0.4";
 
         public Migration104()
             : base(VersionNo) { }
 
-        protected override IEnumerable<Type> GetMigrationTypes() => Assembly.GetExecutingAssembly().GetTypes();
+        public override SqlQuery GenerateQuery() =>
+            "ALTER TABLE AppUser ADD COLUMN This_Added_Nonnullable INT DEFAULT 0".ToQuery();
     }
 }

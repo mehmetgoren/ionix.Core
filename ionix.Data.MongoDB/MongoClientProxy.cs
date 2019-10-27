@@ -6,8 +6,13 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Core.Clusters;
-    using ionix.Utils;
+    using Utils;
 
+    /// <summary>
+    /// The MongoClient instance actually represents a pool of connections to the database; you will only need one instance of class MongoClient even with multiple threads.
+    /// Typically you only create one MongoClient instance for a given cluster and use it across your application.Creating multiple MongoClients will,
+    /// however, still share the same pool of connections if and only if the connection strings are identical.
+    /// </summary>
     public sealed class MongoClientProxy : Singleton, IMongoClient
     {
         private static string ConnectionString = "mongodb://localhost:27017";
@@ -105,7 +110,7 @@
 
 
 
-        //MongoDB Client 2.7 Entended.
+        //MongoDB Client Entended.
         public IAsyncCursor<string> ListDatabaseNames(CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNames(cancellationToken);
 
         public IAsyncCursor<string> ListDatabaseNames(IClientSessionHandle session, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabaseNames(session, cancellationToken);
@@ -122,21 +127,16 @@
 
         public Task<IAsyncCursor<BsonDocument>> ListDatabasesAsync(IClientSessionHandle session, ListDatabasesOptions options, CancellationToken cancellationToken = default(CancellationToken)) => Concrete.ListDatabasesAsync(session,options,cancellationToken);
 
-        public IAsyncCursor<TResult> Watch<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public IChangeStreamCursor<TResult> Watch<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         => Concrete.Watch(pipeline, options,cancellationToken);
 
-        public IAsyncCursor<TResult> Watch<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public IChangeStreamCursor<TResult> Watch<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         => Concrete.Watch(session, pipeline,options,cancellationToken);
 
-        public Task<IAsyncCursor<TResult>> WatchAsync<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IChangeStreamCursor<TResult>> WatchAsync<TResult>(PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         => Concrete.WatchAsync(pipeline,options,cancellationToken);
 
-        public Task<IAsyncCursor<TResult>> WatchAsync<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IChangeStreamCursor<TResult>> WatchAsync<TResult>(IClientSessionHandle session, PipelineDefinition<ChangeStreamDocument<BsonDocument>, TResult> pipeline, ChangeStreamOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
         => Concrete.WatchAsync(session, pipeline, options, cancellationToken);
     }
 }
-
-
-//The MongoClient instance actually represents a pool of connections to the database; you will only need one instance of class MongoClient even with multiple threads.
-//Typically you only create one MongoClient instance for a given cluster and use it across your application.Creating multiple MongoClients will,
-//    however, still share the same pool of connections if and only if the connection strings are identical.

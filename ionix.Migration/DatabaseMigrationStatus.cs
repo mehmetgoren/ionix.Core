@@ -68,15 +68,20 @@
 
             for (int i = 0; i < dbAllMigrations.Count; i++)
             {
-                if (dbAllMigrations[i].Version != appAllMigrations[i].Version)
+                DatabaseVersionBase dbAllMigration = dbAllMigrations[i];
+                Migration appAllMigration = appAllMigrations[i];
+                if (dbAllMigration.Version != appAllMigration.Version)
                 {
-                    throw new MigrationException($"A migration conflict has been detected at index: {i}. The db's version is \"{dbAllMigrations[i].Version}\" and application's version is \"{appAllMigrations[i].Version}\".");
+                    throw new MigrationException($"A migration conflict has been detected at index: {i}. The db's version is \"{dbAllMigration.Version}\" and application's version is \"{appAllMigration.Version}\".");
                 }
 
-                string generatedQuery = appAllMigrations[i].GenerateQuery().ToString();
-                if (dbAllMigrations[i].Script != generatedQuery)
+                if (!appAllMigration.IsBuiltIn)
                 {
-                    throw new MigrationException($"A migration conflict script has been detected at index: {i}. The db's version: '{dbAllMigrations[i].Version}'. and application's version is \n{dbAllMigrations[i].Script}\n\nin application is:\n{generatedQuery}");
+                    string generatedQuery = appAllMigration.GenerateQuery().ToString();
+                    if (dbAllMigration.Script != generatedQuery)
+                    {
+                        throw new MigrationException($"A migration conflict script has been detected at index: {i}. The db's version: '{dbAllMigration.Version}'. and application's version is \n{dbAllMigration.Script}\n\nin application is:\n{generatedQuery}");
+                    }
                 }
             }
         }

@@ -1,8 +1,8 @@
 ﻿namespace ionix.MongoTests
 {
     using MongoDB.Bson;
-    using Newtonsoft.Json;
     using System;
+    using Newtonsoft.Json;
 
     public class ObjectIdConverter : JsonConverter
     {

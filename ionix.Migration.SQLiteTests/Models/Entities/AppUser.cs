@@ -42,11 +42,8 @@
 
         public double LineerBiasScore { get; set; }
 
-        [MigrationVersion(Migration103.VersionNo)]
         public string this_added_newly { get; set; }
 
-
-        [MigrationVersion(Migration104.VersionNo)]
         [DbSchema(ColumnName = "This_Added_Nonnullable", DefaultValue = "0")]
         public int this_added_nonnullable { get; set; }
     }

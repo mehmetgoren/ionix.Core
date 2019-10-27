@@ -12,7 +12,7 @@
         private MigrationSqlQueryBuilder() { }
 
         //tableattribute check edilip gönderiliyor types' a
-        public virtual SqlQuery CreateTable(IEnumerable<Type> types, MigrationCreateTableDbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver)
+        public virtual SqlQuery CreateTable(IEnumerable<Type> types, DbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver)
         {
             SqlQuery query = new SqlQuery();
             if (!types.IsEmptyList() && null != typeResolver)
@@ -44,25 +44,6 @@
                     }
 
                     query.Text.AppendLine();
-                }
-            }
-
-            return query;
-        }
-
-        public SqlQuery AddColumn(IEnumerable<Type> types, MigrationAddColumnDbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver)
-        {
-            SqlQuery query = new SqlQuery();
-            if (!types.IsEmptyList() && null != typeResolver)
-            {
-                foreach (Type type in types)
-                {
-                    IEntityMetaData metaData = provider.CreateEntityMetaData(type);
-                    foreach (PropertyMetaData prop in metaData.Properties)
-                    {
-                        var column = typeResolver.GetColumn(prop);
-                        query.Sql($"ALTER TABLE {metaData.TableName} ADD COLUMN ").Combine(column.ToQuery()).Sql(";").Sql(Environment.NewLine);
-                    }
                 }
             }
 
