@@ -20,7 +20,7 @@
 
         public ICommandFactory Factory => this.factory;
 
-        public bool ConvertType { get; set; } = true;
+        public TypeConversionMode ConversionMode { get; set; } = TypeConversionMode.ConvertSafely;
 
         protected abstract IEntityMetaDataProvider CreateProvider();
 
@@ -38,7 +38,7 @@
         private IEntityCommandSelect CreateSelectCommand()
         {
             IEntityCommandSelect cmd = this.factory.CreateSelectCommand();
-            cmd.ConvertType = this.ConvertType;
+            cmd.ConversionMode = this.ConversionMode;
             return cmd;
         }
 

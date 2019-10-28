@@ -129,7 +129,7 @@
                     if (dic.TryGetValue(kvp.Key, out value))
                     {
                         var pi = kvp.Value;
-                        pi.SetValueSafely(model, value);
+                        pi.SetValueConvertSafely(model, value);
                     }
 
                 }

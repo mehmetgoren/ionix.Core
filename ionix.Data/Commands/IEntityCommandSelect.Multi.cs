@@ -31,17 +31,6 @@
                         try
                         {
                             object dbValue = dr[drIndex];
-                            if (dbValue == DBNull.Value)
-                            {
-                                pi.SetValue(entity, null, null);
-                            }
-                            else
-                            {
-                                if (this.ConvertType)
-                                    pi.SetValueSafely(entity, dbValue);
-                                else
-                                    pi.SetValue(entity, dbValue, null);
-                            }
                         }
                         catch (Exception ex)
                         {

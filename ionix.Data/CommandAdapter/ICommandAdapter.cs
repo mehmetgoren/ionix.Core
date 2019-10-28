@@ -6,7 +6,7 @@
     public interface ICommandAdapter
     {
         ICommandFactory Factory { get; }
-        bool ConvertType { get; set; }
+        TypeConversionMode ConversionMode { get; set; }
 
         TEntity SelectById<TEntity>(params object[] idValues);
         Task<TEntity> SelectByIdAsync<TEntity>(params object[] idValues);

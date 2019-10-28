@@ -10,7 +10,11 @@
 
     public static class ReflectionExtensions
     {
-        private static readonly MethodInfo ToNullable_MethodInfo = typeof(ConversionExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
+        private static readonly MethodInfo ToNullable_MethodInfo = typeof(ConversionExtensions).GetTypeInfo().GetMethod(nameof(ConversionExtensions.ToNullable), BindingFlags.Static | BindingFlags.Public);
+
+        private static readonly MethodInfo ToNullableSafely_MethodInfo = typeof(ConversionExtensions).GetTypeInfo().GetMethod(nameof(ConversionExtensions.ToNullableSafely), BindingFlags.Static | BindingFlags.Public);
+
+        private static readonly MethodInfo Convert_MethodInfo = typeof(ConversionExtensions).GetTypeInfo().GetMethod(nameof(ConversionExtensions.Convert), BindingFlags.Static | BindingFlags.Public);
 
         private static MethodInfo convertSafely_MethodInfo;
         private static readonly object forLock = new object();
@@ -58,7 +62,8 @@
 
             return null;
         }
-        public static void SetValueSafely(this PropertyInfo pi, object entity, object propertyValue)
+
+        public static void SetValueConvert(this PropertyInfo pi, object entity, object propertyValue)
         {
             TypeInfo propertyTypeInfo = pi.PropertyType.GetTypeInfo();
             MethodInfo mi;
@@ -68,11 +73,25 @@
             }
             else
             {
-                mi = ReflectionExtensions.ConvertSafely_MethodInfo.MakeGenericMethod(pi.PropertyType);
+                mi = ReflectionExtensions.Convert_MethodInfo.MakeGenericMethod(pi.PropertyType);
             }
             pi.SetValue(entity, mi.Invoke(null, new object[] { propertyValue }));// Convert.ChangeType(dbValue, pi.PropertyType));
         }
 
+        public static void SetValueConvertSafely(this PropertyInfo pi, object entity, object propertyValue)
+        {
+            TypeInfo propertyTypeInfo = pi.PropertyType.GetTypeInfo();
+            MethodInfo mi;
+            if (propertyTypeInfo.IsGenericType && propertyTypeInfo.GetGenericTypeDefinition() == CachedTypes.PureNullableType)
+            {
+                mi = ReflectionExtensions.ToNullableSafely_MethodInfo.MakeGenericMethod(propertyTypeInfo.GetGenericArguments()[0]);
+            }
+            else
+            {
+                mi = ReflectionExtensions.ConvertSafely_MethodInfo.MakeGenericMethod(pi.PropertyType);
+            }
+            pi.SetValue(entity, mi.Invoke(null, new object[] { propertyValue }));// Convert.ChangeType(dbValue, pi.PropertyType));
+        }
 
         public static IList CreateGenericList(this Type elementType)
         {
@@ -113,7 +132,7 @@
                 {
                     object sourcePropertyValue = sourcePi.GetValue(sourceObject);
 
-                    destPi.SetValueSafely(destObject, sourcePropertyValue);
+                    destPi.SetValueConvertSafely(destObject, sourcePropertyValue);
                 }
             }
         }

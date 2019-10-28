@@ -12,6 +12,17 @@
 
     public partial class EntityCommandTests
     {
+
+        static EntityCommandTests()
+        {
+            var q = "delete from Categories where CategoryID > 8; delete from Territories where datalength(TerritoryID) > 30".ToQuery();
+
+            using (var client = IonixFactory.CreateDbClient())
+            {
+                client.DataAccess.ExecuteNonQuery(q);
+            }
+        }
+
         [Fact]
         public void SelectByIdTest()
         {

@@ -84,7 +84,7 @@
             if (null != identity)
             {
                 object value = base.DataAccess.ExecuteScalar(query);
-                identity.Property.SetValueSafely(entity, value);
+                identity.Property.SetValueConvertSafely(entity, value);
 
                 return value.IsNull() ? 0 : 1;
             }
@@ -101,7 +101,7 @@
             if (null != identity)
             {
                 object value = await base.DataAccess.ExecuteScalarAsync(query);
-                identity.Property.SetValueSafely(entity, value);
+                identity.Property.SetValueConvertSafely(entity, value);
 
                 return value.IsNull() ? 0 : 1;
             }

@@ -7,9 +7,16 @@
     using System.Reflection;
     using System.Threading.Tasks;
 
+    public enum TypeConversionMode
+    {
+        DoNotConvert = 0,
+        Convert,
+        ConvertSafely
+    }
+
     public interface IEntityCommandSelect//Select ler Entity üzerinden otomatik yazılan Select ifadeleri. Query ise custom için.
     {
-        bool ConvertType { get; set; }
+        TypeConversionMode ConversionMode { get; set; }
 
         TEntity SelectById<TEntity>(IEntityMetaDataProvider provider, params object[] keys);
         Task<TEntity> SelectByIdAsync<TEntity>(IEntityMetaDataProvider provider, params object[] keys);
@@ -80,12 +87,37 @@
 
         public char ParameterPrefix { get; }
 
-        public bool ConvertType { get; set; }
+        public TypeConversionMode ConversionMode { get; set; }
 
         private enum MapType
         {
             Select,
             Query
+        }
+
+        private void SetValue(object entity, object dbValue, PropertyInfo pi)
+        {
+            if (dbValue == DBNull.Value)
+            {
+                pi.SetValue(entity, null, null);
+            }
+            else
+            {
+                switch (ConversionMode)
+                {
+                    case TypeConversionMode.DoNotConvert:
+                        pi.SetValue(entity, dbValue, null);
+                        break;
+                    case TypeConversionMode.Convert:
+                        pi.SetValueConvert(entity, dbValue);
+                        break;
+                    case TypeConversionMode.ConvertSafely:
+                        pi.SetValueConvertSafely(entity, dbValue);
+                        break;
+                    default:
+                        throw new NotSupportedException(ConversionMode.ToString());
+                }
+            }
         }
 
         private void Map<TEntity>(TEntity entity, IEntityMetaData metaData, IDataReader dr, MapType mapType)
@@ -100,17 +132,8 @@
                         if (pi.GetSetMethod() != null)
                         {
                             object dbValue = dr[columnName];
-                            if (dbValue == DBNull.Value)
-                            {
-                                pi.SetValue(entity, null, null);
-                            }
-                            else
-                            {
-                                if (this.ConvertType)
-                                    pi.SetValueSafely(entity, dbValue);
-                                else
-                                    pi.SetValue(entity, dbValue, null);
-                            }
+
+                            SetValue(entity, dbValue, pi);
                         }
                     }
                     break;
@@ -126,17 +149,8 @@
                             if (pi.GetSetMethod() != null)
                             {
                                 object dbValue = dr[j];
-                                if (dbValue == DBNull.Value)
-                                {
-                                    pi.SetValue(entity, null, null);
-                                }
-                                else
-                                {
-                                    if (this.ConvertType)
-                                        pi.SetValueSafely(entity, dbValue);
-                                    else
-                                        pi.SetValue(entity, dbValue, null);
-                                }
+
+                                SetValue(entity, dbValue, pi);
                             }
                         }
                     }

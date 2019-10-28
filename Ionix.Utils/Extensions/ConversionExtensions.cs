@@ -24,7 +24,7 @@
             {
                 try
                 {
-                    return (T)System.Convert.ChangeType(value, typeof(T));
+                    return Convert<T>(value);
                 }
                 catch { }
             }
@@ -55,6 +55,18 @@
         }
 
         public static T? ToNullable<T>(this object value)
+            where T : struct
+        {
+            if (null != value)
+            {
+                string stringValue = value.ToString();
+                if (stringValue.Length != 0)
+                    return Convert<T>(value);
+            }
+            return null;
+        }
+
+        public static T? ToNullableSafely<T>(this object value)
             where T : struct
         {
             if (null != value)
