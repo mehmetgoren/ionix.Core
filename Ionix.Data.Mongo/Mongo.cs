@@ -91,13 +91,13 @@
 
         public void InsertMany<TEntity>(IEnumerable<TEntity> entityList, InsertManyOptions options = null)
         {
-            if (!entityList.IsEmptyList())
+            if (!entityList.IsNullOrEmpty())
                 this.Get<TEntity>().InsertMany(entityList, options);
         }
 
         public Task InsertManyAsync<TEntity>(IEnumerable<TEntity> entityList, InsertManyOptions options = null)
         {
-            if (!entityList.IsEmptyList())
+            if (!entityList.IsNullOrEmpty())
                 return this.Get<TEntity>().InsertManyAsync(entityList, options);
 
             return Task.Delay(0);
@@ -378,7 +378,7 @@
 
         public Task<BulkWriteResult<BsonDocument>> BulkReplaceAsync<TEntity>(IEnumerable<TEntity> list, bool isUpsert, BulkWriteOptions options = null, params Expression<Func<TEntity, object>>[] filterFields)
         {
-            if (filterFields.IsEmptyList())
+            if (filterFields.IsNullOrEmpty())
                 throw new ArgumentException(nameof(filterFields) + " can not be null or empty.");
 
             var properties = filterFields.Select(ReflectionExtensions.GetPropertyInfo).ToList();
@@ -439,7 +439,7 @@
 
         public Task<BulkWriteResult<TEntity>> BulkDeleteAsync<TEntity>(IEnumerable<TEntity> list, BulkWriteOptions options, params Expression<Func<TEntity, object>>[] filterFields)
         {
-            if (filterFields.IsEmptyList())
+            if (filterFields.IsNullOrEmpty())
                 throw new ArgumentException(nameof(filterFields) + " can not be null or empty.");
 
             var properties = filterFields.Select(ReflectionExtensions.GetPropertyInfo).ToList();

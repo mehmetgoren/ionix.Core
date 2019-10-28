@@ -39,7 +39,7 @@
 
         public static bool IsModelListValid<TEntity>(this IEnumerable<TEntity> entityList)
         {
-            bool ret = !entityList.IsEmptyList();
+            bool ret = !entityList.IsNullOrEmpty();
             if (ret)
             {
                 foreach (var entity in entityList)

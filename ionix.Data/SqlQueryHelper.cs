@@ -30,7 +30,7 @@
         {
             if (null == metaData)
                 throw new ArgumentNullException(nameof(metaData));
-            if (metaData.Properties.IsEmptyList())
+            if (metaData.Properties.IsNullOrEmpty())
                 throw new NullReferenceException("IEntityMetaData.Properties");
             if (String.IsNullOrEmpty(metaData.TableName))
                 throw new NullReferenceException("IEntityMetaData.TableName");
@@ -51,7 +51,7 @@
         public static IList<PropertyMetaData> OfKeys(this IEntityMetaData metaData, bool throwExcIfNoKeys)
         {
             List<PropertyMetaData> keys = metaData.Properties.Where(s => s.Schema.IsKey).ToList();
-            if (!keys.IsEmptyList())
+            if (!keys.IsNullOrEmpty())
             {
                 keys.Sort((x, y) => x.Schema.Order.CompareTo(y.Schema.Order));
                 return keys;

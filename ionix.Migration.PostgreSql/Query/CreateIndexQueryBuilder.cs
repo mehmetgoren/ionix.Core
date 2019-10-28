@@ -14,7 +14,7 @@
         {
             this.tableName = tableName ?? throw new ArgumentNullException(nameof(tableName));
             this.attr = attr ?? throw new ArgumentNullException(nameof(attr));
-            if (attr.Fields.IsEmptyList())
+            if (attr.Fields.IsNullOrEmpty())
             {
                 throw new ArgumentException("TableIndex.Fields can not be null or empty");
             }

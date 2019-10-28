@@ -312,7 +312,7 @@
         private IEntityCommandUpdate CreateEntityCommandUpdate(string[] updatedFields)
         {
             IEntityCommandUpdate cmd = (IEntityCommandUpdate)this.factory.CreateEntityCommand(EntityCommandType.Update);
-            if (!updatedFields.IsEmptyList())
+            if (!updatedFields.IsNullOrEmpty())
                 cmd.UpdatedFields = new HashSet<string>(updatedFields);
 
             return cmd;
@@ -334,7 +334,7 @@
         private IEntityCommandInsert CreateEntityCommandInsert(string[] insertFields)
         {
             IEntityCommandInsert cmd = (IEntityCommandInsert)this.factory.CreateEntityCommand(EntityCommandType.Insert);
-            if (!insertFields.IsEmptyList())
+            if (!insertFields.IsNullOrEmpty())
                 cmd.InsertFields = new HashSet<string>(insertFields);
 
             return cmd;
@@ -355,9 +355,9 @@
         private IEntityCommandUpsert CreateEntityCommandUpsert(string[] updatedFields, string[] insertFields)
         {
             IEntityCommandUpsert cmd = (IEntityCommandUpsert)this.factory.CreateEntityCommand(EntityCommandType.Upsert);
-            if (!updatedFields.IsEmptyList())
+            if (!updatedFields.IsNullOrEmpty())
                 cmd.UpdatedFields = new HashSet<string>(updatedFields);
-            if (!insertFields.IsEmptyList())
+            if (!insertFields.IsNullOrEmpty())
                 cmd.InsertFields = new HashSet<string>(insertFields);
 
             return cmd;
@@ -396,7 +396,7 @@
         private IBatchCommandUpdate CreateBatchCommandUpdate(string[] updatedFields)
         {
             IBatchCommandUpdate cmd = (IBatchCommandUpdate)this.factory.CreateBatchCommand(EntityCommandType.Update);
-            if (!updatedFields.IsEmptyList())
+            if (!updatedFields.IsNullOrEmpty())
                 cmd.UpdatedFields = new HashSet<string>(updatedFields);
 
             return cmd;
@@ -417,7 +417,7 @@
         private IBatchCommandInsert CreateBatchCommandInsert(string[] insertFields)
         {
             IBatchCommandInsert cmd = (IBatchCommandInsert)this.factory.CreateBatchCommand(EntityCommandType.Insert);
-            if (!insertFields.IsEmptyList())
+            if (!insertFields.IsNullOrEmpty())
                 cmd.InsertFields = new HashSet<string>(insertFields);
 
             return cmd;
@@ -438,9 +438,9 @@
         private IBatchCommandUpsert CreateBatchCommandUpsert(string[] updatedFields, string[] insertFields)
         {
             IBatchCommandUpsert cmd = (IBatchCommandUpsert)this.factory.CreateBatchCommand(EntityCommandType.Upsert);
-            if (!updatedFields.IsEmptyList())
+            if (!updatedFields.IsNullOrEmpty())
                 cmd.UpdatedFields = new HashSet<string>(updatedFields);
-            if (!insertFields.IsEmptyList())
+            if (!insertFields.IsNullOrEmpty())
                 cmd.InsertFields = new HashSet<string>(insertFields);
 
             return cmd;

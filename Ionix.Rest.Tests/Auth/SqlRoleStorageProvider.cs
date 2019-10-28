@@ -45,7 +45,7 @@
         public int Save(IEnumerable<RoleControllerActionEntity> list)
         {
             int ret = 0;
-            if (!list.IsEmptyList())
+            if (!list.IsNullOrEmpty())
             {
                 //Öncelikle Her nekadar entity de Role name olsa bile tek bir role adı olmalı. O yüzden kontrol ediyoruz.
                 HashSet<string> roleNames = new HashSet<string>();
@@ -210,7 +210,7 @@
                 ActionRepository actionRepository = new ActionRepository(tc.Cmd);
                 List<Ionix.RestTests.Action> controllerActions = actionRepository.SelectByControllerId(controller.Id).ToList();
 
-                if (!controllerActions.IsEmptyList())
+                if (!controllerActions.IsNullOrEmpty())
                 {
                     List<int> controllerActionIds = new List<int>(controllerActions.Count);
                     controllerActions.ForEach((aa) => controllerActionIds.Add(aa.Id));

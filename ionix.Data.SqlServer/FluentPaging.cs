@@ -7,7 +7,7 @@
     {
         public override SqlQuery ToQuery()
         {
-            if (!this.select.IsEmptyList() && !String.IsNullOrEmpty(this.from) && !String.IsNullOrEmpty(this.orderBy))
+            if (!this.select.IsNullOrEmpty() && !String.IsNullOrEmpty(this.from) && !String.IsNullOrEmpty(this.orderBy))
             {
                 SqlQuery query = "WITH Paged AS (SELECT TOP 100 PERCENT ".ToQuery();
                 foreach (string column in this.select)

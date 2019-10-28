@@ -77,7 +77,7 @@
         public IEnumerable<ControllerActions> FindByAssemblies(IEnumerable<Assembly> assemblies)
         {
             List<ControllerActions> ret = new List<ControllerActions>();
-            if (!assemblies.IsEmptyList())
+            if (!assemblies.IsNullOrEmpty())
             {
                 foreach (Assembly asm in assemblies)
                 {
@@ -89,7 +89,7 @@
                             if (null != aa)
                             {
                                 var actionMethods = this.GetActionMethods(type);
-                                if (!actionMethods.IsEmptyList())
+                                if (!actionMethods.IsNullOrEmpty())
                                     ret.Add(new ControllerActions(type, actionMethods));
                             }
                         }
@@ -112,7 +112,7 @@
         public ControllerActions(Type controllerType, IEnumerable<MethodInfo> actionMethods)
             : this(controllerType)
         {
-            if (actionMethods.IsEmptyList())
+            if (actionMethods.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(actionMethods));
 
             foreach (MethodInfo item in actionMethods)
@@ -189,7 +189,7 @@
         {
             this.dic = new Dictionary<string, ControllerActions>();
 
-            if (!list.IsEmptyList())
+            if (!list.IsNullOrEmpty())
             {
                 foreach (var item in list)
                 {

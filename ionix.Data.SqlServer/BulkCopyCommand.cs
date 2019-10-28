@@ -71,7 +71,7 @@
 
         private static bool EnsureEntityList<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            return !entityList.IsEmptyList() && null != provider;
+            return !entityList.IsNullOrEmpty() && null != provider;
         }
 
         public void Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)

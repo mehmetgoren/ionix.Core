@@ -117,7 +117,7 @@
                 this.parent = parent;
                 this.entityList = entityList;
                 this.commandType = commandType;
-                this.isEmptyList = entityList.IsEmptyList();
+                this.isEmptyList = entityList.IsNullOrEmpty();
             }
 
             internal CommandScope(Repository<TEntity> parent, TEntity entity, EntityCommandType commandType)

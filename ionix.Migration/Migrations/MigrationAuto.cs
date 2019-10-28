@@ -28,7 +28,7 @@
         public override SqlQuery GenerateQuery()
         {
             IEnumerable<Type> migrationTypes = this.GetEntityTypesWithCheckTableAttributes();
-            if (!migrationTypes.IsEmptyList())
+            if (!migrationTypes.IsNullOrEmpty())
             {
                 List<Type> filteredEntityTypes = new List<Type>();
                 foreach (Type migrationType in migrationTypes)
@@ -44,7 +44,7 @@
                         filteredEntityTypes.Add(migrationType);
                 }
 
-                if (!filteredEntityTypes.IsEmptyList())
+                if (!filteredEntityTypes.IsNullOrEmpty())
                 {
                     filteredEntityTypes = SortTypesHierarchical(filteredEntityTypes);
                     return this.MigrationService.MigrationSqlQueryBuilder.CreateTable(filteredEntityTypes,  DbSchemaMetaDataProvider.Instance, this.MigrationService.ColumnDbTypeResolver);

@@ -134,7 +134,7 @@
 
         public static void BulkCopy<T>(IEnumerable<T> list, ICommandAdapter cmd)
         {
-            if (!list.IsEmptyList())
+            if (!list.IsNullOrEmpty())
             {
                 BulkCopyCommand bulkCopyCommand = new BulkCopyCommand(cmd.Factory.DataAccess.Cast<DbAccess>().Connection.Cast<SqlConnection>());
                 bulkCopyCommand.Execute(list, CreateEntityMetaDataProvider());

@@ -39,10 +39,10 @@
                 {
                     flag = false;
                     var headerValue = context.Request.Headers["Authorization"];
-                    if (!headerValue.IsEmptyList())
+                    if (!headerValue.IsNullOrEmpty())
                     {
                         string[] splits = headerValue[0]?.Split(' ');
-                        if (!splits.IsEmptyList() && splits.Length == 2 && splits[0] == "Token")
+                        if (!splits.IsNullOrEmpty() && splits.Length == 2 && splits[0] == "Token")
                         {
                             string base64Token = splits[1];
                             string strToken = Encoding.ASCII.GetString(Convert.FromBase64String(base64Token));

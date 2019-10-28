@@ -15,7 +15,7 @@
         public virtual SqlQuery CreateTable(IEnumerable<Type> types, DbSchemaMetaDataProvider provider, IColumnDbTypeResolver typeResolver)
         {
             SqlQuery query = new SqlQuery();
-            if (!types.IsEmptyList() && null != typeResolver)
+            if (!types.IsNullOrEmpty() && null != typeResolver)
             {
                 foreach (Type type in types)
                 {
@@ -33,7 +33,7 @@
 
                     //indexes
                     IEnumerable<TableIndexAttribute> indexAttrs = type.GetCustomAttributes<TableIndexAttribute>();
-                    if (!indexAttrs.IsEmptyList())
+                    if (!indexAttrs.IsNullOrEmpty())
                     {
                         foreach (TableIndexAttribute indexAttr in indexAttrs)
                         {
@@ -45,7 +45,7 @@
 
                     //fks
                     IEnumerable<TableForeignKeyAttribute> fkAttrs = type.GetCustomAttributes<TableForeignKeyAttribute>();
-                    if (!fkAttrs.IsEmptyList())
+                    if (!fkAttrs.IsNullOrEmpty())
                     {
                         foreach (TableForeignKeyAttribute fkAttr in fkAttrs)
                         {

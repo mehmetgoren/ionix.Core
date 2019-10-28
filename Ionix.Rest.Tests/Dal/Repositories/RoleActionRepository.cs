@@ -13,7 +13,7 @@
 
         public int DeleteByControllerActionIds(IEnumerable<int> controllerActionIds)
         {
-            if (!controllerActionIds.IsEmptyList())
+            if (!controllerActionIds.IsNullOrEmpty())
             {
                 SqlQuery q = "DELETE FROM RoleAction ActionId=@ActionIds".ToQuery2( new { ActionIds = controllerActionIds });
                // q.Combine( Fluent.Where<RoleAction>().In(a => a.ActionId, controllerActionIds.ToArray()).ToQuery());

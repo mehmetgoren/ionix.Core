@@ -59,7 +59,7 @@
             if (!String.IsNullOrEmpty(sql))
             {
                 this.text.Append(sql);
-                if (!parameters.IsEmptyList())
+                if (!parameters.IsNullOrEmpty())
                 {
                     for (int j = 0; j < parameters.Length; ++j)
                     {

@@ -47,7 +47,7 @@
 
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             SqlQuery batchQuery = this.CreateBatchUpdateQuery(entityList, provider);
@@ -55,7 +55,7 @@
         }
         public override Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return Task.FromResult(0);
 
             SqlQuery batchQuery = this.CreateBatchUpdateQuery(entityList, provider);
@@ -131,7 +131,7 @@
 
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             (SqlQuery batchQuery, PropertyMetaData identity, List<string> outParameterNames) = this.CreateBatchInsertQuery(entityList, provider);
@@ -143,7 +143,7 @@
 
         public override async Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             (SqlQuery batchQuery, PropertyMetaData identity, List<string> outParameterNames) = this.CreateBatchInsertQuery(entityList, provider);
@@ -211,7 +211,7 @@
 
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             (SqlQuery batchQuery, PropertyMetaData identity, List<string> outParameterNames) = this.CreateBatchUpsertQuery(entityList, provider);
@@ -223,7 +223,7 @@
 
         public override async Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             (SqlQuery batchQuery, PropertyMetaData identity, List<string> outParameterNames) = this.CreateBatchUpsertQuery(entityList, provider);
@@ -274,7 +274,7 @@
         }
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             SqlQuery batchQuery = this.CreateBatchDeleteQuery(entityList, provider);
@@ -283,7 +283,7 @@
 
         public override Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return Task.FromResult(0);
 
             SqlQuery batchQuery = this.CreateBatchDeleteQuery(entityList, provider);

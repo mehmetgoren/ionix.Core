@@ -12,7 +12,7 @@
         public static IndexedRoles Create(IEnumerable<RoleControllerActionEntity> list)
         {
             IndexedRoles ret = new IndexedRoles();
-            if (!list.IsEmptyList())
+            if (!list.IsNullOrEmpty())
             {
                 foreach (var entity in list)
                 {

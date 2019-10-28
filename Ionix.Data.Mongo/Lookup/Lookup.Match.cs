@@ -127,7 +127,7 @@
                 if (null != exp)
                 {
                     PropertyInfo pi = ReflectionExtensions.GetPropertyInfo(exp.Body);
-                    if (null != pi && !values.IsEmptyList())
+                    if (null != pi && !values.IsNullOrEmpty())
                     {
                         object[] arr = new object[values.Length];
                         Array.Copy(values, arr, values.Length);

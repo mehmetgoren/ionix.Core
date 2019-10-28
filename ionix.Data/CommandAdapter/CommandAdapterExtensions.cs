@@ -54,7 +54,7 @@
         internal static string[] ToStringArray<TEntity>(Expression<Func<TEntity, object>>[] updatedFields)
         {
             string[] arr = null;
-            if (!updatedFields.IsEmptyList())
+            if (!updatedFields.IsNullOrEmpty())
             {
                 arr = new string[updatedFields.Length];
                 for (int j = 0; j < updatedFields.Length; ++j)

@@ -47,7 +47,7 @@
         }
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             SqlQuery batchQuery = this.CreateUpdateQuery(entityList, provider);
@@ -56,7 +56,7 @@
         }
         public override Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return Task.FromResult(0);
 
             SqlQuery batchQuery = this.CreateUpdateQuery(entityList, provider);
@@ -110,7 +110,7 @@
         }
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             SqlQuery batchQuery = this.CreateInsertQuery(entityList, provider);
@@ -118,7 +118,7 @@
         }
         public override Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return Task.FromResult(0);
 
             SqlQuery batchQuery = this.CreateInsertQuery(entityList, provider);
@@ -155,7 +155,7 @@
         }
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             int sum = 0;
@@ -169,7 +169,7 @@
         }
         public override async Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             int sum = 0;
@@ -224,7 +224,7 @@
         }
         public override int Execute<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return 0;
 
             SqlQuery batchQuery = this.CreateBatchDeleteQuery(entityList, provider);
@@ -233,7 +233,7 @@
 
         public override Task<int> ExecuteAsync<TEntity>(IEnumerable<TEntity> entityList, IEntityMetaDataProvider provider)
         {
-            if (entityList.IsEmptyList())
+            if (entityList.IsNullOrEmpty())
                 return Task.FromResult(0);
 
             SqlQuery batchQuery = this.CreateBatchDeleteQuery(entityList, provider);

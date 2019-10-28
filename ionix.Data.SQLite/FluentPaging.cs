@@ -7,7 +7,7 @@
     {
         public override SqlQuery ToQuery()
         {
-            if (!this.select.IsEmptyList() && !String.IsNullOrEmpty(this.from))
+            if (!this.select.IsNullOrEmpty() && !String.IsNullOrEmpty(this.from))
             {
                 SqlQuery query = "SELECT ".ToQuery();//T.*,
                 foreach (string column in this.select)

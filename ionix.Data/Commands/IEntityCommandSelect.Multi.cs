@@ -63,7 +63,7 @@
                 throw new ArgumentNullException(nameof(provider));
             if (null == query && query.IsEmpty())
                 throw new ArgumentNullException(nameof(query));
-            if (types.IsEmptyList())
+            if (types.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(types));
         }
         protected internal virtual object[] QueryTemplateSingle(IEntityMetaDataProvider provider, SqlQuery query, params Type[] types)

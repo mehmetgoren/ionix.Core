@@ -237,7 +237,7 @@
 
         private (IEntityMetaData, SqlQuery) PrepareSelectById<TEntity>(IEntityMetaDataProvider provider, object[] keys)
         {
-            if (keys.IsEmptyList())
+            if (keys.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(keys));
 
             IEntityMetaData metaData = provider.EnsureCreateEntityMetaData<TEntity>();

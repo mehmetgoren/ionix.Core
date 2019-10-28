@@ -28,7 +28,7 @@
         }
         public static object SelectByIdNonGeneric(this ICommandAdapter adapter, Type entityType, params object[] idValues)
         {
-            if ((null != adapter && null != entityType) && !idValues.IsEmptyList())
+            if ((null != adapter && null != entityType) && !idValues.IsNullOrEmpty())
             {
                 return SelectByIdMethod(entityType).Invoke(adapter, new object[] { idValues });
             }

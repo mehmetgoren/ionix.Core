@@ -17,7 +17,7 @@
             if (null == entity)
                 throw new ArgumentNullException(nameof(entity));
 
-            bool updatedFieldsEnabled = !this.UpdatedFields.IsEmptyList();
+            bool updatedFieldsEnabled = !this.UpdatedFields.IsNullOrEmpty();
 
             SqlQuery query = new SqlQuery();
             StringBuilder text = query.Text;
@@ -85,7 +85,7 @@
 
             sequenceIdentity = null;
 
-            bool insertFieldsEnabled = !this.InsertFields.IsEmptyList();
+            bool insertFieldsEnabled = !this.InsertFields.IsNullOrEmpty();
 
             SqlQuery query = new SqlQuery();
             StringBuilder text = query.Text;

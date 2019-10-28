@@ -10,7 +10,7 @@
 
     public static class ReflectionExtensions
     {
-        private static readonly MethodInfo ToNullable_MethodInfo = typeof(IonixExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
+        private static readonly MethodInfo ToNullable_MethodInfo = typeof(ConversionExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
 
         private static MethodInfo convertSafely_MethodInfo;
         private static readonly object forLock = new object();
@@ -24,10 +24,10 @@
                     {
                         if (null == convertSafely_MethodInfo)
                         {
-                            convertSafely_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(IonixExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), nameof(IonixExtensions.ConvertSafely), 1, 1);
+                            convertSafely_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(ConversionExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), nameof(ConversionExtensions.ConvertSafely), 1, 1);
 
                             if (null == convertSafely_MethodInfo)
-                                throw new NotFoundException($"{nameof(IonixExtensions)}.{nameof(IonixExtensions.ConvertSafely)}. method not found");
+                                throw new NotFoundException($"{nameof(ConversionExtensions)}.{nameof(ConversionExtensions.ConvertSafely)}. method not found");
                         }
                     }
                 }
@@ -37,17 +37,17 @@
         }
         public static MethodInfo FixAmbiguousMatch(MethodInfo[] methods, string methodName, int parameterCount, int genericParameterCount)
         {
-            if (!methods.IsEmptyList() && !String.IsNullOrEmpty(methodName))
+            if (!methods.IsNullOrEmpty() && !String.IsNullOrEmpty(methodName))
             {
                 foreach (MethodInfo mi in methods)
                 {
                     if (String.Equals(mi.Name, methodName))
                     {
                         var pars = mi.GetParameters();
-                        if (!pars.IsEmptyList() && pars.Count() == parameterCount)
+                        if (!pars.IsNullOrEmpty() && pars.Count() == parameterCount)
                         {
                             var genericPars = mi.GetGenericArguments();
-                            if (!genericPars.IsEmptyList() && genericPars.Count() == genericParameterCount)
+                            if (!genericPars.IsNullOrEmpty() && genericPars.Count() == genericParameterCount)
                             {
                                 return mi;
                             }

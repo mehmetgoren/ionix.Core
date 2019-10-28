@@ -39,7 +39,7 @@
 
                 q.Combine(column.ToQuery()).Sql(",").Sql(Environment.NewLine);
             }
-            if (!this.TableForeignKeyList.IsEmptyList())
+            if (!this.TableForeignKeyList.IsNullOrEmpty())
             {
                 foreach (var fk in this.TableForeignKeyList)
                 {
