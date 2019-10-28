@@ -1,4 +1,4 @@
-﻿namespace Ionix.DataTests
+﻿namespace Ionix.Data.Tests
 {
     using FluentAssertions;
     using Ionix.Data;

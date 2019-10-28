@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data;
 using Ionix.Data;
-using IonixIonix.DataTests.SqlServer;
 
-namespace Ionix.DataTests.SqlServer
+namespace Ionix.Data.Tests.SqlServer
 {
     public abstract class DbClient<TDbAccess> : IDisposable
         where TDbAccess : IDbAccess

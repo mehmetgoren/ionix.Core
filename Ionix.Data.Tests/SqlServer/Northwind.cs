@@ -20,7 +20,7 @@ using System;
 using Ionix.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Ionix.DataTests.SqlServer
+namespace Ionix.Data.Tests.SqlServer
 {
 
     // ************************************************************************

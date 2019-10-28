@@ -12,27 +12,27 @@
     {
         private static readonly MethodInfo ToNullable_MethodInfo = typeof(IonixExtensions).GetTypeInfo().GetMethod("ToNullable", BindingFlags.Static | BindingFlags.Public);
 
-        private static MethodInfo convertTo_MethodInfo;
+        private static MethodInfo convertSafely_MethodInfo;
         private static readonly object forLock = new object();
-        private static MethodInfo ConvertTo_MethodInfo
+        private static MethodInfo ConvertSafely_MethodInfo
         {
             get
             {
-                if (null == convertTo_MethodInfo)
+                if (null == convertSafely_MethodInfo)
                 {
                     lock (forLock)
                     {
-                        if (null == convertTo_MethodInfo)
+                        if (null == convertSafely_MethodInfo)
                         {
-                            convertTo_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(IonixExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), "ConvertTo", 1, 1);
+                            convertSafely_MethodInfo = ReflectionExtensions.FixAmbiguousMatch(typeof(IonixExtensions).GetTypeInfo().GetMethods(BindingFlags.Static | BindingFlags.Public), nameof(IonixExtensions.ConvertSafely), 1, 1);
 
-                            if (null == convertTo_MethodInfo)
-                                throw new NotFoundException("ionixExtensions.ConvertTo method not found");
+                            if (null == convertSafely_MethodInfo)
+                                throw new NotFoundException($"{nameof(IonixExtensions)}.{nameof(IonixExtensions.ConvertSafely)}. method not found");
                         }
                     }
                 }
 
-                return convertTo_MethodInfo;
+                return convertSafely_MethodInfo;
             }
         }
         public static MethodInfo FixAmbiguousMatch(MethodInfo[] methods, string methodName, int parameterCount, int genericParameterCount)
@@ -68,7 +68,7 @@
             }
             else
             {
-                mi = ReflectionExtensions.ConvertTo_MethodInfo.MakeGenericMethod(pi.PropertyType);
+                mi = ReflectionExtensions.ConvertSafely_MethodInfo.MakeGenericMethod(pi.PropertyType);
             }
             pi.SetValue(entity, mi.Invoke(null, new object[] { propertyValue }));// Convert.ChangeType(dbValue, pi.PropertyType));
         }

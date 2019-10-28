@@ -2,11 +2,9 @@
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
-using Ionix.Data;
 using Ionix.Data.SqlServer;
-using Ionix.DataTests.SqlServer;
 
-namespace IonixIonix.DataTests.SqlServer
+namespace Ionix.Data.Tests.SqlServer
 {
     public static class IonixFactory
     {
@@ -63,7 +61,7 @@ namespace IonixIonix.DataTests.SqlServer
         {
             DbConnection conn = CreateEmptyConnection();
 
-            conn.ConnectionString = @"Data Source=192.168.0.33;Initial Catalog=NORTHWND;User Id=sa;Password=1;";
+            conn.ConnectionString = @"Data Source=.;Initial Catalog=Northwind;User Id=sa;Password=1242;";
             conn.Open();
 
             return conn;

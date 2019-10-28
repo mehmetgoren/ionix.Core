@@ -1,13 +1,12 @@
-﻿namespace Ionix.DataTests
+﻿namespace Ionix.Data.Tests
 {
-    using Ionix.DataTests.SqlServer;
+    using Ionix.Data.Tests.SqlServer;
     using Ionix.Data;
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
     using System;
     using Xunit;
-    using IonixIonix.DataTests.SqlServer;
     using FluentAssertions;
 
     public class DbAccessTests
@@ -144,7 +143,7 @@
                 result = dbAccess.QuerySingle("select * from Customers t where t.CustomerID=@0".ToQuery("ALFKI"));
             }
 
-            result.Should().NotBeNull();
+            Assert.NotNull(result);
         }
 
 
@@ -157,7 +156,7 @@
                 result = await dbAccess.QuerySingleAsync("select * from Customers t where t.CustomerID=@0".ToQuery("ALFKI"));
             }
 
-            result.Should().NotBeNull();
+            Assert.NotNull(result);
         }
 
         [Fact]
@@ -206,7 +205,7 @@
                 var result = dbAccess.Query("select top 1 * from Customers t".ToQuery());
             }
 
-            pre.Should().NotBe(comp);
+            pre.Should().Be(comp);
         }
 
         [Fact]

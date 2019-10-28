@@ -16,7 +16,8 @@
         {
             return null != obj ? (T)obj : default(T);
         }
-        public static T ConvertTo<T>(this object value)
+
+        public static T ConvertSafely<T>(this object value)
         {
             if (null != value)
             {
@@ -28,18 +29,18 @@
             }
             return default(T);
         }
-        public static TDest? ConvertTo<TSource, TDest>(this TSource? value)
+        public static TDest? ConvertSafely<TSource, TDest>(this TSource? value)
             where TSource : struct
             where TDest : struct
         {
             if (value.HasValue)
             {
-                return ConvertTo<TDest>(value.Value);
+                return ConvertSafely<TDest>(value.Value);
             }
             return null;
         }
 
-        public static object ConvertTo(this object value, TypeCode type)
+        public static object ConvertSafely(this object value, TypeCode type)
         {
             if (null != value)
             {
@@ -59,7 +60,7 @@
             {
                 string stringValue = value.ToString();
                 if (stringValue.Length != 0)
-                    return ConvertTo<T>(value);
+                    return ConvertSafely<T>(value);
             }
             return null;
         }
@@ -162,11 +163,6 @@
             }
         }
 
-        public static bool IsNullOrEmpty(this string s)
-        {
-            return String.IsNullOrEmpty(s);
-        }
-
         public static Exception FindRoot(this Exception ex)
         {
             if (null != ex)
@@ -208,39 +204,6 @@
             if (null != values && null != action)
                 foreach (T obj in values)
                     action(obj);
-        }
-
-        public static object IfNullSetEmpty<TTarget>(this object value)
-        {
-            if (null == value)
-            {
-                Type targetType = typeof(TTarget);
-                if (targetType == CachedTypes.String)
-                    return String.Empty;
-                else if (targetType.IsNullableType())
-                {
-                    Type genericType = targetType.GetTypeInfo().GetGenericArguments()[0];
-                    return Activator.CreateInstance(genericType);
-                }
-                else if (targetType == CachedTypes.ByteArray)
-                    return new byte[0];
-                else
-                    throw new NotSupportedException(targetType.FullName);
-            }
-            return value;
-        }
-
-        public static IEnumerable<T> RemoveEmptyItemsBy<T>(this IEnumerable<T> list, Expression<Func<T, object>> prop)
-        {
-            if (!list.IsEmptyList() && null != prop)
-            {
-                var pi = ReflectionExtensions.GetPropertyInfo(prop);
-                if (null != pi)
-                {
-                    return list.Where(i => !pi.GetValue(i).IsNull());//.ToList();
-                }
-            }
-            return list;
         }
 
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> collection)

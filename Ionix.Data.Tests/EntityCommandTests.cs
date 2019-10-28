@@ -1,13 +1,12 @@
-﻿namespace Ionix.DataTests
+﻿namespace Ionix.Data.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Dynamic;
     using Ionix.Data;
     using Ionix.Utils.Extensions;
-    using Ionix.DataTests.SqlServer;
+    using Ionix.Data.Tests.SqlServer;
     using System.Collections;
-    using IonixIonix.DataTests.SqlServer;
     using Xunit;
     using FluentAssertions;
 

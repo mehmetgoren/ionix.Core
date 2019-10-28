@@ -1,8 +1,8 @@
-namespace Ionix.DataTests
+namespace Ionix.Data.Tests
 {
     using FluentAssertions;
     using Ionix.Data;
-    using Ionix.DataTests.SqlServer;
+    using Ionix.Data.Tests.SqlServer;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics;
