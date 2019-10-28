@@ -1,7 +1,7 @@
 ﻿namespace Ionix.Data
 {
     using Utils;
-    using Utils.Reflection;
+    using Utils.Extensions;
     using System.Text;
     using System;
     using System.Globalization;

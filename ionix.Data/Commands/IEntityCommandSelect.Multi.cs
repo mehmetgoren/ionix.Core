@@ -5,7 +5,6 @@
     using System.Data;
     using System.Reflection;
     using Utils.Extensions;
-    using Utils.Reflection;
 
     partial class EntityCommandSelect
     {

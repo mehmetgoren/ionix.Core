@@ -7,7 +7,7 @@
     using System.Linq.Expressions;
     using System.Linq;
     using System.Reflection;
-    using Reflection;
+    using Ionix.Utils.Extensions;
 
     public class IndexedEntityList<TEntity> : ICollection<TEntity>
     {

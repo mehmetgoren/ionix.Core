@@ -1,4 +1,4 @@
-﻿namespace Ionix.Utils.Reflection
+﻿namespace Ionix.Utils.Extensions
 {
     using System;
     using System.Collections;

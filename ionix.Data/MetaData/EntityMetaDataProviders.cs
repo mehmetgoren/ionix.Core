@@ -1,11 +1,11 @@
 ﻿namespace Ionix.Data
 {
-    using Utils.Reflection;
     using System;
     using System.Reflection;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using Ionix.Utils.Extensions;
 
     public abstract class EntityMetaDataProviderBase : IEntityMetaDataProvider
     {

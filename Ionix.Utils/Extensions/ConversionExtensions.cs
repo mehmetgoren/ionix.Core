@@ -1,12 +1,21 @@
-﻿using System;
-
-namespace Ionix.Utils.Extensions
+﻿namespace Ionix.Utils.Extensions
 {
+    using System;
+
     public static class ConversionExtensions
     {
         public static T Cast<T>(this object obj)
         {
             return null != obj ? (T)obj : default(T);
+        }
+
+        public static T Convert<T>(this object value)
+        {
+            if (null != value)
+            {
+                return (T)System.Convert.ChangeType(value, typeof(T));
+            }
+            return default(T);
         }
 
         public static T ConvertSafely<T>(this object value)
@@ -15,7 +24,7 @@ namespace Ionix.Utils.Extensions
             {
                 try
                 {
-                    return (T)Convert.ChangeType(value, typeof(T));
+                    return (T)System.Convert.ChangeType(value, typeof(T));
                 }
                 catch { }
             }
@@ -38,7 +47,7 @@ namespace Ionix.Utils.Extensions
             {
                 try
                 {
-                    return Convert.ChangeType(value, type, null);
+                    return System.Convert.ChangeType(value, type, null);
                 }
                 catch { }
             }
@@ -56,15 +65,16 @@ namespace Ionix.Utils.Extensions
             }
             return null;
         }
+
         public static T ToValue<T>(this T? n)
             where T : struct
         {
             return n ?? default(T);
         }
+
         public static bool IsNull(this object obj)
         {
             return (null == obj || obj.ToString().Length == 0);
         }
-
     }
 }

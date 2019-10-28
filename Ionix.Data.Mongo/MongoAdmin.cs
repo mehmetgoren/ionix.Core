@@ -7,7 +7,7 @@
     using MongoDB.Bson;
     using MongoDB.Driver;
     using System.Threading.Tasks;
-    using Ionix.Utils.Reflection;
+    using Ionix.Utils.Extensions;
 
     public static partial class MongoAdmin
     {

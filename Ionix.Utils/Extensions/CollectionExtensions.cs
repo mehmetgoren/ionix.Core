@@ -1,10 +1,10 @@
-﻿using Ionix.Utils.Collections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Ionix.Utils.Extensions
+﻿namespace Ionix.Utils.Extensions
 {
+    using Ionix.Utils.Collections;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public static class CollectionExtensions
     {
         public static bool In<T>(this T obj, params T[] items)

@@ -7,7 +7,7 @@
     using MongoDB.Bson.Serialization.Attributes;
     using System.Collections.Concurrent;
     using System.Linq;
-    using Ionix.Utils.Reflection;
+    using Ionix.Utils.Extensions;
 
     public static class DictionarySerializer
     {

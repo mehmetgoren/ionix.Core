@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Reflection;
-    using Utils.Reflection;
+    using Utils.Extensions;
 
     public static class AttributeExtension
     {

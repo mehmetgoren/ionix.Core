@@ -4,7 +4,6 @@
     using Utils.Extensions;
     using System;
     using System.Collections.Generic;
-    using Ionix.Utils.Reflection;
     using System.Threading.Tasks;
 
     public abstract class CommandAdapterBase : ICommandAdapter
