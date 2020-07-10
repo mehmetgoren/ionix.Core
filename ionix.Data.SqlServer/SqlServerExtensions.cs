@@ -4,6 +4,9 @@
     using System;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
+    using Ionix.Utils.Extensions;
+    using System.Linq;
+    using System.Linq.Expressions;
 
     public static class SqlServerExtensions
     {
@@ -59,6 +62,59 @@
                 return "<Byte Array>";
             else
                 return parameterValue.ToString();
+        }
+
+        private const int MaxAllowedParameterCount = 2100;
+        public static void BatchInsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return;
+
+            var provider = new DbSchemaMetaDataProvider();
+            IEntityMetaData metaData = provider.CreateEntityMetaData(typeof(T));
+
+            var propCount = metaData.Properties.Count();
+            var limit = MaxAllowedParameterCount / propCount;
+
+            var entityCount = entities.Count();
+
+            if (entityCount < limit)
+                cmd.BatchInsert(entities);
+            else
+            {
+                var entityList = entities.ToList();
+                var sublist = entityList.GetRange(0, limit);
+                cmd.BatchInsert(sublist);
+
+                entityList.RemoveRange(0, limit);
+                BatchInsertLimit2100(cmd, entityList);
+            }
+        }
+
+        public static void BatchInsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] updatedFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return;
+
+            var provider = new DbSchemaMetaDataProvider();
+            IEntityMetaData metaData = provider.CreateEntityMetaData(typeof(T));
+
+            var propCount = metaData.Properties.Count();
+            var limit = MaxAllowedParameterCount / propCount;
+
+            var entityCount = entities.Count();
+
+            if (entityCount < limit)
+                cmd.BatchUpdate(entities, updatedFields);
+            else
+            {
+                var entityList = entities.ToList();
+                var sublist = entityList.GetRange(0, limit);
+                cmd.BatchUpdate(sublist, updatedFields);
+
+                entityList.RemoveRange(0, limit);
+                BatchInsertLimit2100(cmd, entityList, updatedFields);
+            }
         }
     }
 }

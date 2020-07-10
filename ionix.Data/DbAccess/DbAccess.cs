@@ -20,7 +20,23 @@
             this.Connection = connection;
             this.events = new EventHandlerList();
         }
+
+
+        private int? commandTimeout;
+        public int CommandTimeout 
+        {
+            get 
+            {
+                if (this.commandTimeout.HasValue)
+                    return this.commandTimeout.Value;
+
+                return this.Connection.ConnectionTimeout;
+            }
+            set { this.commandTimeout = value; }
+        }
+
         public DbConnection Connection { get; private set; }
+
 
         public virtual void Dispose()
         {

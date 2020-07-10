@@ -6,6 +6,8 @@
 
     public interface IDbAccess : IDisposable
     {
+        int CommandTimeout { get; set; }
+
         int ExecuteNonQuery(SqlQuery query);
         Task<int> ExecuteNonQueryAsync(SqlQuery query);
 

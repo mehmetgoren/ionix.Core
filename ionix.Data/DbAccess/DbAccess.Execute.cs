@@ -21,8 +21,11 @@
             this.OnPreExecuteSql(query);
             DbCommand cmd = null;
             try
+
             {
                 cmd = this.Connection.CreateCommand();
+                if (this.commandTimeout.HasValue)
+                    cmd.CommandTimeout = this.commandTimeout.Value;
 
                 foreach (SqlQueryParameter parameter in query.Parameters)
                 {
