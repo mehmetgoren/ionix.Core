@@ -7,6 +7,7 @@
     using Ionix.Utils.Extensions;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public static class SqlServerExtensions
     {
@@ -65,56 +66,137 @@
         }
 
         private const int MaxAllowedParameterCount = 2100;
-        public static void BatchInsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities)
+
+        private static int GetProCount<T>(Expression<Func<T, object>>[] fields)
         {
-            if (null == cmd || entities.IsNullOrEmpty())
-                return;
+            int propCount = fields?.Length ?? 0;
+            if (propCount == 0)
+            {
+                var provider = new DbSchemaMetaDataProvider();
+                IEntityMetaData metaData = provider.CreateEntityMetaData(typeof(T));
+                propCount = metaData.Properties.Count();
+            }
 
-            var provider = new DbSchemaMetaDataProvider();
-            IEntityMetaData metaData = provider.CreateEntityMetaData(typeof(T));
+            return propCount;
+        }
 
-            var propCount = metaData.Properties.Count();
-            var limit = MaxAllowedParameterCount / propCount;
-
-            var entityCount = entities.Count();
+        private static void BatchOperationLimit2100<T>(IEnumerable<T> entities, int propCount, ref int affectedCount, Expression<Func<T, object>>[] fields
+            , Func<IEnumerable<T>, Expression<Func<T, object>>[],  int> fn)
+        {
+            int limit = MaxAllowedParameterCount / propCount;
+            int entityCount = entities.Count();
 
             if (entityCount < limit)
-                cmd.BatchInsert(entities);
+                affectedCount += fn(entities, fields);
             else
             {
-                var entityList = entities.ToList();
-                var sublist = entityList.GetRange(0, limit);
-                cmd.BatchInsert(sublist);
+                List<T> entityList = entities.ToList();
+                List<T> sublist = entityList.GetRange(0, limit);
+                affectedCount += fn(sublist, fields);
 
                 entityList.RemoveRange(0, limit);
-                BatchInsertLimit2100(cmd, entityList);
+                BatchOperationLimit2100(entityList, propCount, ref affectedCount, fields, fn);
             }
         }
 
-        public static void BatchInsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] updatedFields)
+        private static async Task BatchOperationLimit2100Async<T>(IEnumerable<T> entities, int propCount, Expression<Func<T, object>>[] fields
+            , Func<IEnumerable<T>, Expression<Func<T, object>>[], Task<int>> fnAsync)
+        {
+            int limit = MaxAllowedParameterCount / propCount;
+            int entityCount = entities.Count();
+
+            if (entityCount < limit)
+                await fnAsync(entities, fields);
+            else
+            {
+                List<T> entityList = entities.ToList();
+                List<T> sublist = entityList.GetRange(0, limit); 
+                await fnAsync(sublist, fields);
+
+                entityList.RemoveRange(0, limit);
+                await BatchOperationLimit2100Async(entityList, propCount, fields, fnAsync);
+            }
+        }
+
+        public static int BatchInsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] insertFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return 0;
+
+            int propCount = GetProCount(insertFields);
+            if (propCount == 0)
+                return 0;
+
+            int affectedCount = 0;
+            BatchOperationLimit2100(entities, propCount, ref affectedCount, insertFields, cmd.BatchInsert);
+
+            return affectedCount;
+        }
+
+        public static int BatchUpdateLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] updatedFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return 0;
+
+            int propCount = GetProCount(updatedFields);
+            if (propCount == 0)
+                return 0;
+
+            int affectedCount = 0;
+            BatchOperationLimit2100(entities, propCount, ref affectedCount, updatedFields, cmd.BatchUpdate);
+
+            return affectedCount;
+        }
+
+        public static int BatchUpsertLimit2100<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] updatedFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return 0;
+
+            int propCount = GetProCount(updatedFields);
+            if (propCount == 0)
+                return 0;
+
+            int affectedCount = 0;
+            BatchOperationLimit2100(entities, propCount, ref affectedCount, updatedFields, cmd.BatchUpdate);
+
+            return affectedCount;
+        }
+
+        public static async Task BatchInsertLimit2100Async<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] insertFields)
         {
             if (null == cmd || entities.IsNullOrEmpty())
                 return;
 
-            var provider = new DbSchemaMetaDataProvider();
-            IEntityMetaData metaData = provider.CreateEntityMetaData(typeof(T));
+            int propCount = GetProCount(insertFields);
+            if (propCount == 0)
+                return;
 
-            var propCount = metaData.Properties.Count();
-            var limit = MaxAllowedParameterCount / propCount;
+            await BatchOperationLimit2100Async(entities, propCount, insertFields, cmd.BatchInsertAsync);
+        }
 
-            var entityCount = entities.Count();
+        public static async Task BatchUpdateLimit2100Async<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] insertFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return;
 
-            if (entityCount < limit)
-                cmd.BatchUpdate(entities, updatedFields);
-            else
-            {
-                var entityList = entities.ToList();
-                var sublist = entityList.GetRange(0, limit);
-                cmd.BatchUpdate(sublist, updatedFields);
+            int propCount = GetProCount(insertFields);
+            if (propCount == 0)
+                return;
 
-                entityList.RemoveRange(0, limit);
-                BatchInsertLimit2100(cmd, entityList, updatedFields);
-            }
+            await BatchOperationLimit2100Async(entities, propCount, insertFields, cmd.BatchUpdateAsync);
+        }
+
+        public static async Task BatchUpsertLimit2100Async<T>(this ICommandAdapter cmd, IEnumerable<T> entities, params Expression<Func<T, object>>[] insertFields)
+        {
+            if (null == cmd || entities.IsNullOrEmpty())
+                return;
+
+            int propCount = GetProCount(insertFields);
+            if (propCount == 0)
+                return;
+
+            await BatchOperationLimit2100Async(entities, propCount, insertFields, cmd.BatchUpsertAsync);
         }
     }
 }
